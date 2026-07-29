@@ -1,6 +1,8 @@
 export interface ToolPageData {
   slug: string;
   kind: 'tool' | 'model';
+  /** Optional per-page override of section render order. Keys must match ToolPage `sections` map. */
+  sectionOrder?: string[];
   status?: 'published' | 'draft';
   updatedAt?: string;
   seoTitle?: string;
