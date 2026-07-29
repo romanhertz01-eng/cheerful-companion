@@ -49,6 +49,149 @@ function computePricingLabel(
   return "";
 }
 
+// Splits pricing into a small rate string (left of CTA) and a total credits label
+// that goes inside the "Генерировать · N кр" button. Reads the same inputs as
+// computePricingLabel — does not alter its output.
+function computePricingParts(
+  pricing: ToolPricing,
+  selects: ToolSelects,
+  selectIdx: number[],
+  chars: number
+): { rate: string; total: string } {
+  const chosen = selects.map(
+    (s, i) => s.options[selectIdx[i] ?? s.defaultIndex ?? 0]
+  );
+  const matched = pricing.rates.find(
+    (r) => r.matchOption && chosen.includes(r.matchOption)
+  );
+  const rate = (matched ?? pricing.rates[0]).rate;
+
+  if (pricing.mode === "per-second") {
+    const dIdx = selects.findIndex((s) => /длит/i.test(s.label));
+    let seconds = 1;
+    if (dIdx >= 0) {
+      const opt = selects[dIdx].options[selectIdx[dIdx] ?? selects[dIdx].defaultIndex ?? 0];
+      const m = opt.match(/\d+/);
+      if (m) seconds = parseInt(m[0], 10);
+    }
+    return { rate: `${rate} кр/сек`, total: `${rate * seconds} кр` };
+  }
+  if (pricing.mode === "per-message") {
+    return { rate: `${rate} кр/сообщение`, total: `${rate} кр` };
+  }
+  if (pricing.mode === "per-clip") {
+    const unit = pricing.unitLabel || "за ролик";
+    return { rate: `${rate} кр ${unit}`.trim(), total: `${rate} кр` };
+  }
+  if (pricing.mode === "per-1k-chars") {
+    const min = pricing.minCredits ?? 0;
+    const total = Math.max(min, Math.ceil((chars * rate) / 1000 / 5) * 5);
+    const rateLabel = `${rate} кр/1000 знаков${min ? ` · мин ${min}` : ""}`;
+    return { rate: rateLabel, total: `${total} кр` };
+  }
+  return { rate: "", total: "" };
+}
+
+// Slugs whose bar shows a "+" image-upload slot to the left of the textarea.
+const IMAGE_UPLOAD_SLUGS = new Set([
+  "kling",
+  "video-generation",
+  "ozhivit-foto",
+  "seedance",
+  "sora",
+  "veo",
+  "hailuo",
+  "ozon-product-video",
+]);
+
+function ChipSelect({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: string[];
+  value: number;
+  onChange: (i: number) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [dropUp, setDropUp] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!open || !btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - rect.bottom;
+    setDropUp(spaceBelow < 220 && rect.top > 220);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (
+        !btnRef.current?.contains(e.target as Node) &&
+        !menuRef.current?.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+
+  const current = options[value] ?? options[0];
+
+  return (
+    <div className="relative">
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        title={label}
+        className={cn(
+          "flex items-center gap-1.5 h-8 px-3 rounded-full border text-xs font-medium transition-colors",
+          "border-white/10 bg-white/[0.06] text-white/90 hover:bg-white/[0.1]"
+        )}
+      >
+        <span className="truncate max-w-[140px]">{current}</span>
+        <ChevronDown size={12} className="opacity-70" />
+      </button>
+      {open && (
+        <div
+          ref={menuRef}
+          className={cn(
+            "absolute z-30 min-w-[160px] rounded-xl border border-white/10 bg-[#1a1a1f] shadow-xl py-1",
+            dropUp ? "bottom-full mb-1" : "top-full mt-1"
+          )}
+        >
+          <div className="px-3 py-1.5 text-[10px] uppercase tracking-wide text-white/40">
+            {label}
+          </div>
+          {options.map((opt, i) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => {
+                onChange(i);
+                setOpen(false);
+              }}
+              className={cn(
+                "w-full flex items-center justify-between gap-3 px-3 py-2 text-xs text-left transition-colors",
+                i === value ? "text-white" : "text-white/75 hover:text-white hover:bg-white/[0.05]"
+              )}
+            >
+              <span>{opt}</span>
+              {i === value && <Check size={12} className="text-primary" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
   if (tool.layout === "row") {
