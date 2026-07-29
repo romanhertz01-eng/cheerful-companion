@@ -249,6 +249,26 @@ const ToolPage = () => {
                   </div>
                 ))}
               </div>
+              {data.technologyDescription && (
+                <div className="mt-10">
+                  <h3 className="text-lg md:text-xl font-semibold mb-3">Под капотом</h3>
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.technologyDescription}</p>
+                </div>
+              )}
+            </section>
+          ) : null,
+          keyFeature: data.keyFeatureTitle ? (
+            <section key="keyFeature" className="max-w-4xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.keyFeatureTitle}</h2>
+              {data.keyFeatureDescription && (
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.keyFeatureDescription}</p>
+              )}
+              {!data.specs && data.technologyDescription && (
+                <div className="mt-10">
+                  <h3 className="text-lg md:text-xl font-semibold mb-3">Под капотом</h3>
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.technologyDescription}</p>
+                </div>
+              )}
             </section>
           ) : null,
           comparisonTable: data.comparisonTable ? (
