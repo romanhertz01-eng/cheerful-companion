@@ -18,6 +18,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { studiosPage } from "@/data/seo/pages/studios";
 import { resolveRobots } from "@/data/seo/robots";
 import type { SeoPage } from "@/data/seo/types";
+import { Footer } from "@/components/shared/Footer";
 
 const STUDIOS_TITLE = studiosPage.seo.title;
 const STUDIOS_DESCRIPTION = studiosPage.seo.description;
