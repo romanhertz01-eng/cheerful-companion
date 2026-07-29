@@ -18,6 +18,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { studiosPage } from "@/data/seo/pages/studios";
 import { resolveRobots } from "@/data/seo/robots";
 import type { SeoPage } from "@/data/seo/types";
+import { Footer } from "@/components/shared/Footer";
 
 const STUDIOS_TITLE = studiosPage.seo.title;
 const STUDIOS_DESCRIPTION = studiosPage.seo.description;
@@ -190,8 +191,9 @@ function ToolsAndModelsPage() {
   const visibleCategories = filter === "all" ? allCategories : [filter];
 
   return (
-    <div className="min-h-[calc(100vh-var(--header-height,64px))] px-4 lg:px-8 py-12">
-      <div className="max-w-6xl mx-auto">
+    <>
+      <div className="min-h-[calc(100vh-var(--header-height,64px))] px-4 lg:px-8 py-12">
+        <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-center" style={{ color: "var(--text-primary)" }}>
           Инструменты и Модели
         </h1>
@@ -365,7 +367,9 @@ function ToolsAndModelsPage() {
             )}
           </>
         )}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

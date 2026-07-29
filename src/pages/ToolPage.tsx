@@ -555,6 +555,28 @@ const ToolPage = () => {
           modelTools: data.kind === 'model' ? (() => {
             const tools = getToolsForModel(data.slug);
             if (!tools.length) return null;
+            if (tools.length === 1) {
+              const t = tools[0];
+              return (
+                <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
+                  <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
+                  <Link
+                    to="/tools/$slug"
+                    params={{ slug: t.slug }}
+                    className="group flex items-center gap-5 rounded-2xl border border-white/10 bg-white/[0.04] shadow-sm p-6 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                  >
+                    <ModelGlyph name={t.heroTitle} size={48} />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-lg mb-1">{t.heroTitle}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                        {t.heroDescription}
+                      </p>
+                    </div>
+                    <span aria-hidden className="shrink-0 text-primary text-2xl transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                </section>
+              );
+            }
             return (
               <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
                 <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
