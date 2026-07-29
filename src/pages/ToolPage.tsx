@@ -172,12 +172,6 @@ const ToolPage = () => {
         </div>
       )}
 
-      {data.kind === 'model' && data.heroFacts && data.heroFacts.length > 0 && (
-        <p className="mt-5 text-sm text-muted-foreground text-center">
-          {data.heroFacts.join(" · ")}
-        </p>
-      )}
-
       {(() => {
         const sections: Record<string, React.ReactNode> = {
           showcaseStrip: data.showcaseStrip ? (
