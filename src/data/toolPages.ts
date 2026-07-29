@@ -6900,6 +6900,28 @@ export function isPublished(slug: string): boolean {
   return !!p && p.status !== 'draft';
 }
 
+export function getModelPriceLabel(slug: string): string | undefined {
+  const p = toolPages.find((t) => t.slug === slug);
+  if (!p) return undefined;
+  const tool = p.tool;
+  const pricing = tool?.pricing;
+  if (pricing) {
+    if (typeof pricing.minCredits === "number") {
+      return `от ${pricing.minCredits} кр`;
+    }
+    const rates = pricing.rates ?? [];
+    if (rates.length) {
+      const min = Math.min(...rates.map((r) => r.rate));
+      const suffix = pricing.mode === "per-second" ? " кр/сек" : " кр";
+      return `от ${min}${suffix}`;
+    }
+  }
+  if (typeof tool?.credits === "number") {
+    return `${tool.credits} кр`;
+  }
+  return undefined;
+}
+
 export function getRelatedTools(slug: string, limit = 6): ToolPageData[] {
   const current = toolPages.find((t) => t.slug === slug);
   if (!current) return [];
