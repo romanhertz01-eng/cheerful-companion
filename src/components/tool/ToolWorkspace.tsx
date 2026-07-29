@@ -679,7 +679,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-3 border-t border-border/70 pt-3">
+          <div className="flex items-center justify-between gap-4 flex-wrap border-t border-border/70 pt-3">
             <div className="flex flex-wrap items-center gap-x-1 gap-y-2 min-w-0">
               {(() => {
                 const inlineItems: React.ReactNode[] = [];
@@ -743,29 +743,24 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 );
               })()}
             </div>
-            <div className="flex items-center gap-3 ml-auto">
-              {rateLabel && (
-                <span className="text-[11px] text-muted-foreground hidden sm:inline">{rateLabel}</span>
+            <button
+              type="button"
+              disabled={isAuthed && (!value.trim() || status === "loading")}
+              onClick={onGenerate}
+              className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 w-full sm:w-auto sm:ml-auto shrink-0"
+              style={{ background: "#E85420" }}
+            >
+              {status === "loading" ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> Генерация...
+                </>
+              ) : (
+                <>
+                  <span>Генерировать</span>
+                  <span className="opacity-90">· {totalLabel}</span>
+                </>
               )}
-              <button
-                type="button"
-                disabled={isAuthed && (!value.trim() || status === "loading")}
-                onClick={onGenerate}
-                className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
-                style={{ background: "#E85420" }}
-              >
-                {status === "loading" ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" /> Генерация...
-                  </>
-                ) : (
-                  <>
-                    <span>Генерировать</span>
-                    <span className="opacity-90">· {totalLabel}</span>
-                  </>
-                )}
-              </button>
-            </div>
+            </button>
           </div>
 
           {tool.legalNote && (
