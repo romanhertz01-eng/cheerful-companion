@@ -206,6 +206,15 @@ const ToolPage = () => {
               items={data.showreel.items}
             />
           ) : null,
+          audioShowreel: data.audioShowreel ? (
+            <AudioShowreel
+              key="audioShowreel"
+              heading={data.audioShowreel.heading}
+              sub={data.audioShowreel.sub}
+              textLabel={data.audioShowreel.textLabel}
+              items={data.audioShowreel.items}
+            />
+          ) : null,
           transformShowcase: data.transformShowcase ? (
             <TransformShowcase
               key="transformShowcase"
