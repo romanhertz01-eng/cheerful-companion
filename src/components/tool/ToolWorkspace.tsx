@@ -586,7 +586,6 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
     ? computePricingParts(tool.pricing, selects, selectIdx, value.length)
     : null;
   const totalLabel = pricingParts ? pricingParts.total : `${tool.credits} кр`;
-  const rateLabel = pricingParts ? pricingParts.rate : "";
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
@@ -622,7 +621,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           )}
 
-          <div className="flex gap-3 items-stretch">
+          <div className="flex gap-3 items-start">
             {supportsImage && (
               <div className="shrink-0">
                 <button
@@ -634,7 +633,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                     onImage(e.dataTransfer.files?.[0] ?? null);
                   }}
                   title="Загрузить изображение"
-                  className="relative w-[72px] h-[72px] rounded-2xl border-2 border-dashed border-border hover:border-primary/60 hover:bg-muted/40 transition-colors flex items-center justify-center overflow-hidden group"
+                  className="relative w-11 h-11 rounded-xl border border-dashed border-border hover:border-primary/60 hover:bg-muted/40 transition-colors flex items-center justify-center overflow-hidden group"
                 >
                   {imagePreview ? (
                     <>
@@ -652,7 +651,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                       </span>
                     </>
                   ) : (
-                    <Plus size={22} className="text-muted-foreground" />
+                    <Plus size={18} className="text-muted-foreground" />
                   )}
                 </button>
                 <input
@@ -679,7 +678,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-3 border-t border-border/70 pt-3">
+          <div className="flex items-center justify-between gap-4 flex-wrap border-t border-border/70 pt-3">
             <div className="flex flex-wrap items-center gap-x-1 gap-y-2 min-w-0">
               {(() => {
                 const inlineItems: React.ReactNode[] = [];
@@ -743,29 +742,24 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 );
               })()}
             </div>
-            <div className="flex items-center gap-3 ml-auto">
-              {rateLabel && (
-                <span className="text-[11px] text-muted-foreground hidden sm:inline">{rateLabel}</span>
+            <button
+              type="button"
+              disabled={isAuthed && (!value.trim() || status === "loading")}
+              onClick={onGenerate}
+              className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 w-full sm:w-auto sm:ml-auto shrink-0"
+              style={{ background: "#E85420" }}
+            >
+              {status === "loading" ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> Генерация...
+                </>
+              ) : (
+                <>
+                  <span>Генерировать</span>
+                  <span className="opacity-90">· {totalLabel}</span>
+                </>
               )}
-              <button
-                type="button"
-                disabled={isAuthed && (!value.trim() || status === "loading")}
-                onClick={onGenerate}
-                className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
-                style={{ background: "#E85420" }}
-              >
-                {status === "loading" ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" /> Генерация...
-                  </>
-                ) : (
-                  <>
-                    <span>Генерировать</span>
-                    <span className="opacity-90">· {totalLabel}</span>
-                  </>
-                )}
-              </button>
-            </div>
+            </button>
           </div>
 
           {tool.legalNote && (
