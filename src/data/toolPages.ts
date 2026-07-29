@@ -2441,12 +2441,6 @@ export const toolPages: ToolPageData[] = [
         { name: "Wan" },
       ],
     },
-    bigStat: {
-      value: "90+",
-      label: "нейросетей в единой подписке ЭРА2",
-      sub: "Оплата в рублях, без VPN и зарубежных карт. Новые модели добавляются по мере выхода.",
-      button: "Попробовать бесплатно",
-    },
   },
   {
     slug: "video-generation",
