@@ -586,7 +586,6 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
     ? computePricingParts(tool.pricing, selects, selectIdx, value.length)
     : null;
   const totalLabel = pricingParts ? pricingParts.total : `${tool.credits} кр`;
-  const rateLabel = pricingParts ? pricingParts.rate : "";
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
