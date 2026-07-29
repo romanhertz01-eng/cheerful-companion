@@ -1134,9 +1134,9 @@ export const toolPages: ToolPageData[] = [
     transformShowcase: {
       heading: "Один персонаж — любые сцены",
       sub: "Загрузите портрет, и модель сохранит черты лица в новых ракурсах, одежде и окружении",
-      inputs: ["/community/01.jpg", "/community/02.jpg"],
-      outputs: ["/community/03.jpg", "/community/04.jpg", "/community/05.jpg"],
-      prompt: "Тот же человек в джинсовой куртке на фоне синей стены, дневной свет",
+      inputs: ["/community/01.jpg"],
+      outputs: ["/community/02.jpg", "/community/03.jpg", "/community/05.jpg"],
+      prompt: "Тот же человек в новых сценах: ночной город, студийный свет, естественный фон",
     },
     features: [
       { icon: "🎨", title: "Генерация изображений SOTA", description: "Создавайте фотореалистичные и иллюстративные изображения со стилистической точностью" },
@@ -1899,7 +1899,7 @@ export const toolPages: ToolPageData[] = [
       sub: "Загрузите картинку и опишите, что изменить — модель сохранит остальное без изменений",
       inputs: ["/community/01.jpg"],
       outputs: ["/community/02.jpg", "/community/03.jpg", "/community/05.jpg"],
-      prompt: "Замени фон на ночной город, сохранив освещение лица и позу",
+      prompt: "Замени фон, сохранив освещение лица и позу",
     },
     features: [
       { icon: "🖼", title: "Правка по фото", description: "Меняйте готовые изображения текстом" },
