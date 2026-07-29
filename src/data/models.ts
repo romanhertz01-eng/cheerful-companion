@@ -352,6 +352,22 @@ export const models: AIModel[] = [
       { id: "wan-2-7-1080p", name: "Wan 2.7 · за секунду (1080p)", credits: 195, isNew: true },
     ],
   },
+  {
+    id: "heygen",
+    name: "HeyGen",
+    provider: "HeyGen",
+    category: "video",
+    credits: 80,
+    description: "Говорящие аватары и цифровые двойники HeyGen. Цена за секунду.",
+    icon: "🧑‍💼",
+    slug: "heygen",
+    subModels: [
+      { id: "heygen-avatar-iii-twin", name: "Avatar III Digital Twin · за секунду", credits: 30 },
+      { id: "heygen-avatar-iii-photo", name: "Avatar III Photo · за секунду", credits: 70 },
+      { id: "heygen-avatar-iv", name: "Avatar IV · за секунду", credits: 80, isNew: true },
+      { id: "heygen-avatar-v", name: "Avatar V · за секунду", credits: 110, isNew: true },
+    ],
+  },
 
   // === AUDIO ===
   {
