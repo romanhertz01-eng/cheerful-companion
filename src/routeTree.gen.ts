@@ -9,38 +9,465 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VideoRouteImport } from './routes/video'
+import { Route as ToolkitRouteImport } from './routes/toolkit'
+import { Route as TextRouteImport } from './routes/text'
+import { Route as StudiosRouteImport } from './routes/studios'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as DesignRouteImport } from './routes/design'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AudioRouteImport } from './routes/audio'
+import { Route as AgentsRouteImport } from './routes/agents'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
+import { Route as ToolsTextGenerationRouteImport } from './routes/tools.text-generation'
+import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
+import { Route as ToolsAgentsRouteImport } from './routes/tools.agents'
+import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
+import { Route as AiVideoRouteImport } from './routes/ai.video'
+import { Route as AiTextRouteImport } from './routes/ai.text'
+import { Route as AiImageRouteImport } from './routes/ai.image'
+import { Route as AiAudioRouteImport } from './routes/ai.audio'
+import { Route as AiAgentsRouteImport } from './routes/ai.agents'
 
+const VideoRoute = VideoRouteImport.update({
+  id: '/video',
+  path: '/video',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolkitRoute = ToolkitRouteImport.update({
+  id: '/toolkit',
+  path: '/toolkit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TextRoute = TextRouteImport.update({
+  id: '/text',
+  path: '/text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StudiosRoute = StudiosRouteImport.update({
+  id: '/studios',
+  path: '/studios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignRoute = DesignRouteImport.update({
+  id: '/design',
+  path: '/design',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AudioRoute = AudioRouteImport.update({
+  id: '/audio',
+  path: '/audio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgentsRoute = AgentsRouteImport.update({
+  id: '/agents',
+  path: '/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsTextGenerationRoute = ToolsTextGenerationRouteImport.update({
+  id: '/tools/text-generation',
+  path: '/tools/text-generation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAudioGenerationRoute = ToolsAudioGenerationRouteImport.update({
+  id: '/tools/audio-generation',
+  path: '/tools/audio-generation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsAgentsRoute = ToolsAgentsRouteImport.update({
+  id: '/tools/agents',
+  path: '/tools/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsSlugRoute = ToolsSlugRouteImport.update({
+  id: '/tools/$slug',
+  path: '/tools/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiVideoRoute = AiVideoRouteImport.update({
+  id: '/ai/video',
+  path: '/ai/video',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiTextRoute = AiTextRouteImport.update({
+  id: '/ai/text',
+  path: '/ai/text',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiImageRoute = AiImageRouteImport.update({
+  id: '/ai/image',
+  path: '/ai/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAudioRoute = AiAudioRouteImport.update({
+  id: '/ai/audio',
+  path: '/ai/audio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiAgentsRoute = AiAgentsRouteImport.update({
+  id: '/ai/agents',
+  path: '/ai/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/agents': typeof AgentsRoute
+  '/audio': typeof AudioRoute
+  '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRoute
+  '/design': typeof DesignRoute
+  '/history': typeof HistoryRoute
+  '/pricing': typeof PricingRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/studios': typeof StudiosRoute
+  '/text': typeof TextRoute
+  '/toolkit': typeof ToolkitRoute
+  '/video': typeof VideoRoute
+  '/ai/agents': typeof AiAgentsRoute
+  '/ai/audio': typeof AiAudioRoute
+  '/ai/image': typeof AiImageRoute
+  '/ai/text': typeof AiTextRoute
+  '/ai/video': typeof AiVideoRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
+  '/tools/agents': typeof ToolsAgentsRoute
+  '/tools/audio-generation': typeof ToolsAudioGenerationRoute
+  '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/agents': typeof AgentsRoute
+  '/audio': typeof AudioRoute
+  '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRoute
+  '/design': typeof DesignRoute
+  '/history': typeof HistoryRoute
+  '/pricing': typeof PricingRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/studios': typeof StudiosRoute
+  '/text': typeof TextRoute
+  '/toolkit': typeof ToolkitRoute
+  '/video': typeof VideoRoute
+  '/ai/agents': typeof AiAgentsRoute
+  '/ai/audio': typeof AiAudioRoute
+  '/ai/image': typeof AiImageRoute
+  '/ai/text': typeof AiTextRoute
+  '/ai/video': typeof AiVideoRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
+  '/tools/agents': typeof ToolsAgentsRoute
+  '/tools/audio-generation': typeof ToolsAudioGenerationRoute
+  '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
+  '/agents': typeof AgentsRoute
+  '/audio': typeof AudioRoute
+  '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRoute
+  '/design': typeof DesignRoute
+  '/history': typeof HistoryRoute
+  '/pricing': typeof PricingRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/studios': typeof StudiosRoute
+  '/text': typeof TextRoute
+  '/toolkit': typeof ToolkitRoute
+  '/video': typeof VideoRoute
+  '/ai/agents': typeof AiAgentsRoute
+  '/ai/audio': typeof AiAudioRoute
+  '/ai/image': typeof AiImageRoute
+  '/ai/text': typeof AiTextRoute
+  '/ai/video': typeof AiVideoRoute
+  '/guides/$slug': typeof GuidesSlugRoute
+  '/tools/$slug': typeof ToolsSlugRoute
+  '/tools/agents': typeof ToolsAgentsRoute
+  '/tools/audio-generation': typeof ToolsAudioGenerationRoute
+  '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/account'
+    | '/agents'
+    | '/audio'
+    | '/auth'
+    | '/checkout'
+    | '/design'
+    | '/history'
+    | '/pricing'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/studios'
+    | '/text'
+    | '/toolkit'
+    | '/video'
+    | '/ai/agents'
+    | '/ai/audio'
+    | '/ai/image'
+    | '/ai/text'
+    | '/ai/video'
+    | '/guides/$slug'
+    | '/tools/$slug'
+    | '/tools/agents'
+    | '/tools/audio-generation'
+    | '/tools/text-generation'
+    | '/guides/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/account'
+    | '/agents'
+    | '/audio'
+    | '/auth'
+    | '/checkout'
+    | '/design'
+    | '/history'
+    | '/pricing'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/studios'
+    | '/text'
+    | '/toolkit'
+    | '/video'
+    | '/ai/agents'
+    | '/ai/audio'
+    | '/ai/image'
+    | '/ai/text'
+    | '/ai/video'
+    | '/guides/$slug'
+    | '/tools/$slug'
+    | '/tools/agents'
+    | '/tools/audio-generation'
+    | '/tools/text-generation'
+    | '/guides'
+  id:
+    | '__root__'
+    | '/'
+    | '/account'
+    | '/agents'
+    | '/audio'
+    | '/auth'
+    | '/checkout'
+    | '/design'
+    | '/history'
+    | '/pricing'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/studios'
+    | '/text'
+    | '/toolkit'
+    | '/video'
+    | '/ai/agents'
+    | '/ai/audio'
+    | '/ai/image'
+    | '/ai/text'
+    | '/ai/video'
+    | '/guides/$slug'
+    | '/tools/$slug'
+    | '/tools/agents'
+    | '/tools/audio-generation'
+    | '/tools/text-generation'
+    | '/guides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
+  AgentsRoute: typeof AgentsRoute
+  AudioRoute: typeof AudioRoute
+  AuthRoute: typeof AuthRoute
+  CheckoutRoute: typeof CheckoutRoute
+  DesignRoute: typeof DesignRoute
+  HistoryRoute: typeof HistoryRoute
+  PricingRoute: typeof PricingRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StudiosRoute: typeof StudiosRoute
+  TextRoute: typeof TextRoute
+  ToolkitRoute: typeof ToolkitRoute
+  VideoRoute: typeof VideoRoute
+  AiAgentsRoute: typeof AiAgentsRoute
+  AiAudioRoute: typeof AiAudioRoute
+  AiImageRoute: typeof AiImageRoute
+  AiTextRoute: typeof AiTextRoute
+  AiVideoRoute: typeof AiVideoRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
+  ToolsSlugRoute: typeof ToolsSlugRoute
+  ToolsAgentsRoute: typeof ToolsAgentsRoute
+  ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
+  ToolsTextGenerationRoute: typeof ToolsTextGenerationRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/video': {
+      id: '/video'
+      path: '/video'
+      fullPath: '/video'
+      preLoaderRoute: typeof VideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/toolkit': {
+      id: '/toolkit'
+      path: '/toolkit'
+      fullPath: '/toolkit'
+      preLoaderRoute: typeof ToolkitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/text': {
+      id: '/text'
+      path: '/text'
+      fullPath: '/text'
+      preLoaderRoute: typeof TextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/studios': {
+      id: '/studios'
+      path: '/studios'
+      fullPath: '/studios'
+      preLoaderRoute: typeof StudiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design': {
+      id: '/design'
+      path: '/design'
+      fullPath: '/design'
+      preLoaderRoute: typeof DesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/audio': {
+      id: '/audio'
+      path: '/audio'
+      fullPath: '/audio'
+      preLoaderRoute: typeof AudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agents': {
+      id: '/agents'
+      path: '/agents'
+      fullPath: '/agents'
+      preLoaderRoute: typeof AgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +475,114 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/text-generation': {
+      id: '/tools/text-generation'
+      path: '/tools/text-generation'
+      fullPath: '/tools/text-generation'
+      preLoaderRoute: typeof ToolsTextGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/audio-generation': {
+      id: '/tools/audio-generation'
+      path: '/tools/audio-generation'
+      fullPath: '/tools/audio-generation'
+      preLoaderRoute: typeof ToolsAudioGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/agents': {
+      id: '/tools/agents'
+      path: '/tools/agents'
+      fullPath: '/tools/agents'
+      preLoaderRoute: typeof ToolsAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/$slug': {
+      id: '/tools/$slug'
+      path: '/tools/$slug'
+      fullPath: '/tools/$slug'
+      preLoaderRoute: typeof ToolsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/video': {
+      id: '/ai/video'
+      path: '/ai/video'
+      fullPath: '/ai/video'
+      preLoaderRoute: typeof AiVideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/text': {
+      id: '/ai/text'
+      path: '/ai/text'
+      fullPath: '/ai/text'
+      preLoaderRoute: typeof AiTextRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/image': {
+      id: '/ai/image'
+      path: '/ai/image'
+      fullPath: '/ai/image'
+      preLoaderRoute: typeof AiImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/audio': {
+      id: '/ai/audio'
+      path: '/ai/audio'
+      fullPath: '/ai/audio'
+      preLoaderRoute: typeof AiAudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/agents': {
+      id: '/ai/agents'
+      path: '/ai/agents'
+      fullPath: '/ai/agents'
+      preLoaderRoute: typeof AiAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
+  AgentsRoute: AgentsRoute,
+  AudioRoute: AudioRoute,
+  AuthRoute: AuthRoute,
+  CheckoutRoute: CheckoutRoute,
+  DesignRoute: DesignRoute,
+  HistoryRoute: HistoryRoute,
+  PricingRoute: PricingRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StudiosRoute: StudiosRoute,
+  TextRoute: TextRoute,
+  ToolkitRoute: ToolkitRoute,
+  VideoRoute: VideoRoute,
+  AiAgentsRoute: AiAgentsRoute,
+  AiAudioRoute: AiAudioRoute,
+  AiImageRoute: AiImageRoute,
+  AiTextRoute: AiTextRoute,
+  AiVideoRoute: AiVideoRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
+  ToolsSlugRoute: ToolsSlugRoute,
+  ToolsAgentsRoute: ToolsAgentsRoute,
+  ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,
+  ToolsTextGenerationRoute: ToolsTextGenerationRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

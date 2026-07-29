@@ -1,0 +1,903 @@
+{
+  "pages": [
+    {
+      "url": "/",
+      "label": "home",
+      "status": 200,
+      "h1": "90+ нейросетей в одной подписке",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 1,
+      "sections": 8
+    },
+    {
+      "url": "/tools/ozhivit-foto",
+      "label": "ozhivit-foto",
+      "status": 200,
+      "h1": "Оживить фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 11,
+      "draft": false
+    },
+    {
+      "url": "/tools/remove-background",
+      "label": "remove-background",
+      "status": 200,
+      "h1": "Удалить фон с фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 6,
+      "draft": false
+    },
+    {
+      "url": "/tools/image-upscaler",
+      "label": "image-upscaler",
+      "status": 200,
+      "h1": "Улучшить качество фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 6,
+      "draft": false
+    },
+    {
+      "url": "/tools/photo-restoration",
+      "label": "photo-restoration",
+      "status": 200,
+      "h1": "Реставрация старых фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": true
+    },
+    {
+      "url": "/tools/colorize-photo",
+      "label": "colorize-photo",
+      "status": 200,
+      "h1": "Раскрасить чёрно-белое фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 8,
+      "draft": true
+    },
+    {
+      "url": "/tools/text-to-speech",
+      "label": "text-to-speech",
+      "status": 200,
+      "h1": "Озвучка текста",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": true
+    },
+    {
+      "url": "/tools/voice-cloning",
+      "label": "voice-cloning",
+      "status": 200,
+      "h1": "Клонировать голос",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 8,
+      "draft": true
+    },
+    {
+      "url": "/tools/transcribe",
+      "label": "transcribe",
+      "status": 200,
+      "h1": "Расшифровать аудио в текст",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": true
+    },
+    {
+      "url": "/tools/nano-banana",
+      "label": "nano-banana",
+      "status": 200,
+      "h1": "Генератор изображений Nano Banana",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/midjourney",
+      "label": "midjourney",
+      "status": 200,
+      "h1": "Генератор изображений Midjourney",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/seedance",
+      "label": "seedance",
+      "status": 200,
+      "h1": "Генератор видео Seedance",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 7,
+      "draft": false
+    },
+    {
+      "url": "/tools/image-generation",
+      "label": "image-generation",
+      "status": 200,
+      "h1": "Создать изображение по описанию",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 7,
+      "draft": false
+    },
+    {
+      "url": "/tools/video-generation",
+      "label": "video-generation",
+      "status": 200,
+      "h1": "Создать видео по описанию",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 8,
+      "draft": false
+    },
+    {
+      "url": "/tools/object-remover",
+      "label": "object-remover",
+      "status": 200,
+      "h1": "Удалить объект с фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 7,
+      "draft": true
+    },
+    {
+      "url": "/tools/watermark-remover",
+      "label": "watermark-remover",
+      "status": 200,
+      "h1": "Удалить водяной знак с фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 6,
+      "draft": true
+    },
+    {
+      "url": "/tools/talking-avatar",
+      "label": "talking-avatar",
+      "status": 200,
+      "h1": "Говорящий аватар по фото",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 7,
+      "draft": true
+    },
+    {
+      "url": "/tools/ozon-product-video",
+      "label": "ozon-product-video",
+      "status": 200,
+      "h1": "Видео для карточки Ozon",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 7,
+      "draft": true
+    },
+    {
+      "url": "/tools/sora",
+      "label": "sora",
+      "status": 200,
+      "h1": "Sora — видеонейросеть OpenAI",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/veo",
+      "label": "veo",
+      "status": 200,
+      "h1": "Veo 3 — видеонейросеть Google",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/kling",
+      "label": "kling",
+      "status": 200,
+      "h1": "Kling — универсальная видеонейросеть",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/chatgpt",
+      "label": "chatgpt",
+      "status": 200,
+      "h1": "ChatGPT на русском — без VPN и регистрации в OpenAI",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/claude",
+      "label": "claude",
+      "status": 200,
+      "h1": "Claude — нейросеть Anthropic на русском",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/gemini",
+      "label": "gemini",
+      "status": 200,
+      "h1": "Gemini — нейросеть Google на русском",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/grok",
+      "label": "grok",
+      "status": 200,
+      "h1": "Grok — нейросеть xAI с поиском в реальном времени",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/deepseek",
+      "label": "deepseek",
+      "status": 200,
+      "h1": "DeepSeek — открытая нейросеть для текста и рассуждений",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/perplexity",
+      "label": "perplexity",
+      "status": 200,
+      "h1": "Perplexity — ИИ-поиск с источниками",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/seedream",
+      "label": "seedream",
+      "status": 200,
+      "h1": "Seedream — быстрая генерация изображений до 4K",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/flux",
+      "label": "flux",
+      "status": 200,
+      "h1": "Flux — нейросеть с контролем композиции",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/gpt-image",
+      "label": "gpt-image",
+      "status": 200,
+      "h1": "GPT Image — генератор изображений от OpenAI",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/imagen",
+      "label": "imagen",
+      "status": 200,
+      "h1": "Imagen 4 — фотореализм от Google",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/hailuo",
+      "label": "hailuo",
+      "status": 200,
+      "h1": "Hailuo — видеонейросеть MiniMax",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/elevenlabs",
+      "label": "elevenlabs",
+      "status": 200,
+      "h1": "ElevenLabs — озвучка, неотличимая от диктора",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/suno",
+      "label": "suno",
+      "status": 200,
+      "h1": "Suno — нейросеть, которая пишет песни",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/translate",
+      "label": "translate",
+      "status": 200,
+      "h1": "Перевод текста нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/ai-writer",
+      "label": "ai-writer",
+      "status": 200,
+      "h1": "Написать текст нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/document-analysis",
+      "label": "document-analysis",
+      "status": 200,
+      "h1": "Анализ документов нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/ai-code",
+      "label": "ai-code",
+      "status": 200,
+      "h1": "Написать код нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 5,
+      "draft": false
+    },
+    {
+      "url": "/tools/video-upscaler",
+      "label": "video-upscaler",
+      "status": 200,
+      "h1": "Апскейл видео нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 5,
+      "draft": true
+    },
+    {
+      "url": "/tools/ai-portrait",
+      "label": "ai-portrait",
+      "status": 200,
+      "h1": "ИИ-фото людей: реалистичные портреты",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 5,
+      "draft": false
+    },
+    {
+      "url": "/tools/photo-editor",
+      "label": "photo-editor",
+      "status": 200,
+      "h1": "Редактор фото с ИИ",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/voice-changer",
+      "label": "voice-changer",
+      "status": 200,
+      "h1": "Смена голоса нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": true
+    },
+    {
+      "url": "/tools/sound-effects",
+      "label": "sound-effects",
+      "status": 200,
+      "h1": "Создание звуков и эффектов нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 5,
+      "draft": true
+    },
+    {
+      "url": "/tools/audio-denoise",
+      "label": "audio-denoise",
+      "status": 200,
+      "h1": "Удаление шума из аудио",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": true
+    },
+    {
+      "url": "/tools/ai-lawyer",
+      "label": "ai-lawyer",
+      "status": 200,
+      "h1": "ИИ-юрист: консультации и документы",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 2,
+      "draft": false
+    },
+    {
+      "url": "/tools/ai-copywriter",
+      "label": "ai-copywriter",
+      "status": 200,
+      "h1": "ИИ-копирайтер: контент как процесс",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 4,
+      "draft": false
+    },
+    {
+      "url": "/tools/ai-marketer",
+      "label": "ai-marketer",
+      "status": 200,
+      "h1": "ИИ-маркетолог: стратегия и рост",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/ai-chat",
+      "label": "ai-chat",
+      "status": 200,
+      "h1": "Чат с нейросетью онлайн",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    },
+    {
+      "url": "/tools/create-song",
+      "label": "create-song",
+      "status": 200,
+      "h1": "Создать песню нейросетью",
+      "footer": true,
+      "faq": true,
+      "broken_imgs": [],
+      "gen_btn": 3,
+      "draft": false
+    }
+  ],
+  "menu": [
+    {
+      "tab": "Текст",
+      "items": 63
+    },
+    {
+      "tab": "Дизайн",
+      "items": 65
+    },
+    {
+      "tab": "Видео",
+      "items": 64
+    },
+    {
+      "tab": "Аудио",
+      "items": 59
+    },
+    {
+      "tab": "Агенты",
+      "items": 59
+    }
+  ],
+  "auth_gate": [
+    {
+      "slug": "ozhivit-foto",
+      "after_click": "http://localhost:8080/tools/ozhivit-foto",
+      "buttons": 10
+    },
+    {
+      "slug": "chatgpt",
+      "after_click": "http://localhost:8080/auth?next=%2Ftools%2Fchatgpt",
+      "buttons": 3
+    },
+    {
+      "slug": "create-song",
+      "after_click": "http://localhost:8080/auth?next=%2Ftools%2Fcreate-song",
+      "buttons": 3
+    }
+  ],
+  "service": {
+    "sitemap": {
+      "status": 200,
+      "count": 47,
+      "draft_leaks": []
+    },
+    "not_found": {
+      "status": 404,
+      "text": "150 кредитов бесплатно\n·\nПопробуйте 90+ нейросетей без VPN\nНачать бесплатно\nE\nera2.ai\nТекст\nДизайн\nВидео\nАудио\nАгенты\nПо"
+    },
+    "guides": {
+      "url": "/guides",
+      "label": "guides",
+      "status": 200,
+      "h1": "Гайды по нейросетям",
+      "footer": true,
+      "faq": false,
+      "broken_imgs": [],
+      "gen_btn": 0
+    }
+  },
+  "mobile": [
+    {
+      "url": "/",
+      "overflow_x": false
+    },
+    {
+      "url": "/tools/ozhivit-foto",
+      "overflow_x": false
+    },
+    {
+      "url": "/tools/chatgpt",
+      "overflow_x": true
+    },
+    {
+      "burger_buttons": 0
+    }
+  ],
+  "defects": [],
+  "menu_pages": [
+    {
+      "href": "/ai/agents",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/ai/audio",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/ai/image",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/ai/text",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/ai/video",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/guides",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/pricing",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/studios",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-chat",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-code",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-copywriter",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-lawyer",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-marketer",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-portrait",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ai-writer",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/audio-denoise",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/chatgpt",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/claude",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/colorize-photo",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/create-song",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/deepseek",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/document-analysis",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/elevenlabs",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/flux",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/gemini",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/gpt-image",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/grok",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/hailuo",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/image-generation",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/image-upscaler",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/imagen",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/kling",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/midjourney",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/nano-banana",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/object-remover",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ozhivit-foto",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/ozon-product-video",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/perplexity",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/photo-editor",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/photo-restoration",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/remove-background",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/seedance",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/seedream",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/sora",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/sound-effects",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/suno",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/talking-avatar",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/text-to-speech",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/transcribe",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/translate",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/veo",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/video-generation",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/video-upscaler",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/voice-changer",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/voice-cloning",
+      "status": 200,
+      "h1": true
+    },
+    {
+      "href": "/tools/watermark-remover",
+      "status": 200,
+      "h1": true
+    }
+  ]
+}
