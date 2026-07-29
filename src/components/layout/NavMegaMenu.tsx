@@ -95,7 +95,6 @@ export const TABS: TabConfig[] = [
       { name: "Wan", desc: "Alibaba", publicHref: "/tools/wan" },
       { name: "Sora", desc: "От OpenAI", publicHref: "/tools/sora" },
       { name: "HeyGen", desc: "AI аватары", publicHref: "/tools/heygen" },
-      { name: "Hedra", desc: "Говорящие персонажи", publicHref: "/tools/talking-avatar" },
     ],
   },
   {
