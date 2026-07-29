@@ -462,7 +462,7 @@ const ToolPage = () => {
         }
 
         const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
-        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips", "bigStat"];
+        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
