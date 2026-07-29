@@ -2585,12 +2585,6 @@ export const toolPages: ToolPageData[] = [
         { name: "HeyGen" },
       ],
     },
-    bigStat: {
-      value: "90+",
-      label: "нейросетей в единой подписке ЭРА2",
-      sub: "Видео, изображения, текст и аудио — одна подписка в рублях закрывает всё.",
-      button: "Попробовать бесплатно",
-    },
   },
   {
     slug: "object-remover",
