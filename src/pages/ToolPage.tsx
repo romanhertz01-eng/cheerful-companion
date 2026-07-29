@@ -1,10 +1,10 @@
 import { ORIGIN } from "@/lib/origin";
 
 import { Link, getRouteApi } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Music, Image as ImageIcon, Film, AlignLeft, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, type ToolPageData } from "@/data/toolPages";
+import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, getToolPageData, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -20,6 +20,18 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
+
+const CHIP_ICON_BY_RESULT_TYPE = {
+  audio: Music,
+  images: ImageIcon,
+  video: Film,
+  text: AlignLeft,
+} as const;
+
+function getChipIcon(slug?: string) {
+  const rt = slug ? getToolPageData(slug)?.tool?.resultType : undefined;
+  return (rt && CHIP_ICON_BY_RESULT_TYPE[rt]) || Sparkles;
+}
 
 const ToolPage = () => {
   const { data } = toolRouteApi.useLoaderData() as { data: ToolPageData };
