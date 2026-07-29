@@ -1,6 +1,20 @@
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon, Plus, X } from "lucide-react";
+import {
+  ArrowLeft,
+  Upload,
+  Play,
+  Loader2,
+  ChevronDown,
+  Check,
+  Play as PlayIcon,
+  Plus,
+  X,
+  RectangleHorizontal,
+  Clock,
+  Monitor,
+  SlidersHorizontal,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ToolPageData } from "@/data/toolPages";
 import { useAuth } from "@/contexts/AuthContext";
@@ -104,16 +118,32 @@ const IMAGE_UPLOAD_SLUGS = new Set([
   "ozon-product-video",
 ]);
 
+function iconForLabel(label: string) {
+  const l = label.toLowerCase();
+  if (/формат|aspect|соотношени/.test(l)) return RectangleHorizontal;
+  if (/длител|duration|секунд|время/.test(l)) return Clock;
+  if (/разреш|resolution|качеств|quality/.test(l)) return Monitor;
+  return SlidersHorizontal;
+}
+
+const FLAGSHIP_RE = /pro|max|ultra|flagship|premium|3\.0|v3\b|1\.6/i;
+
 function ChipSelect({
   label,
   options,
   value,
   onChange,
+  variant = "pill",
+  icon: IconOverride,
+  flagshipMark = false,
 }: {
   label: string;
   options: string[];
   value: number;
   onChange: (i: number) => void;
+  variant?: "pill" | "inline";
+  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  flagshipMark?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
@@ -142,6 +172,8 @@ function ChipSelect({
   }, [open]);
 
   const current = options[value] ?? options[0];
+  const Icon = IconOverride ?? iconForLabel(label);
+  const showFlame = flagshipMark && FLAGSHIP_RE.test(current);
 
   return (
     <div className="relative">
@@ -151,22 +183,26 @@ function ChipSelect({
         onClick={() => setOpen((v) => !v)}
         title={label}
         className={cn(
-          "flex items-center gap-1.5 h-8 px-3 rounded-full border text-xs font-medium transition-colors",
-          "border-white/10 bg-white/[0.06] text-white/90 hover:bg-white/[0.1]"
+          "flex items-center gap-1.5 text-xs font-medium transition-colors",
+          variant === "pill"
+            ? "h-8 px-3 rounded-full border border-border bg-muted/60 text-foreground hover:bg-muted"
+            : "h-8 px-2 rounded-md text-foreground/85 hover:bg-muted/60"
         )}
       >
+        <Icon size={14} className="opacity-70 shrink-0" />
+        {showFlame && <span aria-hidden>🔥</span>}
         <span className="truncate max-w-[140px]">{current}</span>
-        <ChevronDown size={12} className="opacity-70" />
+        <ChevronDown size={12} className="opacity-60" />
       </button>
       {open && (
         <div
           ref={menuRef}
           className={cn(
-            "absolute z-30 min-w-[160px] rounded-xl border border-white/10 bg-[#1a1a1f] shadow-xl py-1",
+            "absolute z-30 min-w-[180px] rounded-xl border border-border bg-popover text-popover-foreground shadow-xl py-1",
             dropUp ? "bottom-full mb-1" : "top-full mt-1"
           )}
         >
-          <div className="px-3 py-1.5 text-[10px] uppercase tracking-wide text-white/40">
+          <div className="px-3 py-1.5 text-[10px] uppercase tracking-wide text-muted-foreground">
             {label}
           </div>
           {options.map((opt, i) => (
@@ -179,7 +215,9 @@ function ChipSelect({
               }}
               className={cn(
                 "w-full flex items-center justify-between gap-3 px-3 py-2 text-xs text-left transition-colors",
-                i === value ? "text-white" : "text-white/75 hover:text-white hover:bg-white/[0.05]"
+                i === value
+                  ? "text-foreground"
+                  : "text-foreground/75 hover:text-foreground hover:bg-muted/60"
               )}
             >
               <span>{opt}</span>
@@ -555,13 +593,10 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
       <div className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight text-center mb-3">{data.heroTitle}</h1>
         <p className="text-muted-foreground text-center max-w-[640px] mx-auto mb-8">{data.heroDescription}</p>
-        <div
-          className="rounded-2xl p-4 md:p-5 flex flex-col gap-3 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_20px_60px_-20px_rgba(232,84,32,0.25)]"
-          style={{ background: "#1a1a1f", color: "#f5f5f7" }}
-        >
+        <div className="rounded-3xl border border-border bg-card text-card-foreground p-5 md:p-6 flex flex-col gap-4 shadow-lg shadow-black/5">
           {tool.sampleUpload && (
             <div>
-              <label className="text-xs text-white/60 mb-1 block">{tool.sampleUpload.label}</label>
+              <label className="text-xs text-muted-foreground mb-1 block">{tool.sampleUpload.label}</label>
               <button
                 type="button"
                 onClick={() => sampleRef.current?.click()}
@@ -571,11 +606,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                   const f = e.dataTransfer.files?.[0] ?? null;
                   if (f) setSampleFile(f);
                 }}
-                className="w-full h-[88px] rounded-xl border-2 border-dashed border-white/15 hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
+                className="w-full h-[88px] rounded-2xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
               >
-                <Upload size={18} className="text-white/60" />
+                <Upload size={18} className="text-muted-foreground" />
                 <span className="text-sm truncate max-w-full">{sampleFile ? sampleFile.name : "Загрузите файл или перетащите сюда"}</span>
-                <span className="text-[11px] text-white/50">{tool.sampleUpload.hint}</span>
+                <span className="text-[11px] text-muted-foreground">{tool.sampleUpload.hint}</span>
               </button>
               <input
                 ref={sampleRef}
@@ -599,7 +634,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                     onImage(e.dataTransfer.files?.[0] ?? null);
                   }}
                   title="Загрузить изображение"
-                  className="relative w-[72px] h-[72px] rounded-xl border border-dashed border-white/20 hover:border-primary/60 hover:bg-white/[0.04] transition-colors flex items-center justify-center overflow-hidden group"
+                  className="relative w-[72px] h-[72px] rounded-2xl border-2 border-dashed border-border hover:border-primary/60 hover:bg-muted/40 transition-colors flex items-center justify-center overflow-hidden group"
                 >
                   {imagePreview ? (
                     <>
@@ -613,11 +648,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                         }}
                         className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                       >
-                        <X size={12} className="text-white" />
+                        <X size={12} className="text-primary-foreground" />
                       </span>
                     </>
                   ) : (
-                    <Plus size={22} className="text-white/60" />
+                    <Plus size={22} className="text-muted-foreground" />
                   )}
                 </button>
                 <input
@@ -636,46 +671,81 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 value={value}
                 onChange={(e) => setText(e.target.value.slice(0, maxChars))}
                 placeholder={tool.textPlaceholder}
-                className="w-full h-full min-h-[72px] resize-none rounded-xl border border-white/10 bg-black/25 text-white placeholder:text-white/40 px-3.5 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
+                className="w-full h-full min-h-[72px] resize-none bg-transparent text-foreground placeholder:text-muted-foreground px-1 py-1 text-sm outline-none border-0"
               />
-              <div className="absolute bottom-2 right-3 text-[11px] text-white/40">
+              <div className="absolute bottom-1 right-1 text-[11px] text-muted-foreground">
                 {value.length} / {maxChars}
               </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-3">
-            <div className="flex flex-wrap items-center gap-2 min-w-0">
-              <span className="h-8 px-3 flex items-center rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/85">
-                {tool.modelName}
-              </span>
-              {voices.length > 0 && (
-                <ChipSelect
-                  label="Голос"
-                  options={voices}
-                  value={Math.max(0, voices.indexOf(voice))}
-                  onChange={(i) => setVoice(voices[i])}
-                />
-              )}
-              {selects.map((sel, si) => (
-                <ChipSelect
-                  key={si}
-                  label={sel.label}
-                  options={sel.options}
-                  value={selectIdx[si] ?? sel.defaultIndex ?? 0}
-                  onChange={(oi) =>
-                    setSelectIdx((prev) => {
-                      const next = [...prev];
-                      next[si] = oi;
-                      return next;
-                    })
-                  }
-                />
-              ))}
+          <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-3 border-t border-border/70 pt-3">
+            <div className="flex flex-wrap items-center gap-x-1 gap-y-2 min-w-0">
+              {(() => {
+                const inlineItems: React.ReactNode[] = [];
+                if (voices.length > 0) {
+                  inlineItems.push(
+                    <ChipSelect
+                      key="voice"
+                      label="Голос"
+                      options={voices}
+                      value={Math.max(0, voices.indexOf(voice))}
+                      onChange={(i) => setVoice(voices[i])}
+                      variant="inline"
+                    />
+                  );
+                }
+                selects.forEach((sel, si) => {
+                  // First select acts as the "version" pill on the far left.
+                  if (si === 0) return;
+                  inlineItems.push(
+                    <ChipSelect
+                      key={si}
+                      label={sel.label}
+                      options={sel.options}
+                      value={selectIdx[si] ?? sel.defaultIndex ?? 0}
+                      onChange={(oi) =>
+                        setSelectIdx((prev) => {
+                          const next = [...prev];
+                          next[si] = oi;
+                          return next;
+                        })
+                      }
+                      variant="inline"
+                    />
+                  );
+                });
+                return (
+                  <>
+                    {selects[0] && (
+                      <ChipSelect
+                        label={selects[0].label}
+                        options={selects[0].options}
+                        value={selectIdx[0] ?? selects[0].defaultIndex ?? 0}
+                        onChange={(oi) =>
+                          setSelectIdx((prev) => {
+                            const next = [...prev];
+                            next[0] = oi;
+                            return next;
+                          })
+                        }
+                        variant="pill"
+                        flagshipMark
+                      />
+                    )}
+                    {inlineItems.map((node, idx) => (
+                      <div key={idx} className="flex items-center gap-1">
+                        <span className="h-4 w-px bg-border/80" aria-hidden />
+                        {node}
+                      </div>
+                    ))}
+                  </>
+                );
+              })()}
             </div>
             <div className="flex items-center gap-3 ml-auto">
               {rateLabel && (
-                <span className="text-[11px] text-white/50 hidden sm:inline">{rateLabel}</span>
+                <span className="text-[11px] text-muted-foreground hidden sm:inline">{rateLabel}</span>
               )}
               <button
                 type="button"
@@ -699,7 +769,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
           </div>
 
           {tool.legalNote && (
-            <p className="text-[11px] text-white/50 flex items-start gap-1.5">
+            <p className="text-[11px] text-muted-foreground flex items-start gap-1.5">
               <span aria-hidden>⚠️</span>
               <span>{tool.legalNote}</span>
             </p>
