@@ -249,6 +249,26 @@ const ToolPage = () => {
                   </div>
                 ))}
               </div>
+              {data.technologyDescription && (
+                <div className="mt-10">
+                  <h3 className="text-lg md:text-xl font-semibold mb-3">Под капотом</h3>
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.technologyDescription}</p>
+                </div>
+              )}
+            </section>
+          ) : null,
+          keyFeature: data.keyFeatureTitle ? (
+            <section key="keyFeature" className="max-w-4xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.keyFeatureTitle}</h2>
+              {data.keyFeatureDescription && (
+                <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.keyFeatureDescription}</p>
+              )}
+              {!data.specs && data.technologyDescription && (
+                <div className="mt-10">
+                  <h3 className="text-lg md:text-xl font-semibold mb-3">Под капотом</h3>
+                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.technologyDescription}</p>
+                </div>
+              )}
             </section>
           ) : null,
           comparisonTable: data.comparisonTable ? (
@@ -450,23 +470,8 @@ const ToolPage = () => {
           ) : null,
         };
 
-        if (data.bigStat) {
-          sections.bigStat = (
-            <section key="bigStat" className="max-w-3xl mx-auto px-4 py-16 text-center">
-              <div className="text-6xl md:text-7xl font-bold gradient-accent-text">{data.bigStat.value}</div>
-              <p className="text-xl md:text-2xl font-semibold mt-3">{data.bigStat.label}</p>
-              {data.bigStat.sub && <p className="text-muted-foreground mt-3 max-w-xl mx-auto">{data.bigStat.sub}</p>}
-              {data.bigStat.button && (
-                <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="gradient-accent text-white rounded-full px-8 py-3 font-semibold mt-6 hover:opacity-90 transition-opacity">
-                  {data.bigStat.button}
-                </button>
-              )}
-            </section>
-          );
-        }
-
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
-        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips", "bigStat"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "gallery", "tips", "useCases", "howItWorks"];
+        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "keyFeature", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}

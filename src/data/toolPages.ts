@@ -59,7 +59,6 @@ export interface ToolPageData {
     sub?: string;
     models: { name: string; slug?: string; badge?: string }[];
   };
-  bigStat?: { value: string; label: string; sub?: string; button?: string };
   examples?: { heading: string; images: string[] };
   visualCards?: {
     heading: string;
@@ -2442,12 +2441,6 @@ export const toolPages: ToolPageData[] = [
         { name: "Wan" },
       ],
     },
-    bigStat: {
-      value: "90+",
-      label: "нейросетей в единой подписке ЭРА2",
-      sub: "Оплата в рублях, без VPN и зарубежных карт. Новые модели добавляются по мере выхода.",
-      button: "Попробовать бесплатно",
-    },
   },
   {
     slug: "video-generation",
@@ -2591,12 +2584,6 @@ export const toolPages: ToolPageData[] = [
         { name: "Vidu" },
         { name: "HeyGen" },
       ],
-    },
-    bigStat: {
-      value: "90+",
-      label: "нейросетей в единой подписке ЭРА2",
-      sub: "Видео, изображения, текст и аудио — одна подписка в рублях закрывает всё.",
-      button: "Попробовать бесплатно",
     },
   },
   {
