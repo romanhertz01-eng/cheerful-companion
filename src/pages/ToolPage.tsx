@@ -573,7 +573,15 @@ const ToolPage = () => {
 
         const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
         const toolOrder = ["intro", "showreel", "audioShowreel", "promptAnswer", "featureBlocks", "useCases", "howItWorks", "keyFeature", "specs", "modelChips"];
-        const order = data.kind === "model" ? modelOrder : toolOrder;
+        const defaultOrder = data.kind === "model" ? modelOrder : toolOrder;
+        // Optional per-page override: keys not listed keep their default position.
+        const order = data.sectionOrder
+          ? (() => {
+              const override = data.sectionOrder.filter((k) => k in sections);
+              const rest = defaultOrder.filter((k) => !override.includes(k));
+              return [...override, ...rest];
+            })()
+          : defaultOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
 
