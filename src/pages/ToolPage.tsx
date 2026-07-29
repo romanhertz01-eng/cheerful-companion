@@ -1,7 +1,8 @@
 import { ORIGIN } from "@/lib/origin";
 
 import { Link, getRouteApi } from "@tanstack/react-router";
-import { ChevronRight, Music, Image as ImageIcon, Film, AlignLeft, Sparkles } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { useEffect, useRef, useState } from "react";
 import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, getToolPageData, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
@@ -20,16 +21,8 @@ import { motion } from "framer-motion";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
 
-const CHIP_ICON_BY_RESULT_TYPE = {
-  audio: Music,
-  images: ImageIcon,
-  video: Film,
-  text: AlignLeft,
-} as const;
-
-function getChipIcon(slug?: string) {
-  const rt = slug ? getToolPageData(slug)?.tool?.resultType : undefined;
-  return (rt && CHIP_ICON_BY_RESULT_TYPE[rt]) || Sparkles;
+function truncate(s: string, n: number) {
+  return s.length > n ? `${s.slice(0, n).trimEnd()}…` : s;
 }
 
 const ToolPage = () => {
@@ -470,39 +463,53 @@ const ToolPage = () => {
                 <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
               )}
               {(() => {
-                const chips = data.modelChips.models.filter((m) => (m.slug ? isPublished(m.slug) : true));
-                const cols = Math.min(Math.max(chips.length, 1), 4);
-                const gridCols = ["", "md:grid-cols-1", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-4"][cols];
+                const all = data.modelChips.models.filter((m) => (m.slug ? isPublished(m.slug) : true));
+                // Complete-rows only: 2→2, 3→3, 4→4(2×2), 5→4, 6→6(3×2), 7+→6
+                const n = all.length;
+                const shown = n >= 7 ? 6 : n === 5 ? 4 : n;
+                const chips = all.slice(0, shown);
+                const gridCols =
+                  shown >= 6 ? "md:grid-cols-3" :
+                  shown === 4 ? "md:grid-cols-2" :
+                  shown === 3 ? "md:grid-cols-3" :
+                  shown === 2 ? "md:grid-cols-2" :
+                  "md:grid-cols-1";
                 return (
               <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4", gridCols)}>
                 {chips.map((m) => {
                     const price = m.slug ? getModelPriceLabel(m.slug) : undefined;
-                    const Icon = getChipIcon(m.slug);
+                    const target = m.slug ? getToolPageData(m.slug) : undefined;
+                    const desc = (m as any).desc || (target?.heroDescription ?? "");
                     const inner = (
                       <>
-                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                          <Icon className="w-6 h-6 text-primary" strokeWidth={1.75} />
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-semibold text-base">{m.name}</span>
-                          {m.badge && (
-                            <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-primary/15 text-primary">
-                              {m.badge}
-                            </span>
+                        <ModelGlyph name={m.name} size={40} />
+                        <div className="flex-1 min-w-0 flex flex-col">
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-base truncate">{m.name}</span>
+                            {m.badge && (
+                              <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-primary/15 text-primary shrink-0">
+                                {m.badge}
+                              </span>
+                            )}
+                          </div>
+                          {desc && (
+                            <p className="text-sm text-muted-foreground truncate mt-1">
+                              {truncate(desc, 110)}
+                            </p>
                           )}
-                        </div>
-                        <div className="mt-3 text-sm text-primary font-mono min-h-[1.25rem]">
-                          {price ?? "\u00A0"}
+                          <div className="mt-2 text-sm text-primary font-mono min-h-[1.25rem]">
+                            {price ?? "\u00A0"}
+                          </div>
                         </div>
                       </>
                     );
-                    const base = "h-full rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors flex flex-col";
+                    const base = "h-full rounded-xl border border-border bg-card p-5 transition-colors flex items-start gap-3";
                     return m.slug ? (
                       <Link
                         key={m.name}
                         to="/tools/$slug"
                         params={{ slug: m.slug }}
-                        className={cn(base, "hover:border-primary/40 hover:bg-white/[0.06]")}
+                        className={cn(base, "hover:border-primary/40 hover:bg-muted/50")}
                       >
                         {inner}
                       </Link>
