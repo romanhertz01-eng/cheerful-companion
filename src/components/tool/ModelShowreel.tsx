@@ -5,10 +5,16 @@ type ShowreelItem = { image: string; prompt?: string; label?: string };
 interface ModelShowreelProps {
   heading: string;
   sub?: string;
+  aspect?: '2/1' | '16/9' | '4/3' | '1/1';
   items: ShowreelItem[];
 }
 
-export function ModelShowreel({ heading, sub, items }: ModelShowreelProps) {
+export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShowreelProps) {
+  const aspectClass =
+    aspect === '16/9' ? 'aspect-video'
+    : aspect === '4/3' ? 'aspect-[4/3]'
+    : aspect === '1/1' ? 'aspect-square'
+    : 'aspect-[2/1]';
   const [activeIdx, setActiveIdx] = useState(0);
   const firstSrc = items[0]?.image ?? "";
   const [frontSrc, setFrontSrc] = useState(firstSrc);
@@ -44,7 +50,7 @@ export function ModelShowreel({ heading, sub, items }: ModelShowreelProps) {
         </p>
       )}
 
-      <div className="mt-8 aspect-[2/1] w-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] relative">
+      <div className={`mt-8 ${aspectClass} w-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] relative`}>
         <img
           src={frontSrc}
           alt={active.label ?? heading}

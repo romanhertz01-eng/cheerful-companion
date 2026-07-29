@@ -75,6 +75,8 @@ export const TABS: TabConfig[] = [
       { name: "Seedream", desc: "От ByteDance", publicHref: "/tools/seedream" },
       { name: "GPT Image", desc: "От OpenAI", publicHref: "/tools/gpt-image" },
       { name: "Flux", desc: "Фотореализм", publicHref: "/tools/flux" },
+      { name: "Grok Imagine", desc: "От xAI", publicHref: "/tools/grok-imagine" },
+      { name: "Qwen Image", desc: "От Alibaba", publicHref: "/tools/qwen-image" },
     ],
   },
   {

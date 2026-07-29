@@ -201,6 +201,7 @@ const ToolPage = () => {
               key="showreel"
               heading={data.showreel.heading}
               sub={data.showreel.sub}
+              aspect={data.showreel.aspect}
               items={data.showreel.items}
             />
           ) : null,

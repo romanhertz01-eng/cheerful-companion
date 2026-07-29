@@ -69,6 +69,7 @@ export interface ToolPageData {
   showreel?: {
     heading: string;
     sub?: string;
+    aspect?: '2/1' | '16/9' | '4/3' | '1/1';
     items: { image: string; prompt?: string; label?: string }[];
   };
   showcaseStrip?: { images: string[] };
@@ -1211,6 +1212,8 @@ export const toolPages: ToolPageData[] = [
         { name: "Seedream", slug: "seedream", priceFrom: "от 30 cr" },
         { name: "Flux", slug: "flux", priceFrom: "от 40 cr" },
         { name: "GPT Image", slug: "gpt-image", priceFrom: "от 35 cr" },
+        { name: "Grok Imagine", slug: "grok-imagine", priceFrom: "от 25 cr" },
+        { name: "Qwen Image", slug: "qwen-image", priceFrom: "от 20 cr" },
       ],
     },
   },
