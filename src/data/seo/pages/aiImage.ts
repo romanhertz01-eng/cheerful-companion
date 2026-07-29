@@ -44,7 +44,7 @@ export const aiImagePage: SeoPage = {
           { title: 'Создать изображение', desc: 'Картинка из текста', href: '/tools/image-generation', icon: '🎨' },
           { title: 'Удалить фон', desc: 'В один клик', href: '/tools/remove-background', icon: '✂️' },
           { title: 'Апскейл', desc: 'Улучшить качество', href: '/tools/image-upscaler', icon: '🔍' },
-          { title: 'Редактор фото', desc: 'Правки и ретушь', href: '/design', icon: '🖌️' },
+          { title: 'Редактор фото', desc: 'Правки и ретушь', href: '/tools/photo-editor', icon: '🖌️' },
         ],
       },
     },
