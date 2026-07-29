@@ -191,8 +191,9 @@ function ToolsAndModelsPage() {
   const visibleCategories = filter === "all" ? allCategories : [filter];
 
   return (
-    <div className="min-h-[calc(100vh-var(--header-height,64px))] px-4 lg:px-8 py-12">
-      <div className="max-w-6xl mx-auto">
+    <>
+      <div className="min-h-[calc(100vh-var(--header-height,64px))] px-4 lg:px-8 py-12">
+        <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-center" style={{ color: "var(--text-primary)" }}>
           Инструменты и Модели
         </h1>
@@ -366,7 +367,9 @@ function ToolsAndModelsPage() {
             )}
           </>
         )}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
