@@ -5305,6 +5305,7 @@ export const toolPages: ToolPageData[] = [
     slug: "elevenlabs",
     kind: 'model',
     updatedAt: "2026-07-26",
+    sectionOrder: ["showcaseStrip", "modelChips", "intro", "audioShowreel", "visualCards", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"],
     modelName: "ElevenLabs",
     heroTitle: "ElevenLabs — озвучка, неотличимая от диктора",
     heroDescription:
@@ -5434,6 +5435,7 @@ export const toolPages: ToolPageData[] = [
     slug: "suno",
     kind: 'model',
     updatedAt: "2026-07-26",
+    sectionOrder: ["showcaseStrip", "modelChips", "intro", "audioShowreel", "visualCards", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"],
     modelName: "Suno",
     heroTitle: "Suno — нейросеть, которая пишет песни",
     heroDescription:
