@@ -499,7 +499,6 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const { isAuthed } = useAuth();
   const navigate = useNavigate();
   const [voice, setVoice] = useState(voices[0] ?? "");
-  const [voiceOpen, setVoiceOpen] = useState(false);
   const [text, setText] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [sampleFile, setSampleFile] = useState<File | null>(null);
@@ -509,6 +508,29 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
     () => selects.map((s) => s.defaultIndex ?? 0)
   );
   const resultType = tool.resultType ?? "audio";
+  const supportsImage = IMAGE_UPLOAD_SLUGS.has(data.slug);
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) URL.revokeObjectURL(imagePreview);
+    };
+  }, [imagePreview]);
+
+  const onImage = (f: File | null) => {
+    if (!f) return;
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImage(f);
+    setImagePreview(URL.createObjectURL(f));
+  };
+  const clearImage = () => {
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImage(null);
+    setImagePreview(null);
+    if (imageRef.current) imageRef.current.value = "";
+  };
 
   const onGenerate = () => {
     if (!isAuthed) {
@@ -522,54 +544,24 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   };
 
   const value = text.slice(0, maxChars);
+  const pricingParts = tool.pricing
+    ? computePricingParts(tool.pricing, selects, selectIdx, value.length)
+    : null;
+  const totalLabel = pricingParts ? pricingParts.total : `${tool.credits} кр`;
+  const rateLabel = pricingParts ? pricingParts.rate : "";
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
       <div className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight text-center mb-3">{data.heroTitle}</h1>
         <p className="text-muted-foreground text-center max-w-[640px] mx-auto mb-8">{data.heroDescription}</p>
-        <div className="rounded-2xl border border-border bg-background/60 p-5 flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <Link to={isAuthed ? "/toolkit" : "/studios"} className="p-1.5 rounded-md hover:bg-muted transition-colors">
-              <ArrowLeft size={16} />
-            </Link>
-          </div>
-
-          {voices.length > 0 && (
-            <div className="relative">
-              <label className="text-xs text-muted-foreground mb-1 block">Голос</label>
-              <button
-                type="button"
-                onClick={() => setVoiceOpen((v) => !v)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-border bg-muted/40 text-sm"
-              >
-                <span className="font-medium">{voice}</span>
-                <ChevronDown size={14} className="text-muted-foreground" />
-              </button>
-              {voiceOpen && (
-                <div className="absolute z-10 mt-1 w-full rounded-lg border border-border bg-background shadow-lg overflow-hidden">
-                  {voices.map((v) => (
-                    <button
-                      key={v}
-                      type="button"
-                      onClick={() => {
-                        setVoice(v);
-                        setVoiceOpen(false);
-                      }}
-                      className="w-full flex items-center justify-between px-3 py-2 text-sm text-left hover:bg-muted transition-colors"
-                    >
-                      <span>{v}</span>
-                      {v === voice && <Check size={14} className="text-primary" />}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
+        <div
+          className="rounded-2xl p-4 md:p-5 flex flex-col gap-3 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_20px_60px_-20px_rgba(232,84,32,0.25)]"
+          style={{ background: "#1a1a1f", color: "#f5f5f7" }}
+        >
           {tool.sampleUpload && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1 block">{tool.sampleUpload.label}</label>
+              <label className="text-xs text-white/60 mb-1 block">{tool.sampleUpload.label}</label>
               <button
                 type="button"
                 onClick={() => sampleRef.current?.click()}
@@ -579,11 +571,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                   const f = e.dataTransfer.files?.[0] ?? null;
                   if (f) setSampleFile(f);
                 }}
-                className="w-full h-[88px] rounded-xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
+                className="w-full h-[88px] rounded-xl border-2 border-dashed border-white/15 hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
               >
-                <Upload size={18} className="text-muted-foreground" />
+                <Upload size={18} className="text-white/60" />
                 <span className="text-sm truncate max-w-full">{sampleFile ? sampleFile.name : "Загрузите файл или перетащите сюда"}</span>
-                <span className="text-[11px] text-muted-foreground">{tool.sampleUpload.hint}</span>
+                <span className="text-[11px] text-white/50">{tool.sampleUpload.hint}</span>
               </button>
               <input
                 ref={sampleRef}
@@ -595,86 +587,127 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           )}
 
-          <div className="relative">
-            <textarea
-              rows={5}
-              value={value}
-              onChange={(e) => setText(e.target.value.slice(0, maxChars))}
-              placeholder={tool.textPlaceholder}
-              className="w-full resize-none rounded-lg border border-border bg-background/80 px-3 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
-            />
-            <div className="absolute bottom-2 right-3 text-[11px] text-muted-foreground">
-              {value.length} / {maxChars}
+          <div className="flex gap-3 items-stretch">
+            {supportsImage && (
+              <div className="shrink-0">
+                <button
+                  type="button"
+                  onClick={() => imageRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    onImage(e.dataTransfer.files?.[0] ?? null);
+                  }}
+                  title="Загрузить изображение"
+                  className="relative w-[72px] h-[72px] rounded-xl border border-dashed border-white/20 hover:border-primary/60 hover:bg-white/[0.04] transition-colors flex items-center justify-center overflow-hidden group"
+                >
+                  {imagePreview ? (
+                    <>
+                      <img src={imagePreview} alt="preview" className="absolute inset-0 w-full h-full object-cover" />
+                      <span
+                        role="button"
+                        aria-label="Удалить изображение"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          clearImage();
+                        }}
+                        className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <X size={12} className="text-white" />
+                      </span>
+                    </>
+                  ) : (
+                    <Plus size={22} className="text-white/60" />
+                  )}
+                </button>
+                <input
+                  ref={imageRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={(e) => onImage(e.target.files?.[0] ?? null)}
+                />
+              </div>
+            )}
+
+            <div className="relative flex-1 min-w-0">
+              <textarea
+                rows={supportsImage ? 3 : 4}
+                value={value}
+                onChange={(e) => setText(e.target.value.slice(0, maxChars))}
+                placeholder={tool.textPlaceholder}
+                className="w-full h-full min-h-[72px] resize-none rounded-xl border border-white/10 bg-black/25 text-white placeholder:text-white/40 px-3.5 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
+              />
+              <div className="absolute bottom-2 right-3 text-[11px] text-white/40">
+                {value.length} / {maxChars}
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 pt-2 border-t border-border sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2 flex-wrap min-w-0">
-              <span className="border border-border rounded-full px-3 py-1 text-xs">{tool.modelName}</span>
-              {selects.map((sel, si) => (
-                <div key={si} className="flex items-center gap-1 flex-wrap">
-                  <span className="text-[11px] text-muted-foreground">{sel.label}:</span>
-                  <div className="flex items-center gap-1 rounded-lg border border-border p-0.5 flex-wrap">
-                    {sel.options.map((opt, oi) => {
-                      const active = (selectIdx[si] ?? 0) === oi;
-                      return (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() =>
-                            setSelectIdx((prev) => {
-                              const next = [...prev];
-                              next[si] = oi;
-                              return next;
-                            })
-                          }
-                          className={cn(
-                            "text-xs px-2.5 py-1.5 rounded-md font-medium transition-colors",
-                            active
-                              ? "bg-primary/15 text-foreground"
-                              : "text-muted-foreground hover:text-foreground"
-                          )}
-                        >
-                          {opt}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-              <span className="text-[11px] text-muted-foreground">
-                {tool.pricing
-                  ? computePricingLabel(tool.pricing, selects, selectIdx, value.length)
-                  : `${tool.credits} кредитов`}
+          <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-3">
+            <div className="flex flex-wrap items-center gap-2 min-w-0">
+              <span className="h-8 px-3 flex items-center rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/85">
+                {tool.modelName}
               </span>
-              {tool.planNote && (
-                <span className="text-[11px]" style={{ color: "#E85420" }}>{tool.planNote}</span>
+              {voices.length > 0 && (
+                <ChipSelect
+                  label="Голос"
+                  options={voices}
+                  value={Math.max(0, voices.indexOf(voice))}
+                  onChange={(i) => setVoice(voices[i])}
+                />
               )}
+              {selects.map((sel, si) => (
+                <ChipSelect
+                  key={si}
+                  label={sel.label}
+                  options={sel.options}
+                  value={selectIdx[si] ?? sel.defaultIndex ?? 0}
+                  onChange={(oi) =>
+                    setSelectIdx((prev) => {
+                      const next = [...prev];
+                      next[si] = oi;
+                      return next;
+                    })
+                  }
+                />
+              ))}
             </div>
-            <button
-              type="button"
-              disabled={isAuthed && (!value.trim() || status === "loading")}
-              onClick={onGenerate}
-              className="w-full sm:w-auto h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
-              style={{ background: "#E85420" }}
-            >
-              {status === "loading" ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" /> Генерация...
-                </>
-              ) : (
-                "Генерировать"
+            <div className="flex items-center gap-3 ml-auto">
+              {rateLabel && (
+                <span className="text-[11px] text-white/50 hidden sm:inline">{rateLabel}</span>
               )}
-            </button>
+              <button
+                type="button"
+                disabled={isAuthed && (!value.trim() || status === "loading")}
+                onClick={onGenerate}
+                className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
+                style={{ background: "#E85420" }}
+              >
+                {status === "loading" ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" /> Генерация...
+                  </>
+                ) : (
+                  <>
+                    <span>Генерировать</span>
+                    <span className="opacity-90">· {totalLabel}</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
 
           {tool.legalNote && (
-            <p className="text-[11px] text-muted-foreground flex items-start gap-1.5">
+            <p className="text-[11px] text-white/50 flex items-start gap-1.5">
               <span aria-hidden>⚠️</span>
               <span>{tool.legalNote}</span>
             </p>
           )}
         </div>
+        {tool.planNote && (
+          <p className="mt-2 text-[11px] text-center" style={{ color: "#E85420" }}>{tool.planNote}</p>
+        )}
 
         {status === "done" && (
           resultType === "images" ? (
