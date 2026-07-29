@@ -42,6 +42,8 @@ export function TransformShowcase({
                     src={src}
                     alt={`${inputLabel} ${i + 1}`}
                     loading="lazy"
+                    width={600}
+                    height={800}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -53,6 +55,8 @@ export function TransformShowcase({
                 src={inputs[0]}
                 alt={inputLabel}
                 loading="lazy"
+                width={600}
+                height={800}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -78,6 +82,8 @@ export function TransformShowcase({
                   src={src}
                   alt={`${outputLabel} ${i + 1}`}
                   loading="lazy"
+                  width={600}
+                  height={800}
                   className="w-full h-full object-cover"
                 />
               </div>

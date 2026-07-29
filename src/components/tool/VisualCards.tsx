@@ -71,6 +71,8 @@ export function VisualCards({ heading, sub, cards }: VisualCardsProps) {
               src={card.image}
               alt={card.title}
               loading="lazy"
+              width={900}
+              height={1200}
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />

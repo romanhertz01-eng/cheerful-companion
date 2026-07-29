@@ -55,6 +55,9 @@ export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShow
           src={frontSrc}
           alt={active.label ?? heading}
           loading="eager"
+          fetchPriority="high"
+          width={1600}
+          height={800}
           className={
             "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300 " +
             (frontOnTop ? "opacity-100" : "opacity-0")
@@ -64,6 +67,8 @@ export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShow
           src={backSrc}
           alt={active.label ?? heading}
           loading="lazy"
+          width={1600}
+          height={800}
           className={
             "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300 " +
             (frontOnTop ? "opacity-0" : "opacity-100")
@@ -89,7 +94,7 @@ export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShow
                     : "w-10 h-10 rounded-full opacity-60 hover:opacity-100")
                 }
               >
-                <img src={it.image} alt="" className="object-cover w-full h-full" />
+                <img src={it.image} alt="" width={72} height={40} className="object-cover w-full h-full" />
               </button>
             );
           })}

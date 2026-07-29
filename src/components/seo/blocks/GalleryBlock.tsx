@@ -30,7 +30,7 @@ export function GalleryBlock({ title = "Работы сообщества", coun
             key={w.image + i}
             className="break-inside-avoid rounded-xl border border-border bg-card shadow-sm relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-muted/50 transition-all group"
           >
-            <img src={w.image} alt={w.author ?? `${title} — ${i + 1}`} loading="lazy" className="w-full h-auto block object-cover" />
+            <img src={w.image} alt={w.author ?? `${title} — ${i + 1}`} loading="lazy" width={800} height={1000} className="w-full h-auto block object-cover" />
             {showMeta && w.author && (
             <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between">
               <span className="text-white text-[11px]">{w.author}</span>

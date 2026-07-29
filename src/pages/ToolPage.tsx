@@ -306,7 +306,7 @@ const ToolPage = () => {
                 >
                   {b.image && (
                     <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
-                      <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
+                      <img src={b.image} alt={b.title} loading="lazy" width={800} height={600} className="w-full h-full object-cover" />
                     </div>
                   )}
                   <div className={cn("w-full", b.image ? "md:w-1/2" : "max-w-3xl text-center mx-auto")}>
