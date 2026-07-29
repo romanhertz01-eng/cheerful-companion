@@ -57,7 +57,7 @@ export interface ToolPageData {
   modelChips?: {
     heading: string;
     sub?: string;
-    models: { name: string; slug?: string; badge?: string; priceFrom?: string }[];
+    models: { name: string; slug?: string; badge?: string }[];
   };
   bigStat?: { value: string; label: string; sub?: string; button?: string };
   examples?: { heading: string; images: string[] };
