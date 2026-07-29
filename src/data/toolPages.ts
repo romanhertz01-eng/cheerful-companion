@@ -3875,9 +3875,6 @@ export const toolPages: ToolPageData[] = [
     },
   },
   {
-    slug: "elevenlabs",
-  },
-  {
     slug: "runway",
     kind: 'model',
     status: 'published',
@@ -4267,7 +4264,7 @@ export const toolPages: ToolPageData[] = [
     },
   },
   {
-    slug: "__placeholder_removed__",
+    slug: "elevenlabs",
     kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "ElevenLabs",
