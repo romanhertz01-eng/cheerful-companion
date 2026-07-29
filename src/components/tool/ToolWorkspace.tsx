@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon } from "lucide-react";
+import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon, Plus, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ToolPageData } from "@/data/toolPages";
 import { useAuth } from "@/contexts/AuthContext";
@@ -47,6 +47,149 @@ function computePricingLabel(
     return `${rate} кр ${pricing.unitLabel || "за 1000 знаков"}${min ? ` · минимум ${min}` : ""}`;
   }
   return "";
+}
+
+// Splits pricing into a small rate string (left of CTA) and a total credits label
+// that goes inside the "Генерировать · N кр" button. Reads the same inputs as
+// computePricingLabel — does not alter its output.
+function computePricingParts(
+  pricing: ToolPricing,
+  selects: ToolSelects,
+  selectIdx: number[],
+  chars: number
+): { rate: string; total: string } {
+  const chosen = selects.map(
+    (s, i) => s.options[selectIdx[i] ?? s.defaultIndex ?? 0]
+  );
+  const matched = pricing.rates.find(
+    (r) => r.matchOption && chosen.includes(r.matchOption)
+  );
+  const rate = (matched ?? pricing.rates[0]).rate;
+
+  if (pricing.mode === "per-second") {
+    const dIdx = selects.findIndex((s) => /длит/i.test(s.label));
+    let seconds = 1;
+    if (dIdx >= 0) {
+      const opt = selects[dIdx].options[selectIdx[dIdx] ?? selects[dIdx].defaultIndex ?? 0];
+      const m = opt.match(/\d+/);
+      if (m) seconds = parseInt(m[0], 10);
+    }
+    return { rate: `${rate} кр/сек`, total: `${rate * seconds} кр` };
+  }
+  if (pricing.mode === "per-message") {
+    return { rate: `${rate} кр/сообщение`, total: `${rate} кр` };
+  }
+  if (pricing.mode === "per-clip") {
+    const unit = pricing.unitLabel || "за ролик";
+    return { rate: `${rate} кр ${unit}`.trim(), total: `${rate} кр` };
+  }
+  if (pricing.mode === "per-1k-chars") {
+    const min = pricing.minCredits ?? 0;
+    const total = Math.max(min, Math.ceil((chars * rate) / 1000 / 5) * 5);
+    const rateLabel = `${rate} кр/1000 знаков${min ? ` · мин ${min}` : ""}`;
+    return { rate: rateLabel, total: `${total} кр` };
+  }
+  return { rate: "", total: "" };
+}
+
+// Slugs whose bar shows a "+" image-upload slot to the left of the textarea.
+const IMAGE_UPLOAD_SLUGS = new Set([
+  "kling",
+  "video-generation",
+  "ozhivit-foto",
+  "seedance",
+  "sora",
+  "veo",
+  "hailuo",
+  "ozon-product-video",
+]);
+
+function ChipSelect({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: string[];
+  value: number;
+  onChange: (i: number) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [dropUp, setDropUp] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    if (!open || !btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - rect.bottom;
+    setDropUp(spaceBelow < 220 && rect.top > 220);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (
+        !btnRef.current?.contains(e.target as Node) &&
+        !menuRef.current?.contains(e.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+
+  const current = options[value] ?? options[0];
+
+  return (
+    <div className="relative">
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        title={label}
+        className={cn(
+          "flex items-center gap-1.5 h-8 px-3 rounded-full border text-xs font-medium transition-colors",
+          "border-white/10 bg-white/[0.06] text-white/90 hover:bg-white/[0.1]"
+        )}
+      >
+        <span className="truncate max-w-[140px]">{current}</span>
+        <ChevronDown size={12} className="opacity-70" />
+      </button>
+      {open && (
+        <div
+          ref={menuRef}
+          className={cn(
+            "absolute z-30 min-w-[160px] rounded-xl border border-white/10 bg-[#1a1a1f] shadow-xl py-1",
+            dropUp ? "bottom-full mb-1" : "top-full mt-1"
+          )}
+        >
+          <div className="px-3 py-1.5 text-[10px] uppercase tracking-wide text-white/40">
+            {label}
+          </div>
+          {options.map((opt, i) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => {
+                onChange(i);
+                setOpen(false);
+              }}
+              className={cn(
+                "w-full flex items-center justify-between gap-3 px-3 py-2 text-xs text-left transition-colors",
+                i === value ? "text-white" : "text-white/75 hover:text-white hover:bg-white/[0.05]"
+              )}
+            >
+              <span>{opt}</span>
+              {i === value && <Check size={12} className="text-primary" />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
@@ -356,7 +499,6 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const { isAuthed } = useAuth();
   const navigate = useNavigate();
   const [voice, setVoice] = useState(voices[0] ?? "");
-  const [voiceOpen, setVoiceOpen] = useState(false);
   const [text, setText] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [sampleFile, setSampleFile] = useState<File | null>(null);
@@ -366,6 +508,29 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
     () => selects.map((s) => s.defaultIndex ?? 0)
   );
   const resultType = tool.resultType ?? "audio";
+  const supportsImage = IMAGE_UPLOAD_SLUGS.has(data.slug);
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) URL.revokeObjectURL(imagePreview);
+    };
+  }, [imagePreview]);
+
+  const onImage = (f: File | null) => {
+    if (!f) return;
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImage(f);
+    setImagePreview(URL.createObjectURL(f));
+  };
+  const clearImage = () => {
+    if (imagePreview) URL.revokeObjectURL(imagePreview);
+    setImage(null);
+    setImagePreview(null);
+    if (imageRef.current) imageRef.current.value = "";
+  };
 
   const onGenerate = () => {
     if (!isAuthed) {
@@ -379,54 +544,24 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   };
 
   const value = text.slice(0, maxChars);
+  const pricingParts = tool.pricing
+    ? computePricingParts(tool.pricing, selects, selectIdx, value.length)
+    : null;
+  const totalLabel = pricingParts ? pricingParts.total : `${tool.credits} кр`;
+  const rateLabel = pricingParts ? pricingParts.rate : "";
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
       <div className="max-w-3xl mx-auto px-4 py-8">
         <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight text-center mb-3">{data.heroTitle}</h1>
         <p className="text-muted-foreground text-center max-w-[640px] mx-auto mb-8">{data.heroDescription}</p>
-        <div className="rounded-2xl border border-border bg-background/60 p-5 flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <Link to={isAuthed ? "/toolkit" : "/studios"} className="p-1.5 rounded-md hover:bg-muted transition-colors">
-              <ArrowLeft size={16} />
-            </Link>
-          </div>
-
-          {voices.length > 0 && (
-            <div className="relative">
-              <label className="text-xs text-muted-foreground mb-1 block">Голос</label>
-              <button
-                type="button"
-                onClick={() => setVoiceOpen((v) => !v)}
-                className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-border bg-muted/40 text-sm"
-              >
-                <span className="font-medium">{voice}</span>
-                <ChevronDown size={14} className="text-muted-foreground" />
-              </button>
-              {voiceOpen && (
-                <div className="absolute z-10 mt-1 w-full rounded-lg border border-border bg-background shadow-lg overflow-hidden">
-                  {voices.map((v) => (
-                    <button
-                      key={v}
-                      type="button"
-                      onClick={() => {
-                        setVoice(v);
-                        setVoiceOpen(false);
-                      }}
-                      className="w-full flex items-center justify-between px-3 py-2 text-sm text-left hover:bg-muted transition-colors"
-                    >
-                      <span>{v}</span>
-                      {v === voice && <Check size={14} className="text-primary" />}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
+        <div
+          className="rounded-2xl p-4 md:p-5 flex flex-col gap-3 shadow-[0_0_0_1px_rgba(255,255,255,0.06),0_20px_60px_-20px_rgba(232,84,32,0.25)]"
+          style={{ background: "#1a1a1f", color: "#f5f5f7" }}
+        >
           {tool.sampleUpload && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1 block">{tool.sampleUpload.label}</label>
+              <label className="text-xs text-white/60 mb-1 block">{tool.sampleUpload.label}</label>
               <button
                 type="button"
                 onClick={() => sampleRef.current?.click()}
@@ -436,11 +571,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                   const f = e.dataTransfer.files?.[0] ?? null;
                   if (f) setSampleFile(f);
                 }}
-                className="w-full h-[88px] rounded-xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
+                className="w-full h-[88px] rounded-xl border-2 border-dashed border-white/15 hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
               >
-                <Upload size={18} className="text-muted-foreground" />
+                <Upload size={18} className="text-white/60" />
                 <span className="text-sm truncate max-w-full">{sampleFile ? sampleFile.name : "Загрузите файл или перетащите сюда"}</span>
-                <span className="text-[11px] text-muted-foreground">{tool.sampleUpload.hint}</span>
+                <span className="text-[11px] text-white/50">{tool.sampleUpload.hint}</span>
               </button>
               <input
                 ref={sampleRef}
@@ -452,86 +587,127 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           )}
 
-          <div className="relative">
-            <textarea
-              rows={5}
-              value={value}
-              onChange={(e) => setText(e.target.value.slice(0, maxChars))}
-              placeholder={tool.textPlaceholder}
-              className="w-full resize-none rounded-lg border border-border bg-background/80 px-3 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
-            />
-            <div className="absolute bottom-2 right-3 text-[11px] text-muted-foreground">
-              {value.length} / {maxChars}
+          <div className="flex gap-3 items-stretch">
+            {supportsImage && (
+              <div className="shrink-0">
+                <button
+                  type="button"
+                  onClick={() => imageRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    onImage(e.dataTransfer.files?.[0] ?? null);
+                  }}
+                  title="Загрузить изображение"
+                  className="relative w-[72px] h-[72px] rounded-xl border border-dashed border-white/20 hover:border-primary/60 hover:bg-white/[0.04] transition-colors flex items-center justify-center overflow-hidden group"
+                >
+                  {imagePreview ? (
+                    <>
+                      <img src={imagePreview} alt="preview" className="absolute inset-0 w-full h-full object-cover" />
+                      <span
+                        role="button"
+                        aria-label="Удалить изображение"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          clearImage();
+                        }}
+                        className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        <X size={12} className="text-white" />
+                      </span>
+                    </>
+                  ) : (
+                    <Plus size={22} className="text-white/60" />
+                  )}
+                </button>
+                <input
+                  ref={imageRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  className="hidden"
+                  onChange={(e) => onImage(e.target.files?.[0] ?? null)}
+                />
+              </div>
+            )}
+
+            <div className="relative flex-1 min-w-0">
+              <textarea
+                rows={supportsImage ? 3 : 4}
+                value={value}
+                onChange={(e) => setText(e.target.value.slice(0, maxChars))}
+                placeholder={tool.textPlaceholder}
+                className="w-full h-full min-h-[72px] resize-none rounded-xl border border-white/10 bg-black/25 text-white placeholder:text-white/40 px-3.5 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
+              />
+              <div className="absolute bottom-2 right-3 text-[11px] text-white/40">
+                {value.length} / {maxChars}
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 pt-2 border-t border-border sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-2 flex-wrap min-w-0">
-              <span className="border border-border rounded-full px-3 py-1 text-xs">{tool.modelName}</span>
-              {selects.map((sel, si) => (
-                <div key={si} className="flex items-center gap-1 flex-wrap">
-                  <span className="text-[11px] text-muted-foreground">{sel.label}:</span>
-                  <div className="flex items-center gap-1 rounded-lg border border-border p-0.5 flex-wrap">
-                    {sel.options.map((opt, oi) => {
-                      const active = (selectIdx[si] ?? 0) === oi;
-                      return (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() =>
-                            setSelectIdx((prev) => {
-                              const next = [...prev];
-                              next[si] = oi;
-                              return next;
-                            })
-                          }
-                          className={cn(
-                            "text-xs px-2.5 py-1.5 rounded-md font-medium transition-colors",
-                            active
-                              ? "bg-primary/15 text-foreground"
-                              : "text-muted-foreground hover:text-foreground"
-                          )}
-                        >
-                          {opt}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-              <span className="text-[11px] text-muted-foreground">
-                {tool.pricing
-                  ? computePricingLabel(tool.pricing, selects, selectIdx, value.length)
-                  : `${tool.credits} кредитов`}
+          <div className="flex flex-wrap items-center justify-between gap-y-2 gap-x-3">
+            <div className="flex flex-wrap items-center gap-2 min-w-0">
+              <span className="h-8 px-3 flex items-center rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/85">
+                {tool.modelName}
               </span>
-              {tool.planNote && (
-                <span className="text-[11px]" style={{ color: "#E85420" }}>{tool.planNote}</span>
+              {voices.length > 0 && (
+                <ChipSelect
+                  label="Голос"
+                  options={voices}
+                  value={Math.max(0, voices.indexOf(voice))}
+                  onChange={(i) => setVoice(voices[i])}
+                />
               )}
+              {selects.map((sel, si) => (
+                <ChipSelect
+                  key={si}
+                  label={sel.label}
+                  options={sel.options}
+                  value={selectIdx[si] ?? sel.defaultIndex ?? 0}
+                  onChange={(oi) =>
+                    setSelectIdx((prev) => {
+                      const next = [...prev];
+                      next[si] = oi;
+                      return next;
+                    })
+                  }
+                />
+              ))}
             </div>
-            <button
-              type="button"
-              disabled={isAuthed && (!value.trim() || status === "loading")}
-              onClick={onGenerate}
-              className="w-full sm:w-auto h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
-              style={{ background: "#E85420" }}
-            >
-              {status === "loading" ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" /> Генерация...
-                </>
-              ) : (
-                "Генерировать"
+            <div className="flex items-center gap-3 ml-auto">
+              {rateLabel && (
+                <span className="text-[11px] text-white/50 hidden sm:inline">{rateLabel}</span>
               )}
-            </button>
+              <button
+                type="button"
+                disabled={isAuthed && (!value.trim() || status === "loading")}
+                onClick={onGenerate}
+                className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
+                style={{ background: "#E85420" }}
+              >
+                {status === "loading" ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" /> Генерация...
+                  </>
+                ) : (
+                  <>
+                    <span>Генерировать</span>
+                    <span className="opacity-90">· {totalLabel}</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
 
           {tool.legalNote && (
-            <p className="text-[11px] text-muted-foreground flex items-start gap-1.5">
+            <p className="text-[11px] text-white/50 flex items-start gap-1.5">
               <span aria-hidden>⚠️</span>
               <span>{tool.legalNote}</span>
             </p>
           )}
         </div>
+        {tool.planNote && (
+          <p className="mt-2 text-[11px] text-center" style={{ color: "#E85420" }}>{tool.planNote}</p>
+        )}
 
         {status === "done" && (
           resultType === "images" ? (
