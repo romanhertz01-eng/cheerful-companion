@@ -2782,7 +2782,7 @@ export const toolPages: ToolPageData[] = [
     keyFeatureDescription:
       "Одно фото и текст сценария превращаются в ролик с говорящим человеком — губы двигаются в такт речи, мимика естественная.",
     technologyDescription:
-      "HeyGen и Hedra синхронизируют артикуляцию с фонемами речи и достраивают микромимику.",
+      "HeyGen синхронизирует артикуляцию с фонемами речи и достраивает микромимику.",
     tool: {
       layout: "row",
       model: "hailuo-2-3-std",
@@ -2862,7 +2862,7 @@ export const toolPages: ToolPageData[] = [
         { label: "Сценарий", value: "до 375 символов" },
         { label: "Голоса", value: "русские, мужские и женские" },
         { label: "Разрешение", value: "540P / 720P" },
-        { label: "Модели", value: "HeyGen, Hedra" },
+        { label: "Модели", value: "HeyGen Avatar III, IV, V" },
         { label: "Цена", value: "от 80 кр/сек" },
       ],
     },
