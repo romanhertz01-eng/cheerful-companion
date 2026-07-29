@@ -314,36 +314,56 @@ const ToolPage = () => {
               </div>
             </section>
           ) : null,
-          featureBlocks: data.featureBlocks ? (
-            <section key="featureBlocks" className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
-              {data.featureBlocks.map((b, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    "flex flex-col gap-6 md:gap-12 items-center",
-                    b.image && (i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse")
-                  )}
-                >
-                  {b.image && (
+          featureBlocks: data.featureBlocks ? (() => {
+            const withImg = data.featureBlocks.filter((b) => !!b.image);
+            const noImg = data.featureBlocks.filter((b) => !b.image);
+            return (
+              <section key="featureBlocks" className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
+                {withImg.map((b, i) => (
+                  <div
+                    key={`img-${i}`}
+                    className={cn(
+                      "flex flex-col gap-6 md:gap-12 items-center",
+                      i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                    )}
+                  >
                     <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
                       <img src={b.image} alt={b.title} loading="lazy" width={800} height={600} className="w-full h-full object-cover" />
                     </div>
-                  )}
-                  <div className={cn("w-full", b.image ? "md:w-1/2" : "max-w-3xl text-center mx-auto")}>
-                    <h3 className="text-2xl md:text-[28px] font-bold mb-3">{b.title}</h3>
-                    <p className="text-muted-foreground mb-5 leading-relaxed">{b.desc}</p>
-                    <button
-                      type="button"
-                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                      className="gradient-accent text-white rounded-full px-6 py-2.5 font-semibold hover:opacity-90 transition-opacity"
-                    >
-                      {b.cta}
-                    </button>
+                    <div className="w-full md:w-1/2">
+                      <h3 className="text-2xl md:text-[28px] font-bold mb-3">{b.title}</h3>
+                      <p className="text-muted-foreground mb-5 leading-relaxed">{b.desc}</p>
+                      <button
+                        type="button"
+                        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                        className="gradient-accent text-white rounded-full px-6 py-2.5 font-semibold hover:opacity-90 transition-opacity"
+                      >
+                        {b.cta}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </section>
-          ) : null,
+                ))}
+                {noImg.length > 0 && (
+                  <div>
+                    {withImg.length > 0 && (
+                      <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">Что ещё умеет</h3>
+                    )}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {noImg.map((b, i) => (
+                        <div
+                          key={`txt-${i}`}
+                          className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                        >
+                          <h4 className="font-semibold mb-1">{b.title}</h4>
+                          <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </section>
+            );
+          })() : null,
           tips: data.tips ? (
             <section key="tips" className="max-w-5xl mx-auto px-4 py-12">
               <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
@@ -500,8 +520,8 @@ const ToolPage = () => {
           })() : null,
         };
 
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
-        const toolOrder = ["worksOn", "intro", "featureBlocks", "useCases", "howItWorks", "keyFeature", "showreel", "audioShowreel", "promptAnswer", "specs", "modelChips"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
+        const toolOrder = ["worksOn", "intro", "showreel", "audioShowreel", "promptAnswer", "featureBlocks", "useCases", "howItWorks", "keyFeature", "specs", "modelChips"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
