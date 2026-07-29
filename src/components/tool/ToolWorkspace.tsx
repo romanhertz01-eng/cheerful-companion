@@ -1,6 +1,20 @@
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon, Plus, X } from "lucide-react";
+import {
+  ArrowLeft,
+  Upload,
+  Play,
+  Loader2,
+  ChevronDown,
+  Check,
+  Play as PlayIcon,
+  Plus,
+  X,
+  RectangleHorizontal,
+  Clock,
+  Monitor,
+  SlidersHorizontal,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ToolPageData } from "@/data/toolPages";
 import { useAuth } from "@/contexts/AuthContext";
@@ -104,16 +118,32 @@ const IMAGE_UPLOAD_SLUGS = new Set([
   "ozon-product-video",
 ]);
 
+function iconForLabel(label: string) {
+  const l = label.toLowerCase();
+  if (/формат|aspect|соотношени/.test(l)) return RectangleHorizontal;
+  if (/длител|duration|секунд|время/.test(l)) return Clock;
+  if (/разреш|resolution|качеств|quality/.test(l)) return Monitor;
+  return SlidersHorizontal;
+}
+
+const FLAGSHIP_RE = /pro|max|ultra|flagship|premium|3\.0|v3\b|1\.6/i;
+
 function ChipSelect({
   label,
   options,
   value,
   onChange,
+  variant = "pill",
+  icon: IconOverride,
+  flagshipMark = false,
 }: {
   label: string;
   options: string[];
   value: number;
   onChange: (i: number) => void;
+  variant?: "pill" | "inline";
+  icon?: React.ComponentType<{ size?: number; className?: string }>;
+  flagshipMark?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
@@ -142,6 +172,8 @@ function ChipSelect({
   }, [open]);
 
   const current = options[value] ?? options[0];
+  const Icon = IconOverride ?? iconForLabel(label);
+  const showFlame = flagshipMark && FLAGSHIP_RE.test(current);
 
   return (
     <div className="relative">
@@ -151,22 +183,26 @@ function ChipSelect({
         onClick={() => setOpen((v) => !v)}
         title={label}
         className={cn(
-          "flex items-center gap-1.5 h-8 px-3 rounded-full border text-xs font-medium transition-colors",
-          "border-white/10 bg-white/[0.06] text-white/90 hover:bg-white/[0.1]"
+          "flex items-center gap-1.5 text-xs font-medium transition-colors",
+          variant === "pill"
+            ? "h-8 px-3 rounded-full border border-border bg-muted/60 text-foreground hover:bg-muted"
+            : "h-8 px-2 rounded-md text-foreground/85 hover:bg-muted/60"
         )}
       >
+        <Icon size={14} className="opacity-70 shrink-0" />
+        {showFlame && <span aria-hidden>🔥</span>}
         <span className="truncate max-w-[140px]">{current}</span>
-        <ChevronDown size={12} className="opacity-70" />
+        <ChevronDown size={12} className="opacity-60" />
       </button>
       {open && (
         <div
           ref={menuRef}
           className={cn(
-            "absolute z-30 min-w-[160px] rounded-xl border border-white/10 bg-[#1a1a1f] shadow-xl py-1",
+            "absolute z-30 min-w-[180px] rounded-xl border border-border bg-popover text-popover-foreground shadow-xl py-1",
             dropUp ? "bottom-full mb-1" : "top-full mt-1"
           )}
         >
-          <div className="px-3 py-1.5 text-[10px] uppercase tracking-wide text-white/40">
+          <div className="px-3 py-1.5 text-[10px] uppercase tracking-wide text-muted-foreground">
             {label}
           </div>
           {options.map((opt, i) => (
@@ -179,7 +215,9 @@ function ChipSelect({
               }}
               className={cn(
                 "w-full flex items-center justify-between gap-3 px-3 py-2 text-xs text-left transition-colors",
-                i === value ? "text-white" : "text-white/75 hover:text-white hover:bg-white/[0.05]"
+                i === value
+                  ? "text-foreground"
+                  : "text-foreground/75 hover:text-foreground hover:bg-muted/60"
               )}
             >
               <span>{opt}</span>
