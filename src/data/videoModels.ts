@@ -111,6 +111,21 @@ export const videoProviders: VideoProvider[] = [
     durationOptions: ["5s", "8s"],
     resolutionOptions: ["720p", "1080p"],
   },
+  {
+    id: "heygen",
+    name: "HeyGen",
+    icon: "🧑‍💼",
+    badge: "Avatars",
+    subModels: [
+      { id: "heygen-avatar-iii-twin", name: "Avatar III Digital Twin", credits: 30, desc: "За секунду", time: "60 сек" },
+      { id: "heygen-avatar-iii-photo", name: "Avatar III Photo", credits: 70, desc: "За секунду", time: "60 сек" },
+      { id: "heygen-avatar-iv", name: "Avatar IV", credits: 80, isDefault: true, isNew: true, desc: "За секунду", time: "60 сек" },
+      { id: "heygen-avatar-v", name: "Avatar V", credits: 110, isNew: true, desc: "За секунду", time: "60 сек" },
+    ],
+    aspectRatios: ["16:9", "9:16", "1:1"],
+    durationOptions: ["10s", "30s", "60s"],
+    resolutionOptions: ["720p", "1080p"],
+  },
 ];
 
 // ─── Carousel promo cards ───
