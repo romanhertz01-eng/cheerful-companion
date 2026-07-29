@@ -470,23 +470,8 @@ const ToolPage = () => {
           ) : null,
         };
 
-        if (data.bigStat) {
-          sections.bigStat = (
-            <section key="bigStat" className="max-w-3xl mx-auto px-4 py-16 text-center">
-              <div className="text-6xl md:text-7xl font-bold gradient-accent-text">{data.bigStat.value}</div>
-              <p className="text-xl md:text-2xl font-semibold mt-3">{data.bigStat.label}</p>
-              {data.bigStat.sub && <p className="text-muted-foreground mt-3 max-w-xl mx-auto">{data.bigStat.sub}</p>}
-              {data.bigStat.button && (
-                <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="gradient-accent text-white rounded-full px-8 py-3 font-semibold mt-6 hover:opacity-90 transition-opacity">
-                  {data.bigStat.button}
-                </button>
-              )}
-            </section>
-          );
-        }
-
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
-        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips", "bigStat"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "gallery", "tips", "useCases", "howItWorks"];
+        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "keyFeature", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
