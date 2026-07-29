@@ -622,7 +622,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           )}
 
-          <div className="flex gap-3 items-stretch">
+          <div className="flex gap-3 items-start">
             {supportsImage && (
               <div className="shrink-0">
                 <button
@@ -634,7 +634,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                     onImage(e.dataTransfer.files?.[0] ?? null);
                   }}
                   title="Загрузить изображение"
-                  className="relative w-[72px] h-[72px] rounded-2xl border-2 border-dashed border-border hover:border-primary/60 hover:bg-muted/40 transition-colors flex items-center justify-center overflow-hidden group"
+                  className="relative w-11 h-11 rounded-xl border border-dashed border-border hover:border-primary/60 hover:bg-muted/40 transition-colors flex items-center justify-center overflow-hidden group"
                 >
                   {imagePreview ? (
                     <>
@@ -652,7 +652,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                       </span>
                     </>
                   ) : (
-                    <Plus size={22} className="text-muted-foreground" />
+                    <Plus size={18} className="text-muted-foreground" />
                   )}
                 </button>
                 <input
