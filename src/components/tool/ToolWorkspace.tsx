@@ -280,7 +280,11 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
-      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-5 md:grid-cols-[440px_1fr]">
+      <div className="max-w-6xl mx-auto px-4 pt-8 pb-4 text-center">
+        <h1 className="text-[28px] md:text-[40px] font-bold leading-[1.1] tracking-tight">{data.heroTitle}</h1>
+        <p className="text-sm text-muted-foreground mt-1.5 max-w-[560px] mx-auto">{data.heroDescription}</p>
+      </div>
+      <div className="max-w-6xl mx-auto px-4 pb-8 grid gap-5 md:grid-cols-[440px_1fr]">
         {/* LEFT PANEL */}
         <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-2.5">
           <div className="flex items-center gap-2">
@@ -416,36 +420,23 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
           )}
 
           {has("select") && tool.selects && tool.selects.length > 0 && (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-x-1 gap-y-2">
               {tool.selects.map((sel, si) => (
-                <div key={si}>
-                  <label className="text-xs text-muted-foreground mb-1 block">{sel.label}</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {sel.options.map((opt, oi) => {
-                      const active = (selectIdx[si] ?? sel.defaultIndex ?? 0) === oi;
-                      return (
-                        <button
-                          key={opt}
-                          type="button"
-                          onClick={() =>
-                            setSelectIdx((prev) => {
-                              const next = [...prev];
-                              next[si] = oi;
-                              return next;
-                            })
-                          }
-                          className={cn(
-                            "px-3 py-2 rounded-lg text-sm font-medium border transition-colors",
-                            active
-                              ? "border-primary bg-primary/10 text-foreground"
-                              : "border-border text-muted-foreground hover:text-foreground"
-                          )}
-                        >
-                          {opt}
-                        </button>
-                      );
-                    })}
-                  </div>
+                <div key={si} className="flex items-center">
+                  {si > 0 && <span className="h-4 w-px bg-border/80 mx-1" aria-hidden />}
+                  <ChipSelect
+                    variant="inline"
+                    label={sel.label}
+                    options={sel.options}
+                    value={selectIdx[si] ?? sel.defaultIndex ?? 0}
+                    onChange={(oi) =>
+                      setSelectIdx((prev) => {
+                        const next = [...prev];
+                        next[si] = oi;
+                        return next;
+                      })
+                    }
+                  />
                 </div>
               ))}
             </div>
@@ -453,42 +444,43 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
           {has("generate") && (
             <div className="pt-1 border-t border-border">
-              <p className="text-[11px] text-muted-foreground mb-2">
-                {tool.pricing
-                  ? computePricingLabel(tool.pricing, tool.selects ?? [], selectIdx, 0)
-                  : tool.types
-                  ? `Требуется кредитов: ${tool.types[selectedType].credits}`
-                  : `модель: ${tool.modelName} · ${tool.credits} кредитов`}
-              </p>
               {tool.planNote && (
                 <p className="text-[11px] mb-2" style={{ color: "hsl(var(--primary))" }}>{tool.planNote}</p>
               )}
-              <button
-                type="button"
-                disabled={isAuthed && (!file || status === "loading")}
-                onClick={onGenerate}
-                className="w-full h-10 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
-                style={{ background: "hsl(var(--primary))" }}
-              >
-                {status === "loading" ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" /> Генерация...
-                  </>
-                ) : (
-                  "Генерировать"
-                )}
-              </button>
+              {(() => {
+                const totalLabel = tool.pricing
+                  ? computePricingParts(tool.pricing, tool.selects ?? [], selectIdx, 0).total
+                  : tool.types
+                  ? `${tool.types[selectedType].credits} кр`
+                  : typeof tool.credits === "number"
+                  ? `${tool.credits} кр`
+                  : "";
+                return (
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      disabled={isAuthed && (!file || status === "loading")}
+                      onClick={onGenerate}
+                      className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
+                      style={{ background: "hsl(var(--primary))" }}
+                    >
+                      {status === "loading" ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" /> Генерация...
+                        </>
+                      ) : (
+                        <>Создать{totalLabel ? ` · ${totalLabel}` : ""}</>
+                      )}
+                    </button>
+                  </div>
+                );
+              })()}
             </div>
           )}
         </div>
 
         {/* RIGHT PREVIEW */}
         <div className="flex flex-col gap-3 h-full">
-          <div className="shrink-0">
-            <h1 className="text-[28px] md:text-[40px] font-bold leading-[1.1] tracking-tight text-center">{data.heroTitle}</h1>
-            <p className="text-sm text-muted-foreground mt-1.5 text-center max-w-[560px] mx-auto">{data.heroDescription}</p>
-          </div>
-
           <div className="flex-1 min-h-0 relative overflow-hidden rounded-2xl border border-border bg-background/60">
             {status === "loading" && (
               <div className="absolute inset-0 animate-pulse bg-muted/40 flex items-center justify-center z-20">
