@@ -8,6 +8,7 @@ export const kakOzhivitStaroeFotoGuide: SeoPage = {
   status: 'published',
   searchIntent: 'informational',
   updatedAt: '2026-07-25',
+  publishedAt: '2026-07-25',
   readingTime: '6 минут',
   cardTitle: 'Как оживить старое фото нейросетью',
   uniqueValue:

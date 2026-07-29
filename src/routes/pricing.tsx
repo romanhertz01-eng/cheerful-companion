@@ -29,6 +29,15 @@ const softwareApplicationLd = JSON.stringify({
     })),
 });
 
+const breadcrumbLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Главная", item: `${ORIGIN}/` },
+    { "@type": "ListItem", position: 2, name: "Тарифы", item: CANONICAL },
+  ],
+});
+
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
   head: () => ({
@@ -46,6 +55,10 @@ export const Route = createFileRoute("/pricing")({
       {
         type: "application/ld+json",
         children: softwareApplicationLd,
+      },
+      {
+        type: "application/ld+json",
+        children: breadcrumbLd,
       },
     ],
   }),
