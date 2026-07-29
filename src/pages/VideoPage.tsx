@@ -205,7 +205,7 @@ const VideoPage = () => {
     { name: "Sora 2", desc: "Флагман видеогенерации OpenAI", credits: 160 },
     { name: "Wan AI", desc: "Точное управление видео", isNew: true, credits: 130 },
     { name: "Hailuo AI", desc: "Новый игрок на рынке", isNew: true, credits: 200 },
-    { name: "Vidu AI", desc: "Кинотеатральное качество", isNew: true, credits: 50 },
+    { name: "HeyGen", desc: "Аватары и говорящие головы", isNew: true, credits: 80 },
     { name: "Sora 2 Pro", desc: "Максимальное качество", credits: 480 },
     { name: "Kling 2.5 Turbo", desc: "Быстрая генерация видео", credits: 285 },
   ];
