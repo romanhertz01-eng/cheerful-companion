@@ -24,6 +24,8 @@ export function ModelGallery({ heading, images, initialCount = 12 }: ModelGaller
               src={src}
               alt={`${heading} — пример ${i + 1}`}
               loading="lazy"
+              width={800}
+              height={1000}
               className="w-full h-auto rounded-xl border border-white/10"
             />
           </div>

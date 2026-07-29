@@ -24,6 +24,15 @@ const STUDIOS_DESCRIPTION = studiosPage.seo.description;
 const STUDIOS_CANONICAL = studiosPage.seo.canonical;
 const STUDIOS_ROBOTS = resolveRobots(studiosPage as SeoPage);
 
+const breadcrumbLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Главная", item: `${ORIGIN}/` },
+    { "@type": "ListItem", position: 2, name: "Инструменты", item: STUDIOS_CANONICAL },
+  ],
+});
+
 export const Route = createFileRoute("/studios")({
   validateSearch: (search: Record<string, unknown>) => ({
     q: typeof search.q === "string" ? search.q : "",
@@ -39,6 +48,9 @@ export const Route = createFileRoute("/studios")({
       { property: "og:image", content: `${ORIGIN}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: STUDIOS_CANONICAL }],
+    scripts: [
+      { type: "application/ld+json", children: breadcrumbLd },
+    ],
   }),
   component: ToolsAndModelsPage,
 });

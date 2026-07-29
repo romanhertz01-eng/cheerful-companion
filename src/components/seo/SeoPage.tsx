@@ -47,10 +47,16 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
       ? {
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: def.seo.title,
+          headline: def.cardTitle ?? def.seo.title.split(' | ')[0].trim(),
+          image: def.seo.ogImage ?? `${ORIGIN}/og-image.png`,
+          datePublished: def.publishedAt ?? def.updatedAt,
           dateModified: def.updatedAt,
           author: { '@type': 'Organization', name: 'ERA2' },
-          publisher: { '@type': 'Organization', name: 'ERA2' },
+          publisher: {
+            '@type': 'Organization',
+            name: 'ERA2',
+            logo: { '@type': 'ImageObject', url: `${ORIGIN}/logo.png` },
+          },
           mainEntityOfPage: def.seo.canonical,
         }
       : null;

@@ -7,6 +7,7 @@ export const kakOplatitChatgptGuide: SeoPage = {
   status: 'published',
   searchIntent: 'commercial',
   updatedAt: '2026-07-26',
+  publishedAt: '2026-07-26',
   readingTime: '6 минут',
   cardTitle: 'Как оплатить ChatGPT из России',
   uniqueValue: 'Единственная страница, которая честно разбирает все способы оплаты ChatGPT из России с их рисками и комиссиями — и показывает вариант, при котором платить OpenAI напрямую вообще не нужно.',

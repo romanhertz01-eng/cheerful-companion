@@ -1,5 +1,5 @@
 import { ORIGIN } from "@/lib/origin";
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, redirect } from "@tanstack/react-router";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { CreditsProvider } from "@/hooks/useCredits";
@@ -31,6 +31,19 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
+  beforeLoad: async () => {
+    if (typeof window !== "undefined") return;
+    const { getRequest } = await import("@tanstack/react-start/server");
+    const req = getRequest();
+    const host = (req.headers.get("host") ?? "").toLowerCase();
+    if (host === "www.era2.ai") {
+      const url = new URL(req.url);
+      throw redirect({
+        href: `https://era2.ai${url.pathname}${url.search}`,
+        statusCode: 301,
+      });
+    }
+  },
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -71,7 +84,10 @@ function RootShell({ children }: { children: React.ReactNode }) {
       "@type": "Organization",
       name: "ERA2",
       url: ORIGIN,
-      logo: `${ORIGIN}/favicon.svg`,
+      logo: {
+        "@type": "ImageObject",
+        url: `${ORIGIN}/logo.png`,
+      },
       alternateName: ["ЭРА2", "era2", "ERA2.ai"],
       description:
         "Агрегатор нейросетей: 90+ ИИ-моделей по единой подписке с оплатой в рублях",

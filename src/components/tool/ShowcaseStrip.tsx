@@ -16,6 +16,8 @@ export function ShowcaseStrip({ images }: ShowcaseStripProps) {
               src={src}
               alt=""
               loading="lazy"
+              width={300}
+              height={400}
               className="w-full h-full object-cover"
             />
           </div>
