@@ -58,7 +58,6 @@ export interface ToolPageData {
     sub?: string;
     models: { name: string; slug?: string; badge?: string }[];
   };
-  examples?: { heading: string; images: string[] };
   visualCards?: {
     heading: string;
     sub?: string;
@@ -247,9 +246,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько стоит?", a: "От 115 кр/сек в 720p — ролик 5 с ≈ 575 кр. В 1080p — 145 кр/сек, в 4K — 630 кр/сек. Итог зависит от разрешения и длительности и виден до запуска." },
       { q: "Можно ли оживить фото, где несколько людей?", a: "Да, модель работает и с групповыми кадрами, но качество движения выше, когда лица крупные и хорошо различимы. На массовых снимках оживление аккуратнее у тех, кто ближе к камере и смотрит прямо." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры оживших фото",
-      images: ["/community/01.jpg", "/community/02.jpg", "/community/03.jpg", "/community/04.jpg"],
+      sub: "Оживление фотографий: до/после",
+      aspect: '16/9',
+      items: [
+        { image: "/community/01.jpg", label: "Портрет ожил" },
+        { image: "/community/02.jpg", label: "Семейный архив" },
+        { image: "/community/03.jpg", label: "Групповое фото" },
+        { image: "/community/04.jpg", label: "Ч/б в цвете" },
+      ],
     },
   },
   {
@@ -373,9 +379,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Правда ли это бесплатно?", a: "Базовые операции Recraft (удаление фона, апскейл) не списывают кредиты с тарифа Про — обрабатывайте сколько нужно. Кредиты уходят только на тяжёлые режимы, вроде апскейла Topaz 2K/4K/8K." },
       { q: "Что делать после удаления фона?", a: "Скачайте PNG или продолжите в ЭРА2: улучшите качество апскейлером, соберите карточку товара или сгенерируйте новый фон нейросетью." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры: фон удалён",
-      images: ["/community/05.jpg", "/community/06.jpg", "/community/07.jpg", "/community/08.jpg"],
+      sub: "Чистый вырез без ореолов",
+      aspect: '1/1',
+      items: [
+        { image: "/community/05.jpg", label: "Товар для карточки" },
+        { image: "/community/06.jpg", label: "Портрет без фона" },
+        { image: "/community/07.jpg", label: "Продукт для лендинга" },
+        { image: "/community/08.jpg", label: "Одежда для маркетплейса" },
+      ],
     },
   },
   {
@@ -500,9 +513,16 @@ export const toolPages: ToolPageData[] = [
         { q: "Правда ли это бесплатно?", a: "Базовые операции Recraft (апскейл, удаление фона) не списывают кредиты с тарифа Про. Тяжёлые режимы Topaz 2K/4K/8K тарифицируются по кредитам, как указано в панели." },
         { q: "Что делать со старым повреждённым фото?", a: "Сначала пропустите снимок через инструмент «Реставрация старых фото» — он уберёт царапины, заломы и вернёт резкость лицам. Потом уже увеличивайте результат апскейлером: связка даёт чистое высокое разрешение без усиления дефектов." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры увеличенных изображений",
-      images: ["/community/01.jpg", "/community/03.jpg", "/community/05.jpg", "/community/07.jpg"],
+      sub: "Увеличение без потери качества",
+      aspect: '1/1',
+      items: [
+        { image: "/community/01.jpg", label: "Портрет 4×" },
+        { image: "/community/03.jpg", label: "Пейзаж 4×" },
+        { image: "/community/05.jpg", label: "Скриншот 2×" },
+        { image: "/community/07.jpg", label: "Логотип 4×" },
+      ],
     },
   },
   {
@@ -626,9 +646,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько стоит реставрация?", a: "40 кредитов за одно фото по подписке ЭРА2. Стартовых кредитов при регистрации хватает, чтобы попробовать инструмент бесплатно и оценить результат на своём снимке." },
       { q: "В каком качестве будет результат?", a: "Разрешение исходника сохраняется, а детализация вырастает за счёт восстановленных деталей. Если нужен ещё больший размер для печати — пропустите результат через апскейлер: связка «Реставрация → Апскейл» даёт максимально чистое высокое разрешение." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры реставрации старых фото",
-      images: ["/community/02.jpg", "/community/04.jpg", "/community/06.jpg", "/community/08.jpg"],
+      sub: "Старые снимки как новые",
+      aspect: '1/1',
+      items: [
+        { image: "/community/02.jpg", label: "Старый портрет" },
+        { image: "/community/04.jpg", label: "Царапины убраны" },
+        { image: "/community/06.jpg", label: "Цвет восстановлен" },
+        { image: "/community/08.jpg", label: "Резкость лица" },
+      ],
     },
   },
   {
@@ -751,9 +778,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько стоит раскраска?", a: "40 кредитов за одно фото по подписке ЭРА2. Стартовых кредитов хватит, чтобы попробовать колоризацию на нескольких снимках и оценить результат до оформления подписки." },
       { q: "Можно ли напечатать раскрашенный результат?", a: "Да, и в любом формате: скачайте цветную версию, при необходимости пропустите через апскейлер для увеличения разрешения — и печатайте от портрета А4 до баннера, качества хватит на большой формат." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры раскраски ч/б фото",
-      images: ["/community/01.jpg", "/community/02.jpg", "/community/05.jpg", "/community/06.jpg"],
+      sub: "Раскраска чёрно-белых фото",
+      aspect: '1/1',
+      items: [
+        { image: "/community/01.jpg", label: "Портрет 1940-х" },
+        { image: "/community/02.jpg", label: "Семейный снимок" },
+        { image: "/community/05.jpg", label: "Городская сцена" },
+        { image: "/community/06.jpg", label: "Военное фото" },
+      ],
     },
   },
   {
@@ -2589,9 +2623,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько стоит генерация?", a: "От 45 кредитов за изображение на Nano Banana 2. Более лёгкие модели вроде Seedream стоят от 30 кредитов. Кредиты входят в подписку или покупаются отдельно." },
       { q: "Можно ли отредактировать готовое изображение?", a: "Да: в ЭРА2 доступны инструменты «Удалить фон», «Апскейл», «Оживить фото». Полный цикл работы с картинкой — от генерации до финальной обработки — в одном окне." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры сгенерированных изображений",
-      images: ["/community/01.jpg", "/community/02.jpg", "/community/03.jpg", "/community/04.jpg"],
+      sub: "Разные стили из одного промпта",
+      aspect: '1/1',
+      items: [
+        { image: "/community/01.jpg", label: "Фотореализм" },
+        { image: "/community/02.jpg", label: "Иллюстрация" },
+        { image: "/community/03.jpg", label: "3D-рендер" },
+        { image: "/community/04.jpg", label: "Абстракция" },
+      ],
     },
     modelChips: {
       heading: "Все главные генераторы — в одной подписке",
@@ -2740,9 +2781,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько стоит одно видео?", a: "От 115 кр/сек в 720p — ролик 5 с ≈ 575 кр. 1080p — 145 кр/сек, 4K — 630 кр/сек. На Veo и Sora — от 355 и 160 кр/сек соответственно. Стоимость видна до запуска." },
       { q: "Подходит ли для вертикальных видео в Reels?", a: "Да, формат 9:16 создан именно для Reels, Shorts и TikTok. Выберите вертикальную ориентацию перед генерацией — ролик сразу будет готов под алгоритмы вертикальных площадок." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры сгенерированных видео",
-      images: ["/community/05.jpg", "/community/06.jpg", "/community/07.jpg", "/community/08.jpg"],
+      sub: "Кадры разных моделей",
+      aspect: '16/9',
+      items: [
+        { image: "/community/05.jpg", label: "Кинокадр" },
+        { image: "/community/06.jpg", label: "Анимация" },
+        { image: "/community/07.jpg", label: "Реклама" },
+        { image: "/community/08.jpg", label: "Природа" },
+      ],
     },
     modelChips: {
       heading: "Модели видео-генерации в одном месте",
@@ -2878,9 +2926,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько стоит удаление объекта?", a: "30 кредитов за изображение по единой подписке ЭРА2. Стартовые кредиты позволяют попробовать инструмент бесплатно, оценить качество и потом продолжить работу." },
       { q: "Что делать с фото после удаления?", a: "Прогоните через апскейлер, если нужно повысить резкость, или замените фон, если хотите поменять сцену. Все инструменты ЭРА2 работают в одном окне — без пересохранений." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры: объект удалён",
-      images: ["/community/02.jpg", "/community/03.jpg", "/community/05.jpg", "/community/07.jpg"],
+      sub: "Удаление лишнего с фото",
+      aspect: '1/1',
+      items: [
+        { image: "/community/02.jpg", label: "Убран прохожий" },
+        { image: "/community/03.jpg", label: "Убрана машина" },
+        { image: "/community/05.jpg", label: "Убран мусор" },
+        { image: "/community/07.jpg", label: "Чистый фон" },
+      ],
     },
   },
   {
@@ -3002,9 +3057,16 @@ export const toolPages: ToolPageData[] = [
       { q: "Сколько это стоит?", a: "20 кредитов за изображение по единой подписке ЭРА2. Стартовые кредиты позволяют попробовать инструмент бесплатно и оценить качество перед серьёзным использованием." },
       { q: "Что ещё можно сделать с фото в ЭРА2?", a: "Прогнать через апскейлер для повышения резкости, восстановить старое фото реставрацией, раскрасить чёрно-белый снимок, убрать фон или сгенерировать новый — всё в одном окне без пересохранений." },
     ],
-    examples: {
+    showreel: {
       heading: "Примеры: водяной знак удалён",
-      images: ["/community/01.jpg", "/community/04.jpg", "/community/06.jpg", "/community/08.jpg"],
+      sub: "Снятие водяных знаков",
+      aspect: '1/1',
+      items: [
+        { image: "/community/01.jpg", label: "Логотип убран" },
+        { image: "/community/04.jpg", label: "Плашка снята" },
+        { image: "/community/06.jpg", label: "Подпись убрана" },
+        { image: "/community/08.jpg", label: "Копирайт убран" },
+      ],
     },
   },
   {
@@ -3137,9 +3199,16 @@ export const toolPages: ToolPageData[] = [
       subtitle: "Фото + текст — видео с презентером за минуты.",
       button: "Создать аватара",
     },
-    examples: {
+    showreel: {
       heading: "Примеры: аватар говорит",
-      images: ["/community/04.jpg", "/community/02.jpg", "/community/07.jpg", "/community/01.jpg"],
+      sub: "Аватары, которые говорят",
+      aspect: '16/9',
+      items: [
+        { image: "/community/04.jpg", label: "Ведущий" },
+        { image: "/community/02.jpg", label: "Учитель" },
+        { image: "/community/07.jpg", label: "Диктор" },
+        { image: "/community/01.jpg", label: "Персонаж" },
+      ],
     },
     faqItems: [
       { q: "Как это работает?", a: "Нейросеть анализирует лицо на фото, синхронизирует артикуляцию с фонемами речи и достраивает микромимику — получается ролик, где человек с фото произносит ваш сценарий." },
@@ -3284,9 +3353,16 @@ export const toolPages: ToolPageData[] = [
       subtitle: "Фото → продающий ролик за минуты.",
       button: "Создать видео товара",
     },
-    examples: {
+    showreel: {
       heading: "Примеры: товар в движении",
-      images: ["/community/06.jpg", "/community/02.jpg", "/community/05.jpg", "/community/08.jpg"],
+      sub: "Товар в движении для карточки",
+      aspect: '16/9',
+      items: [
+        { image: "/community/06.jpg", label: "Крутится 360°" },
+        { image: "/community/02.jpg", label: "Свет играет" },
+        { image: "/community/05.jpg", label: "Демонстрация" },
+        { image: "/community/08.jpg", label: "Крупный план" },
+      ],
     },
     faqItems: [
       { q: "Зачем карточке видео?", a: "Заметность в поисковой выдаче и удержание покупателя: видео-превью цепляет взгляд, а движение показывает фактуру и детали, которых не видно на статичном фото. Итог — больше кликов и меньше возвратов." },
@@ -7134,3 +7210,29 @@ export function getRelatedTools(slug: string, limit = 6): ToolPageData[] {
 
 export const toolPagesByKind = (kind: 'tool' | 'model') =>
   toolPages.filter((p) => p.kind === kind);
+
+export function getToolsForModel(modelSlug: string): ToolPageData[] {
+  const model = toolPages.find((t) => t.slug === modelSlug && t.kind === 'model');
+  if (!model) return [];
+  const nameLower = model.modelName.toLowerCase();
+  return toolPages.filter((t) => {
+    if (t.kind !== 'tool' || !t.tool) return false;
+    if (t.status === 'draft') return false;
+    const tm = (t.tool.model ?? '').toLowerCase();
+    const tmn = (t.tool.modelName ?? '').toLowerCase();
+    return tm === modelSlug || tm.startsWith(modelSlug + '-') || tmn === nameLower || tmn.startsWith(nameLower);
+  });
+}
+
+export function getModelForTool(tool: ToolPageData): ToolPageData | undefined {
+  if (tool.kind !== 'tool' || !tool.tool) return undefined;
+  const tm = (tool.tool.model ?? '').toLowerCase();
+  const tmn = (tool.tool.modelName ?? '').toLowerCase();
+  return toolPages.find((p) => {
+    if (p.kind !== 'model') return false;
+    if (p.status === 'draft') return false;
+    const slug = p.slug.toLowerCase();
+    const name = p.modelName.toLowerCase();
+    return tm === slug || tm.startsWith(slug + '-') || tmn === name;
+  });
+}
