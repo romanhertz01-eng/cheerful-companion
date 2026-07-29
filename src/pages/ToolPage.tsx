@@ -12,6 +12,7 @@ import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
 import { AudioShowreel } from "@/components/tool/AudioShowreel";
+import { PromptAnswer } from "@/components/tool/PromptAnswer";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
 import { TransformShowcase } from "@/components/tool/TransformShowcase";
 import { ModelGallery } from "@/components/tool/ModelGallery";
@@ -207,6 +208,14 @@ const ToolPage = () => {
               sub={data.audioShowreel.sub}
               textLabel={data.audioShowreel.textLabel}
               items={data.audioShowreel.items}
+            />
+          ) : null,
+          promptAnswer: data.promptAnswer ? (
+            <PromptAnswer
+              key="promptAnswer"
+              heading={data.promptAnswer.heading}
+              sub={data.promptAnswer.sub}
+              items={data.promptAnswer.items}
             />
           ) : null,
           transformShowcase: data.transformShowcase ? (
@@ -455,8 +464,8 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
-        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "specs", "modelChips", "bigStat"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
+        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
