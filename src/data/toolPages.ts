@@ -3,6 +3,7 @@ export interface ToolPageData {
   kind: 'tool' | 'model';
   status?: 'published' | 'draft';
   updatedAt?: string;
+  seoTitle?: string;
   modelName: string;
   heroTitle: string;
   heroDescription: string;
