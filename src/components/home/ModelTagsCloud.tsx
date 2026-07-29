@@ -3,7 +3,7 @@ const modelTags = [
   "Midjourney", "Nano Banana 2", "Nano Banana Pro", "Seedream 5 Lite",
   "GPT Image 1.5", "Flux", "Imagen 4", "Higgsfield Soul",
   "Kling 3.0", "Kling 2.5 Turbo", "Seedance 2.0", "Veo 3",
-  "Sora 2", "Wan AI", "Hailuo AI", "Vidu AI", "ElevenLabs", "Suno",
+  "Sora 2", "Wan AI", "Hailuo AI", "HeyGen", "ElevenLabs", "Suno",
 ];
 
 export function ModelTagsCloud() {

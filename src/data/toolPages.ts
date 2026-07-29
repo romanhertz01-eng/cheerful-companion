@@ -2581,7 +2581,6 @@ export const toolPages: ToolPageData[] = [
         { name: "Seedance 2.0", slug: "seedance" },
         { name: "Hailuo", slug: "hailuo" },
         { name: "Wan 2.7" },
-        { name: "Vidu" },
         { name: "HeyGen" },
       ],
     },
