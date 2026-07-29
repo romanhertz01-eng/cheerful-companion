@@ -199,15 +199,15 @@ const VideoPage = () => {
   ];
 
   const videoGridModels = [
-    { name: "Kling 3.0", desc: "Топовое видео от Kling AI", isNew: true, credits: 75 },
-    { name: "Seedance 2.0", desc: "Плавные многокадровые видео", isNew: true, badges: ["60% OFF"], credits: 48 },
-    { name: "Veo 3", desc: "Топовая модель Google", isNew: true, credits: 120 },
-    { name: "Sora 2", desc: "Флагман видеогенерации OpenAI", credits: 480 },
-    { name: "Wan AI", desc: "Точное управление видео", isNew: true, credits: 30 },
-    { name: "Hailuo AI", desc: "Новый игрок на рынке", isNew: true, credits: 40 },
+    { name: "Kling 3.0", desc: "Топовое видео от Kling AI", isNew: true, credits: 115 },
+    { name: "Seedance 2.0", desc: "Плавные многокадровые видео", isNew: true, credits: 330 },
+    { name: "Veo 3", desc: "Топовая модель Google", isNew: true, credits: 355 },
+    { name: "Sora 2", desc: "Флагман видеогенерации OpenAI", credits: 160 },
+    { name: "Wan AI", desc: "Точное управление видео", isNew: true, credits: 130 },
+    { name: "Hailuo AI", desc: "Новый игрок на рынке", isNew: true, credits: 200 },
     { name: "Vidu AI", desc: "Кинотеатральное качество", isNew: true, credits: 50 },
-    { name: "Sora 2 Pro", desc: "Максимальное качество", credits: 1440 },
-    { name: "Kling 2.5 Turbo", desc: "Быстрая генерация видео", credits: 30 },
+    { name: "Sora 2 Pro", desc: "Максимальное качество", credits: 480 },
+    { name: "Kling 2.5 Turbo", desc: "Быстрая генерация видео", credits: 285 },
   ];
 
   const handleCarouselSelect = (name: string) => {
