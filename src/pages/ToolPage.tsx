@@ -3,7 +3,6 @@ import { ORIGIN } from "@/lib/origin";
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { ChevronRight, Music, Image as ImageIcon, Film, AlignLeft, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, getToolPageData, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
