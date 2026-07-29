@@ -1,10 +1,9 @@
 import { ORIGIN } from "@/lib/origin";
 
 import { Link, getRouteApi } from "@tanstack/react-router";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Music, Image as ImageIcon, Film, AlignLeft, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, type ToolPageData } from "@/data/toolPages";
+import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, getToolPageData, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -20,6 +19,18 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
+
+const CHIP_ICON_BY_RESULT_TYPE = {
+  audio: Music,
+  images: ImageIcon,
+  video: Film,
+  text: AlignLeft,
+} as const;
+
+function getChipIcon(slug?: string) {
+  const rt = slug ? getToolPageData(slug)?.tool?.resultType : undefined;
+  return (rt && CHIP_ICON_BY_RESULT_TYPE[rt]) || Sparkles;
+}
 
 const ToolPage = () => {
   const { data } = toolRouteApi.useLoaderData() as { data: ToolPageData };
@@ -458,15 +469,19 @@ const ToolPage = () => {
               {data.modelChips.sub && (
                 <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
               )}
-              <div className="flex gap-4 overflow-x-auto no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
-                {data.modelChips.models
-                  .filter((m) => (m.slug ? isPublished(m.slug) : true))
-                  .map((m) => {
+              {(() => {
+                const chips = data.modelChips.models.filter((m) => (m.slug ? isPublished(m.slug) : true));
+                const cols = Math.min(Math.max(chips.length, 1), 4);
+                const gridCols = ["", "md:grid-cols-1", "md:grid-cols-2", "md:grid-cols-3", "md:grid-cols-4"][cols];
+                return (
+              <div className={cn("grid grid-cols-1 sm:grid-cols-2 gap-4", gridCols)}>
+                {chips.map((m) => {
                     const price = m.slug ? getModelPriceLabel(m.slug) : undefined;
+                    const Icon = getChipIcon(m.slug);
                     const inner = (
                       <>
                         <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                          <ModelGlyph name={m.name} size={32} />
+                          <Icon className="w-6 h-6 text-primary" strokeWidth={1.75} />
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="font-semibold text-base">{m.name}</span>
@@ -481,7 +496,7 @@ const ToolPage = () => {
                         </div>
                       </>
                     );
-                    const base = "shrink-0 w-[200px] rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors";
+                    const base = "h-full rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors flex flex-col";
                     return m.slug ? (
                       <Link
                         key={m.name}
@@ -498,6 +513,8 @@ const ToolPage = () => {
                     );
                   })}
               </div>
+                );
+              })()}
             </section>
           ) : null,
           howItWorks: data.howItWorks ? (
