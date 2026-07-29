@@ -2860,7 +2860,7 @@ export const toolPages: ToolPageData[] = [
       "HeyGen синхронизирует артикуляцию с фонемами речи и достраивает микромимику.",
     tool: {
       layout: "row",
-      model: "hailuo-2-3-std",
+      model: "heygen-avatar-iv",
       modelName: "HeyGen",
       credits: 80,
       bricks: [],
