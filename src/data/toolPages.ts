@@ -59,7 +59,6 @@ export interface ToolPageData {
     sub?: string;
     models: { name: string; slug?: string; badge?: string }[];
   };
-  bigStat?: { value: string; label: string; sub?: string; button?: string };
   examples?: { heading: string; images: string[] };
   visualCards?: {
     heading: string;
