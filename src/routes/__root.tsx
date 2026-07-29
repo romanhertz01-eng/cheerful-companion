@@ -33,16 +33,14 @@ function NotFoundComponent() {
 
 const runWwwRedirect = createIsomorphicFn()
   .client(() => {})
-  .server(() => {
-    // Dynamic require to keep the server-only module out of the client graph.
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { checkWwwRedirect } = require("@/lib/wwwRedirect.server");
+  .server(async () => {
+    const { checkWwwRedirect } = await import("@/lib/wwwRedirect.server");
     checkWwwRedirect();
   });
 
 export const Route = createRootRoute({
-  beforeLoad: () => {
-    runWwwRedirect();
+  beforeLoad: async () => {
+    await runWwwRedirect();
   },
   head: () => ({
     meta: [
