@@ -41,10 +41,10 @@ export const aiTextPage: SeoPage = {
       data: {
         heading: 'Текстовые инструменты',
         items: [
-          { title: 'Чат с ИИ', desc: 'Диалог с моделью', href: '/text', icon: '💬' },
-          { title: 'Написать текст', desc: 'Статьи и посты', href: '/ai/text', icon: '✍️' },
-          { title: 'Перевод', desc: 'На любой язык', href: '/text', icon: '🌍' },
-          { title: 'Написать код', desc: 'Генерация и разбор', href: '/text', icon: '💻' },
+          { title: 'Чат с ИИ', desc: 'Диалог с моделью', href: '/tools/ai-chat', icon: '💬' },
+          { title: 'Написать текст', desc: 'Статьи и посты', href: '/tools/ai-writer', icon: '✍️' },
+          { title: 'Переводчик', desc: 'На любой язык', href: '/tools/translate', icon: '🌍' },
+          { title: 'Написать код', desc: 'Генерация и разбор', href: '/tools/ai-code', icon: '💻' },
         ],
       },
     },

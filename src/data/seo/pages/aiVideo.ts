@@ -44,6 +44,7 @@ export const aiVideoPage: SeoPage = {
           { title: 'Оживить фото', desc: 'Фото → живое видео', href: '/tools/ozhivit-foto', icon: '🎬' },
           { title: 'Создать видео', desc: 'Видео из текста', href: '/tools/video-generation', icon: '✨' },
           { title: 'ИИ-аватар', desc: 'Говорящий персонаж', href: '/tools/talking-avatar', icon: '🧑' },
+          { title: 'Апскейл видео', desc: 'Улучшить качество', href: '/tools/video-upscaler', icon: '🔍' },
         ],
       },
     },

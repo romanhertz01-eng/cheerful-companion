@@ -42,9 +42,8 @@ export const aiAudioPage: SeoPage = {
         heading: 'Аудио-инструменты',
         items: [
           { title: 'Озвучка текста', desc: 'Текст в речь', href: '/tools/text-to-speech', icon: '🎙️' },
-          { title: 'Создать песню', desc: 'Музыка по описанию', href: '/audio', icon: '🎵' },
-          { title: 'Клон голоса', desc: 'Свой голос по образцу', href: '/tools/voice-cloning', icon: '🗣️' },
-          { title: 'Транскрибация', desc: 'Аудио в текст', href: '/tools/transcribe', icon: '📝' },
+          { title: 'Создать песню', desc: 'Музыка по описанию', href: '/tools/create-song', icon: '🎵' },
+          { title: 'Звуковые эффекты', desc: 'SFX по описанию', href: '/tools/sound-effects', icon: '💥' },
         ],
       },
     },
@@ -57,8 +56,6 @@ export const aiAudioPage: SeoPage = {
         items: [
           { name: 'ElevenLabs', desc: 'Реалистичная озвучка на десятках языков', image: '/models/01.jpg', href: '/tools/elevenlabs' },
           { name: 'Suno', badge: 'TOP', desc: 'Полноценные песни по описанию', image: '/models/02.jpg', href: '/tools/suno' },
-          { name: 'ElevenLabs Voice Clone', desc: 'Клонирование голоса по образцу', image: '/models/03.jpg', href: '/tools/voice-cloning' },
-          { name: 'ElevenLabs STT', desc: 'Точная расшифровка аудио в текст', image: '/models/04.jpg', href: '/tools/transcribe' },
         ],
       },
     },

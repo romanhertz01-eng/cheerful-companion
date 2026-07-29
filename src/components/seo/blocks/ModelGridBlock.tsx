@@ -37,6 +37,23 @@ function Card({ m }: { m: ModelItem }) {
   );
 }
 
+const DESKTOP_COLS: Record<number, string> = {
+  1: 'lg:grid-cols-1',
+  2: 'lg:grid-cols-2',
+  3: 'lg:grid-cols-3',
+  4: 'lg:grid-cols-4',
+};
+const DESKTOP_MAX: Record<number, string> = {
+  1: 'max-w-sm',
+  2: 'max-w-3xl',
+  3: 'max-w-5xl',
+  4: 'max-w-6xl',
+};
+function desktopColsFor(n: number) {
+  if (n <= 4) return Math.max(n, 1);
+  return n % 3 === 0 ? 3 : 4;
+}
+
 export function ModelGridBlock({ heading, items }: ModelGridBlockProps) {
   const visible = items.filter((m) => {
     if (!m.href) return true;
@@ -44,10 +61,13 @@ export function ModelGridBlock({ heading, items }: ModelGridBlockProps) {
     if (!match) return true;
     return isPublished(match[1]);
   });
+  const cols = desktopColsFor(visible.length);
+  const colsClass = DESKTOP_COLS[cols];
+  const maxClass = DESKTOP_MAX[cols];
   return (
-    <section className="max-w-5xl mx-auto px-4 py-12">
+    <section className="max-w-6xl mx-auto px-4 py-12">
       <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{heading}</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className={`grid grid-cols-1 sm:grid-cols-2 ${colsClass} gap-4 mx-auto ${maxClass}`}>
         {visible.map((m) =>
           m.href ? (
             <Link key={m.name} to={m.href} className="block">

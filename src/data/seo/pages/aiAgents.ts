@@ -41,10 +41,10 @@ export const aiAgentsPage: SeoPage = {
       data: {
         heading: 'Популярные агенты',
         items: [
-          { title: 'Маркетолог', desc: 'Стратегия и контент-план', href: '/agents', icon: '📈' },
-          { title: 'Копирайтер', desc: 'Тексты под задачу', href: '/agents', icon: '✍️' },
-          { title: 'Программист', desc: 'Код и код-ревью', href: '/agents', icon: '💻' },
-          { title: 'Юрист', desc: 'Разбор договоров', href: '/agents', icon: '⚖️' },
+          { title: 'ИИ-юрист', desc: 'Разбор договоров', href: '/tools/ai-lawyer', icon: '⚖️' },
+          { title: 'ИИ-маркетолог', desc: 'Стратегия и контент-план', href: '/tools/ai-marketer', icon: '📈' },
+          { title: 'ИИ-копирайтер', desc: 'Тексты под задачу', href: '/tools/ai-copywriter', icon: '✍️' },
+          { title: 'Разбор документов', desc: 'Извлечение и анализ', href: '/tools/document-analysis', icon: '📄' },
         ],
       },
     },
@@ -59,6 +59,8 @@ export const aiAgentsPage: SeoPage = {
           { name: 'Claude', desc: 'Длинные документы и анализ', image: '/models/02.jpg', href: '/tools/claude' },
           { name: 'Gemini', desc: 'Данные и мультимодальность', image: '/models/03.jpg', href: '/tools/gemini' },
           { name: 'DeepSeek', desc: 'Код и логика', image: '/models/04.jpg', href: '/tools/deepseek' },
+          { name: 'Grok', desc: 'Свежие данные и прямота', image: '/models/05.jpg', href: '/tools/grok' },
+          { name: 'Perplexity', desc: 'Ответы с источниками из интернета', image: '/models/06.jpg', href: '/tools/perplexity' },
         ],
       },
     },
