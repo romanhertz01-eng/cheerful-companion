@@ -238,25 +238,42 @@ const ToolPage = () => {
               initialCount={data.gallery.initialCount}
             />
           ) : null,
-          specs: data.specs ? (
-            <section key="specs" className="max-w-3xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
-              <div className="flex flex-col">
-                {data.specs.items.map((it, i) => (
-                  <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
-                    <span className="text-muted-foreground">{it.label}</span>
-                    <span className="font-medium text-right">{it.value}</span>
-                  </div>
-                ))}
-              </div>
-              {data.technologyDescription && (
-                <div className="mt-10">
-                  <h3 className="text-lg md:text-xl font-semibold mb-3">Под капотом</h3>
-                  <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.technologyDescription}</p>
+          specs: data.specs ? (() => {
+            const modelPage = data.kind === 'tool' ? getModelForTool(data) : null;
+            const items = [...data.specs.items];
+            if (data.kind === 'tool' && modelPage && !items.some((it) => it.label === 'Модель')) {
+              items.push({ label: 'Модель', value: modelPage.modelName });
+            }
+            const renderValue = (label: string, value: string) => {
+              if (data.kind === 'tool' && modelPage && label === 'Модель') {
+                return (
+                  <Link to="/tools/$slug" params={{ slug: modelPage.slug }} className="font-medium text-right underline decoration-dotted underline-offset-4 hover:text-primary transition-colors">
+                    {value}
+                  </Link>
+                );
+              }
+              return <span className="font-medium text-right">{value}</span>;
+            };
+            return (
+              <section key="specs" className="max-w-3xl mx-auto px-4 py-12">
+                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
+                <div className="flex flex-col">
+                  {items.map((it, i) => (
+                    <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
+                      <span className="text-muted-foreground">{it.label}</span>
+                      {renderValue(it.label, it.value)}
+                    </div>
+                  ))}
                 </div>
-              )}
-            </section>
-          ) : null,
+                {data.technologyDescription && (
+                  <div className="mt-10">
+                    <h3 className="text-lg md:text-xl font-semibold mb-3">Под капотом</h3>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-line">{data.technologyDescription}</p>
+                  </div>
+                )}
+              </section>
+            );
+          })() : null,
           keyFeature: data.keyFeatureTitle ? (
             <section key="keyFeature" className="max-w-4xl mx-auto px-4 py-12">
               <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.keyFeatureTitle}</h2>
@@ -504,32 +521,10 @@ const ToolPage = () => {
               </section>
             );
           })() : null,
-          worksOn: data.kind === 'tool' ? (() => {
-            const model = getModelForTool(data);
-            if (!model) return null;
-            return (
-              <section key="worksOn" className="max-w-3xl mx-auto px-4 py-8">
-                <Link
-                  to="/tools/$slug"
-                  params={{ slug: model.slug }}
-                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <ModelGlyph name={model.modelName} size={32} />
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-xs uppercase tracking-wide text-muted-foreground mb-1">Работает на модели</div>
-                    <div className="font-semibold text-base truncate">{model.modelName}</div>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-muted-foreground ml-auto shrink-0" />
-                </Link>
-              </section>
-            );
-          })() : null,
         };
 
         const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
-        const toolOrder = ["worksOn", "intro", "showreel", "audioShowreel", "promptAnswer", "featureBlocks", "useCases", "howItWorks", "keyFeature", "specs", "modelChips"];
+        const toolOrder = ["intro", "showreel", "audioShowreel", "promptAnswer", "featureBlocks", "useCases", "howItWorks", "keyFeature", "specs", "modelChips"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
