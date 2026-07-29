@@ -4,7 +4,7 @@ import { Link, getRouteApi } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getRelatedTools, isPublished, type ToolPageData } from "@/data/toolPages";
+import { getRelatedTools, isPublished, getModelPriceLabel, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -366,6 +366,7 @@ const ToolPage = () => {
                 {data.modelChips.models
                   .filter((m) => (m.slug ? isPublished(m.slug) : true))
                   .map((m) => {
+                    const price = m.slug ? getModelPriceLabel(m.slug) : undefined;
                     const inner = (
                       <>
                         <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
@@ -379,9 +380,9 @@ const ToolPage = () => {
                             </span>
                           )}
                         </div>
-                        {m.priceFrom && (
-                          <div className="mt-3 text-sm text-primary font-mono">{m.priceFrom}</div>
-                        )}
+                        <div className="mt-3 text-sm text-primary font-mono min-h-[1.25rem]">
+                          {price ?? "\u00A0"}
+                        </div>
                       </>
                     );
                     const base = "shrink-0 w-[200px] rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors";
