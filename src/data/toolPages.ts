@@ -6754,21 +6754,17 @@ export function getModelPriceLabel(slug: string): string | undefined {
   if (!p) return undefined;
   const tool = p.tool;
   const pricing = tool?.pricing;
+  let min: number | undefined;
   if (pricing) {
     if (typeof pricing.minCredits === "number") {
-      return `от ${pricing.minCredits} кр`;
-    }
-    const rates = pricing.rates ?? [];
-    if (rates.length) {
-      const min = Math.min(...rates.map((r) => r.rate));
-      const suffix = pricing.mode === "per-second" ? " кр/сек" : " кр";
-      return `от ${min}${suffix}`;
+      min = pricing.minCredits;
+    } else {
+      const rates = pricing.rates ?? [];
+      if (rates.length) min = Math.min(...rates.map((r) => r.rate));
     }
   }
-  if (typeof tool?.credits === "number") {
-    return `${tool.credits} кр`;
-  }
-  return undefined;
+  if (min === undefined && typeof tool?.credits === "number") min = tool.credits;
+  return typeof min === "number" ? `от ${min} кр` : undefined;
 }
 
 export function getRelatedTools(slug: string, limit = 6): ToolPageData[] {
