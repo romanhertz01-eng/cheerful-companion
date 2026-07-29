@@ -3721,7 +3721,7 @@ export const toolPages: ToolPageData[] = [
     heroTitle: "Hailuo — видеонейросеть MiniMax",
     heroDescription:
       "Быстрорастущая модель для коротких роликов: выразительное движение камеры и цена вдвое ниже флагманов. Без VPN, оплата в рублях.",
-    heroFacts: ["от 200 cr за ролик", "6 секунд", "до 768p"],
+    heroFacts: ["от 200 cr за ролик", "6 или 10 секунд", "до 1080p"],
     category: "video",
     features: [
       { icon: "🎥", title: "Живая камера", description: "Динамичные пролёты и ракурсы из коробки" },
