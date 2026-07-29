@@ -210,6 +210,14 @@ const ToolPage = () => {
               items={data.audioShowreel.items}
             />
           ) : null,
+          promptAnswer: data.promptAnswer ? (
+            <PromptAnswer
+              key="promptAnswer"
+              heading={data.promptAnswer.heading}
+              sub={data.promptAnswer.sub}
+              items={data.promptAnswer.items}
+            />
+          ) : null,
           transformShowcase: data.transformShowcase ? (
             <TransformShowcase
               key="transformShowcase"
@@ -456,8 +464,8 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
-        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "specs", "modelChips", "bigStat"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
+        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
