@@ -1,0 +1,18 @@
+{
+  "h1": "90+ нейросетей в одной подписке",
+  "canonical": [
+    "https://era2.ai/"
+  ],
+  "faq_ld": true,
+  "bc_ld": false,
+  "bc_visible": 0,
+  "footer_count_home": 1,
+  "footer_count_ai": 1,
+  "placeholder_before": "Опишите картинку, которую хотите создать…",
+  "placeholder_after": "Опишите сцену для видео…",
+  "ozhivit_href": "/tools/ozhivit-foto",
+  "create_href": "/auth?next=%2Fvideo",
+  "has_counter": true,
+  "broken_ai_image": [],
+  "broken_home": []
+}
