@@ -388,7 +388,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                 max={100}
                 value={motion}
                 onChange={(e) => setMotion(Number(e.target.value))}
-                className="w-full accent-[#E85420]"
+                className="w-full accent-[hsl(var(--primary))]"
               />
             </div>
           )}
@@ -461,14 +461,14 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                   : `модель: ${tool.modelName} · ${tool.credits} кредитов`}
               </p>
               {tool.planNote && (
-                <p className="text-[11px] mb-2" style={{ color: "#E85420" }}>{tool.planNote}</p>
+                <p className="text-[11px] mb-2" style={{ color: "hsl(var(--primary))" }}>{tool.planNote}</p>
               )}
               <button
                 type="button"
                 disabled={isAuthed && (!file || status === "loading")}
                 onClick={onGenerate}
                 className="w-full h-10 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
-                style={{ background: "#E85420" }}
+                style={{ background: "hsl(var(--primary))" }}
               >
                 {status === "loading" ? (
                   <>
@@ -747,7 +747,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
               disabled={isAuthed && (!value.trim() || status === "loading")}
               onClick={onGenerate}
               className="h-10 px-5 rounded-full font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 w-full sm:w-auto sm:ml-auto shrink-0"
-              style={{ background: "#E85420" }}
+              style={{ background: "hsl(var(--primary))" }}
             >
               {status === "loading" ? (
                 <>
@@ -770,7 +770,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
           )}
         </div>
         {tool.planNote && (
-          <p className="mt-2 text-[11px] text-center" style={{ color: "#E85420" }}>{tool.planNote}</p>
+          <p className="mt-2 text-[11px] text-center" style={{ color: "hsl(var(--primary))" }}>{tool.planNote}</p>
         )}
 
         {status === "done" && (
@@ -793,7 +793,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 className="absolute inset-0 w-full h-full object-cover opacity-80"
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg" style={{ background: "#E85420" }}>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg" style={{ background: "hsl(var(--primary))" }}>
                   <PlayIcon size={28} className="ml-1 text-white" fill="white" />
                 </div>
               </div>
@@ -813,7 +813,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           ) : (
           <div className="mt-4 rounded-xl border border-border p-4 flex items-center gap-3 bg-background/60">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "#E85420" }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "hsl(var(--primary))" }}>
               <PlayIcon size={18} className="ml-0.5 text-white" fill="white" />
             </div>
             <div className="flex-1">
