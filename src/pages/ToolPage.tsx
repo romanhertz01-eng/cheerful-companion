@@ -193,13 +193,44 @@ const ToolPage = () => {
             />
           ) : null,
           showreel: data.showreel ? (
-            <ModelShowreel
-              key="showreel"
-              heading={data.showreel.heading}
-              sub={data.showreel.sub}
-              aspect={data.showreel.aspect}
-              items={data.showreel.items}
-            />
+            data.kind === 'tool' ? (
+              <section key="showreel" className="max-w-5xl mx-auto px-4 py-12">
+                <h2 className="text-2xl md:text-[32px] font-bold text-center">{data.showreel.heading}</h2>
+                {data.showreel.sub && (
+                  <p className="mt-3 text-sm text-muted-foreground text-center max-w-2xl mx-auto">{data.showreel.sub}</p>
+                )}
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {data.showreel.items.slice(0, 8).map((it, i) => (
+                    <figure key={i} className="flex flex-col gap-2">
+                      <div className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-white/[0.03]">
+                        <img
+                          src={it.image}
+                          alt={it.label ?? it.prompt ?? data.showreel!.heading}
+                          loading={i < 4 ? "eager" : "lazy"}
+                          width={600}
+                          height={600}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      {(it.label || it.prompt) && (
+                        <figcaption className="text-xs text-muted-foreground leading-snug line-clamp-3">
+                          {it.label ? <span className="text-foreground font-medium">{it.label}. </span> : null}
+                          {it.prompt}
+                        </figcaption>
+                      )}
+                    </figure>
+                  ))}
+                </div>
+              </section>
+            ) : (
+              <ModelShowreel
+                key="showreel"
+                heading={data.showreel.heading}
+                sub={data.showreel.sub}
+                aspect={data.showreel.aspect}
+                items={data.showreel.items}
+              />
+            )
           ) : null,
           audioShowreel: data.audioShowreel ? (
             <AudioShowreel
