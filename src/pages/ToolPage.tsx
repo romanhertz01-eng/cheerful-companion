@@ -4,7 +4,7 @@ import { Link, getRouteApi } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getRelatedTools, isPublished, getModelPriceLabel, type ToolPageData } from "@/data/toolPages";
+import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, getModelForTool, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -452,26 +452,56 @@ const ToolPage = () => {
               </div>
             </section>
           ) : null,
-          examples: data.examples ? (
-            <section key="examples" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.examples.heading}</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {data.examples.images.map((src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt={`${data.examples!.heading} — ${i + 1}`}
-                    loading="lazy"
-                    className="w-full aspect-square object-cover rounded-xl border border-white/10"
-                  />
-                ))}
-              </div>
-            </section>
-          ) : null,
+          modelTools: data.kind === 'model' ? (() => {
+            const tools = getToolsForModel(data.slug);
+            if (!tools.length) return null;
+            return (
+              <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
+                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {tools.map((t) => (
+                    <Link
+                      key={t.slug}
+                      to="/tools/$slug"
+                      params={{ slug: t.slug }}
+                      className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                    >
+                      <h3 className="font-semibold mb-1">{t.heroTitle}</h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {t.heroDescription.length > 90 ? `${t.heroDescription.slice(0, 90).trimEnd()}…` : t.heroDescription}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })() : null,
+          worksOn: data.kind === 'tool' ? (() => {
+            const model = getModelForTool(data);
+            if (!model) return null;
+            return (
+              <section key="worksOn" className="max-w-3xl mx-auto px-4 py-8">
+                <Link
+                  to="/tools/$slug"
+                  params={{ slug: model.slug }}
+                  className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <ModelGlyph name={model.modelName} size={32} />
+                  </div>
+                  <div className="min-w-0">
+                    <div className="text-xs uppercase tracking-wide text-muted-foreground mb-1">Работает на модели</div>
+                    <div className="font-semibold text-base truncate">{model.modelName}</div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-muted-foreground ml-auto shrink-0" />
+                </Link>
+              </section>
+            );
+          })() : null,
         };
 
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "gallery", "tips", "useCases", "howItWorks"];
-        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "keyFeature", "examples", "audioShowreel", "promptAnswer", "specs", "modelChips"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "audioShowreel", "promptAnswer", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
+        const toolOrder = ["worksOn", "intro", "featureBlocks", "useCases", "howItWorks", "keyFeature", "showreel", "audioShowreel", "promptAnswer", "specs", "modelChips"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
       })()}
