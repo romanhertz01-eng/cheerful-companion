@@ -343,24 +343,32 @@ const ToolPage = () => {
                     </div>
                   </div>
                 ))}
-                {noImg.length > 0 && (
-                  <div>
-                    {withImg.length > 0 && (
-                      <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">Что ещё умеет</h3>
-                    )}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {noImg.map((b, i) => (
-                        <div
-                          key={`txt-${i}`}
-                          className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
-                        >
-                          <h4 className="font-semibold mb-1">{b.title}</h4>
-                          <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-                        </div>
-                      ))}
+                {noImg.length >= 2 && (() => {
+                  const n = noImg.length;
+                  const gridCols =
+                    n === 2 ? "md:grid-cols-2" :
+                    n === 3 ? "md:grid-cols-3" :
+                    n === 4 ? "md:grid-cols-2" :
+                    "md:grid-cols-3";
+                  return (
+                    <div>
+                      {withImg.length > 0 && (
+                        <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">Что ещё умеет</h3>
+                      )}
+                      <div className={cn("grid grid-cols-1 gap-4", gridCols)}>
+                        {noImg.map((b, i) => (
+                          <div
+                            key={`txt-${i}`}
+                            className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors flex flex-col h-full"
+                          >
+                            <h4 className="font-semibold mb-1">{b.title}</h4>
+                            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">{b.desc}</p>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  );
+                })()}
               </section>
             );
           })() : null,
