@@ -84,6 +84,16 @@ export interface ToolPageData {
       src?: string;
     }[];
   };
+  promptAnswer?: {
+    heading: string;
+    sub?: string;
+    items: {
+      label?: string;
+      version?: string;
+      prompt: string;
+      answer: string;
+    }[];
+  };
   showcaseStrip?: { images: string[] };
   transformShowcase?: {
     heading: string;
