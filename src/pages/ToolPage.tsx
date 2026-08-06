@@ -253,9 +253,9 @@ const ToolPage = () => {
           showreel: data.showreel ? (
             data.kind === 'tool' ? (
               <section key="showreel" className="max-w-5xl mx-auto px-4 py-12">
-                <h2 className="text-2xl md:text-[32px] font-bold text-center">{data.showreel.heading}</h2>
+                <h2 className="text-2xl md:text-[32px] font-bold text-center md:text-left">{data.showreel.heading}</h2>
                 {data.showreel.sub && (
-                  <p className="mt-3 text-sm text-muted-foreground text-center max-w-2xl mx-auto">{data.showreel.sub}</p>
+                  <p className="mt-3 text-sm text-muted-foreground text-center md:text-left max-w-2xl mx-auto md:mx-0">{data.showreel.sub}</p>
                 )}
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {data.showreel.items.slice(0, 8).map((it, i) => (
@@ -353,7 +353,7 @@ const ToolPage = () => {
             };
             return (
               <section key="specs" className="max-w-3xl mx-auto px-4 py-12">
-                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
+                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.specs.heading}</h2>
                 <div className="flex flex-col">
                   {items.map((it, i) => (
                     <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
@@ -387,7 +387,7 @@ const ToolPage = () => {
           ) : null,
           comparisonTable: data.comparisonTable ? (
             <section key="comparisonTable" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.comparisonTable.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.comparisonTable.heading}</h2>
               <div className="overflow-x-auto -mx-4 px-4">
                 <table className="w-full min-w-[640px] text-sm">
                   <thead>
@@ -467,7 +467,7 @@ const ToolPage = () => {
                   return (
                     <div>
                       {withImg.length > 0 && (
-                        <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">Что ещё умеет</h3>
+                        <h3 className="text-xl md:text-2xl font-bold mb-6 text-center md:text-left">Что ещё умеет</h3>
                       )}
                       <div className={cn("grid grid-cols-1 gap-4", gridCols)}>
                         {noImg.map((b, i) => (
@@ -488,7 +488,7 @@ const ToolPage = () => {
           })() : null,
           tips: data.tips ? (
             <section key="tips" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.tips.heading}</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {data.tips.items.map((it, i) => (
                   <div
@@ -504,7 +504,7 @@ const ToolPage = () => {
           ) : null,
           useCases: data.useCases ? (
             <section key="useCases" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.useCases.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.useCases.heading}</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {data.useCases.items.map((it, i) => (
                   <div
@@ -520,9 +520,9 @@ const ToolPage = () => {
           ) : null,
           modelChips: data.modelChips ? (
             <section key="modelChips" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center">{data.modelChips.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center md:text-left">{data.modelChips.heading}</h2>
               {data.modelChips.sub && (
-                <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
+                <p className="text-muted-foreground text-center md:text-left mb-8 max-w-2xl mx-auto md:mx-0">{data.modelChips.sub}</p>
               )}
               {(() => {
                 const all = data.modelChips.models.filter((m) => (m.slug ? isPublished(m.slug) : true));
@@ -588,7 +588,7 @@ const ToolPage = () => {
           ) : null,
           howItWorks: data.howItWorks ? (
             <section key="howItWorks" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">
                 {data.howItWorks.title}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -621,7 +621,7 @@ const ToolPage = () => {
               const t = tools[0];
               return (
                 <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
-                  <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
+                  <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">Что делают на этой модели</h2>
                   <Link
                     to="/tools/$slug"
                     params={{ slug: t.slug }}
@@ -641,7 +641,7 @@ const ToolPage = () => {
             }
             return (
               <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
-                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
+                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">Что делают на этой модели</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {tools.map((t) => (
                     <Link
@@ -706,7 +706,7 @@ const ToolPage = () => {
 
       {showRelated && (
         <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Похожие инструменты</h2>
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">Похожие инструменты</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {related.map((r) => (
               <Link
