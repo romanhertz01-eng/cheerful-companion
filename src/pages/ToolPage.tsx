@@ -289,8 +289,15 @@ const ToolPage = () => {
               />
             )
           ) : null,
+          capabilityCards: data.capabilityCards ? (
+            <CapabilityCards
+              key="capabilityCards"
+              heading={data.capabilityCards.heading}
+              sub={data.capabilityCards.sub}
+              cards={data.capabilityCards.cards}
+            />
+          ) : null,
           audioShowreel: data.audioShowreel ? (
-            <AudioShowreel
             <AudioShowreel
               key="audioShowreel"
               heading={data.audioShowreel.heading}
@@ -660,7 +667,7 @@ const ToolPage = () => {
         const pilotModelOrder = [
           "showcaseStrip",
           "visualCards",
-          "showreel",
+          "capabilityCards",
           "gallery",
           "featureBlocks",
           "transformShowcase",
