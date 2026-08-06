@@ -66,7 +66,7 @@ function computePricingLabel(
 // Splits pricing into a small rate string (left of CTA) and a total credits label
 // that goes inside the "Генерировать · N кр" button. Reads the same inputs as
 // computePricingLabel — does not alter its output.
-function computePricingParts(
+export function computePricingParts(
   pricing: ToolPricing,
   selects: ToolSelects,
   selectIdx: number[],
