@@ -173,7 +173,7 @@ const ToolPage = () => {
         />
       )}
       {/* Hero with prompt bar */}
-      <div className="relative w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden min-h-[600px]">
         {data.heroVideo && (
           <HeroVideoBackground
             src={data.heroVideo.src}
@@ -181,7 +181,7 @@ const ToolPage = () => {
             overlay={data.heroVideo.overlay}
           />
         )}
-        <div className="relative z-10">
+        <div className={cn("relative z-10", data.heroVideo && "pb-32")}>
       <section className="relative overflow-hidden" style={data.heroVideo ? undefined : { background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
         {!data.heroVideo && (
           <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
@@ -190,7 +190,7 @@ const ToolPage = () => {
           <nav className={cn("flex items-center gap-1.5 text-[13px]", data.heroVideo ? "text-white/70" : "text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
             <Link to="/" className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Главная</Link>
             <ChevronRight className={cn("w-3 h-3", data.heroVideo && "text-white/40")} />
-            <Link to="/studios" className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Инструменты</Link>
+            <Link to="/studios" search={{ q: "" }} className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Инструменты</Link>
             <ChevronRight className={cn("w-3 h-3", data.heroVideo && "text-white/40")} />
             <span className={data.heroVideo ? "text-white" : "text-foreground/70"}>{data.heroTitle}</span>
           </nav>
@@ -224,7 +224,7 @@ const ToolPage = () => {
 
       {data.tool && (
         <div ref={workspaceRef}>
-          <ToolWorkspace data={data} />
+          <ToolWorkspace data={data} onVideo={!!data.heroVideo} />
         </div>
       )}
         </div>
