@@ -82,6 +82,16 @@ export interface ToolPageData {
       insetPosition?: 'bottom-left' | 'bottom-right' | 'top-right';
     }[];
   };
+  pricingBlock?: {
+    heading: string;
+    sub?: string;
+  };
+  ctaBanner?: {
+    title: string;
+    button: string;
+    image?: string;
+    video?: string;
+  };
   audioShowreel?: {
     heading: string;
     sub?: string;

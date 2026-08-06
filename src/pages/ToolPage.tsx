@@ -17,6 +17,8 @@ import { PromptAnswer } from "@/components/tool/PromptAnswer";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
 import { TransformShowcase } from "@/components/tool/TransformShowcase";
 import { ModelGallery } from "@/components/tool/ModelGallery";
+import { PricingBlock } from "@/components/tool/PricingBlock";
+import { CtaBanner } from "@/components/tool/CtaBanner";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -444,7 +446,6 @@ const ToolPage = () => {
           ) : null,
           featureBlocks: data.featureBlocks ? (() => {
             const withImg = data.featureBlocks.filter((b) => !!b.image);
-            const noImg = data.featureBlocks.filter((b) => !b.image);
             return (
               <section key="featureBlocks" className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
                 {withImg.map((b, i) => (
