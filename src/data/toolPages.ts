@@ -2353,8 +2353,9 @@ export const toolPages: ToolPageData[] = [
       images: ["/community/01.jpg", "/community/04.jpg", "/community/06.jpg", "/community/03.jpg", "/community/02.jpg", "/community/05.jpg", "/community/01.jpg", "/community/04.jpg"],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Seedance",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/01.jpg", label: "Пластика движения",
           prompt: "Девушка танцует в неоновом свете, плавные движения рук и корпуса, волосы следуют за движением, камера медленно кружит вокруг" },
@@ -2579,7 +2580,7 @@ export const toolPages: ToolPageData[] = [
     ],
     showreel: {
       heading: "Примеры сгенерированных изображений",
-      sub: "Разные стили из одного промпта",
+      sub: "Примеры генераций на этой модели",
       aspect: '1/1',
       items: [
         { image: "/community/01.jpg", label: "Фотореализм" },
