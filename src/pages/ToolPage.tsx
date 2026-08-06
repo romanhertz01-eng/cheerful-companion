@@ -202,7 +202,7 @@ const ToolPage = () => {
           <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
         )}
         <div className={cn("relative max-w-4xl mx-auto px-4", data.tool ? "pt-8 pb-5 md:pt-10 md:pb-6" : "pt-16 pb-14 md:pt-20 md:pb-16")}>
-          <nav className={cn("flex items-center gap-1.5 text-[13px]", data.heroVideo ? "inline-flex px-4 py-2 rounded-full bg-black/40 backdrop-blur-sm text-white/80" : "text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
+          <nav className={cn("items-center gap-1.5 text-[13px]", data.heroVideo ? "inline-flex px-4 py-2 rounded-full bg-black/40 backdrop-blur-sm text-white/80" : "flex text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
             <Link to="/" className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Главная</Link>
             <ChevronRight className={cn("w-3 h-3", data.heroVideo ? "text-white/50" : "")} />
             <Link to="/studios" search={{ q: "" }} className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Инструменты</Link>
