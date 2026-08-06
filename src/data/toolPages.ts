@@ -71,6 +71,17 @@ export interface ToolPageData {
     aspect?: '2/1' | '16/9' | '4/3' | '1/1';
     items: { image: string; prompt?: string; label?: string }[];
   };
+  capabilityCards?: {
+    heading: string;
+    sub?: string;
+    cards: {
+      title: string;
+      desc: string;
+      image: string;
+      inset?: string;
+      insetPosition?: 'bottom-left' | 'bottom-right' | 'top-right';
+    }[];
+  };
   audioShowreel?: {
     heading: string;
     sub?: string;
