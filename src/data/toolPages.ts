@@ -94,6 +94,11 @@ export interface ToolPageData {
     }[];
   };
   showcaseStrip?: { images: string[] };
+  heroVideo?: {
+    src: string;
+    poster?: string;
+    overlay?: number;
+  };
   transformShowcase?: {
     heading: string;
     sub?: string;
@@ -3666,6 +3671,11 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "kling",
+    heroVideo: {
+      src: "/videos/kling-hero.mp4",
+      poster: "/community/01.jpg",
+      overlay: 0.6,
+    },
     gallery: {
       heading: "Создано с Kling",
       initialCount: 12,
