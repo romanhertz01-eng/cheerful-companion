@@ -96,7 +96,7 @@ const ToolPage = () => {
   const heroWrapRef = useRef<HTMLDivElement | null>(null);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
 
-  useHeaderOffset(heroWrapRef, Boolean(data.heroVideo));
+  useHeaderOffset(heroWrapRef, true);
 
   useEffect(() => {
     if (!data.tool) return;
