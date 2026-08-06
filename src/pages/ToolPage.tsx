@@ -351,6 +351,23 @@ const ToolPage = () => {
               initialCount={data.gallery.initialCount}
             />
           ) : null,
+          pricingBlock: data.pricingBlock ? (
+            <PricingBlock
+              key="pricingBlock"
+              heading={data.pricingBlock.heading}
+              sub={data.pricingBlock.sub}
+            />
+          ) : null,
+          ctaBanner: data.ctaBanner ? (
+            <CtaBanner
+              key="ctaBanner"
+              title={data.ctaBanner.title}
+              button={data.ctaBanner.button}
+              image={data.ctaBanner.image}
+              video={data.ctaBanner.video}
+              onClick={scrollToWorkspace}
+            />
+          ) : null,
           specs: data.specs ? (() => {
             const modelPage = data.kind === 'tool' ? getModelForTool(data) : null;
             const items = [...data.specs.items];
