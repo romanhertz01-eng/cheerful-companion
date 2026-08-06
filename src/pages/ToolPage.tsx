@@ -24,6 +24,28 @@ import { motion } from "framer-motion";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
 
+/** Measures how much chrome (promo bar + header) sits above the hero and
+ *  exposes it as --header-offset so the hero can fill the rest of the screen. */
+function useHeaderOffset(ref: React.RefObject<HTMLDivElement | null>, enabled: boolean) {
+  useEffect(() => {
+    if (!enabled) return;
+    const el = ref.current;
+    if (!el) return;
+    const update = () => {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      el.style.setProperty("--header-offset", `${Math.max(0, Math.round(top))}px`);
+    };
+    update();
+    window.addEventListener("resize", update);
+    const ro = new ResizeObserver(update);
+    if (document.body) ro.observe(document.body);
+    return () => {
+      window.removeEventListener("resize", update);
+      ro.disconnect();
+    };
+  }, [ref, enabled]);
+}
+
 function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; poster?: string; overlay?: number }) {
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -190,7 +212,7 @@ const ToolPage = () => {
         />
       )}
       {/* Hero with prompt bar */}
-      <div className="relative w-full overflow-hidden min-h-[520px] md:min-h-[calc(100vh-var(--header-offset,180px))]">
+      <div ref={heroWrapRef} className="relative w-full overflow-hidden min-h-[520px] md:min-h-[calc(100vh-var(--header-offset,180px))]">
         {data.heroVideo && (
           <HeroVideoBackground
             src={data.heroVideo.src}
