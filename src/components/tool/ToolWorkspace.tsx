@@ -700,6 +700,7 @@ function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?:
                       value={Math.max(0, voices.indexOf(voice))}
                       onChange={(i) => setVoice(voices[i])}
                       variant="inline"
+                      onVideo={onVideo}
                     />
                   );
                 }
@@ -720,6 +721,7 @@ function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?:
                         })
                       }
                       variant="inline"
+                      onVideo={onVideo}
                     />
                   );
                 });
@@ -743,7 +745,7 @@ function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?:
                     )}
                     {inlineItems.map((node, idx) => (
                       <div key={idx} className="flex items-center gap-1">
-                        <span className="h-4 w-px bg-border/80" aria-hidden />
+                        {!onVideo && <span className="h-4 w-px bg-border/80" aria-hidden />}
                         {node}
                       </div>
                     ))}
