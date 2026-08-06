@@ -45,6 +45,7 @@
 
 /* ═══ ERA2 LIGHT THEME — warm beige ═══ */
 :root {
+  --header-offset: 180px;
   --background: 30 28% 95%;
   --foreground: 20 24% 7%;
   --card: 30 30% 98%;
