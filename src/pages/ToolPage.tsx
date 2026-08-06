@@ -600,8 +600,9 @@ const ToolPage = () => {
           })() : null,
         };
 
-        // Пилот широкого шаблона: только модельная страница /tools/kling
-        const isWidePilot = data.kind === "model" && data.slug === "kling";
+        // Широкий шаблон: модельные страницы видео
+        const wideSlugs = ["kling", "sora", "veo", "seedance", "hailuo", "runway", "wan", "heygen"];
+        const isWidePilot = data.kind === "model" && wideSlugs.includes(data.slug);
         const pilotModelOrder = [
           "showcaseStrip",
           "visualCards",
