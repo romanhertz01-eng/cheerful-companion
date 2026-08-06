@@ -750,20 +750,14 @@ const ToolPage = () => {
           )}
           aria-hidden={!showFloatingBar}
         >
-          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
-            <span className="hidden md:block flex-1 truncate text-sm text-muted-foreground">
-              {data.tool.textPlaceholder ?? "Опишите задачу…"}
-            </span>
-            <span className="md:hidden flex-1" />
-            <span className="border border-border rounded-full px-3 py-1 text-xs text-muted-foreground whitespace-nowrap">
-              {data.modelName}
-            </span>
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-center">
             <button
               type="button"
               onClick={scrollToWorkspace}
-              className="gradient-accent text-white rounded-full px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
+              className="h-10 px-5 rounded-full font-semibold text-white transition-opacity hover:opacity-90 whitespace-nowrap"
+              style={{ background: "hsl(var(--primary))" }}
             >
-              Генерировать
+              Генерировать{stickyPriceLabel ? ` · ${stickyPriceLabel}` : ""}
             </button>
           </div>
         </div>
