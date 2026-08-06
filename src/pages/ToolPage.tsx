@@ -8,7 +8,7 @@ import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, get
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
-import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
+import { ToolWorkspace, computePricingParts } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
 import { CapabilityCards } from "@/components/tool/CapabilityCards";
