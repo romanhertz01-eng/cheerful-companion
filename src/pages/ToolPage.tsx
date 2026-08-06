@@ -681,11 +681,11 @@ const ToolPage = () => {
           "specs",
           "comparisonTable",
           "tips",
-          "useCases",
           "howItWorks",
           "audioShowreel",
           "promptAnswer",
-          "bigStat",
+          "pricingBlock",
+          "ctaBanner",
         ];
         const baseModelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
         const modelOrder = isWidePilot ? pilotModelOrder : baseModelOrder;
