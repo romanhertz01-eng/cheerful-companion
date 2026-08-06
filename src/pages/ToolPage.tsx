@@ -21,6 +21,46 @@ import { motion } from "framer-motion";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
 
+function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; poster?: string; overlay?: number }) {
+  const [reduceMotion, setReduceMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduceMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduceMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return (
+    <>
+      {reduceMotion ? (
+        poster ? (
+          <img
+            src={poster}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : null
+      ) : (
+        <video
+          src={src}
+          poster={poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      )}
+      <div className="absolute inset-0" style={{ background: `rgba(0,0,0,${overlay})` }} />
+    </>
+  );
+}
+
 function truncate(s: string, n: number) {
   return s.length > n ? `${s.slice(0, n).trimEnd()}…` : s;
 }
