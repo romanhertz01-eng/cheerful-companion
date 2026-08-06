@@ -9,7 +9,7 @@ interface PricingBlockProps {
 }
 
 export function PricingBlock({ heading, sub }: PricingBlockProps) {
-  const shown = plans.filter((p) => !p.enterprise).slice(0, 4);
+  const shown = plans.filter((p) => !p.enterprise).slice(0, 3);
 
   return (
     <section className="max-w-[1360px] mx-auto px-4 py-16">
@@ -20,7 +20,7 @@ export function PricingBlock({ heading, sub }: PricingBlockProps) {
         </p>
       )}
 
-      <div className="mt-12 grid gap-5 md:grid-cols-4">
+      <div className="mt-12 grid gap-5 md:grid-cols-3">
         {shown.map((plan) => {
           const price =
             plan.monthPrice === null
@@ -32,10 +32,18 @@ export function PricingBlock({ heading, sub }: PricingBlockProps) {
           return (
             <div
               key={plan.id}
-              className="relative rounded-2xl border border-border bg-card p-6 flex flex-col"
+              className={cn(
+                "relative rounded-2xl border bg-card p-6 flex flex-col",
+                plan.highlight ? "border-primary shadow-[0_0_30px_-12px_hsl(var(--primary))]" : "border-border"
+              )}
             >
               {plan.badge && (
-                <span className="absolute top-4 right-4 text-[11px] px-2 py-0.5 rounded-full bg-primary/15 text-primary">
+                <span className={cn(
+                    "absolute top-4 right-4 text-[11px] px-2 py-0.5 rounded-full font-semibold uppercase tracking-wide",
+                    plan.badge.tone === "accent"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground"
+                  )}>
                   {plan.badge.text}
                 </span>
               )}
@@ -47,6 +55,10 @@ export function PricingBlock({ heading, sub }: PricingBlockProps) {
                   <span className="text-xs text-muted-foreground">/мес</span>
                 )}
               </div>
+
+              <p className="mt-2 text-sm text-muted-foreground">
+                {plan.credits} кредитов{plan.creditsNote ? ` ${plan.creditsNote}` : ""}
+              </p>
 
               <ul className="mt-5 flex flex-col gap-2">
                 {plan.features.filter((f) => !f.negative).slice(0, 4).map((f) => (
@@ -67,7 +79,7 @@ export function PricingBlock({ heading, sub }: PricingBlockProps) {
                       : "border border-border"
                   )}
                 >
-                  Выбрать
+                  Выбрать план
                 </Link>
               </div>
             </div>
