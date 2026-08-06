@@ -101,18 +101,6 @@ export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShow
           })}
         </div>
       </div>
-
-      {active.prompt && (
-        <div className="mt-5 max-w-3xl mx-auto rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4">
-          {active.label && (
-            <div className="font-semibold text-base mb-1">{active.label}</div>
-          )}
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-2">
-            Промпт
-          </div>
-          <p className="text-sm leading-relaxed">{active.prompt}</p>
-        </div>
-      )}
     </section>
   );
 }
