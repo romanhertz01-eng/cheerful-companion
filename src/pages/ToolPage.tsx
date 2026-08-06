@@ -43,7 +43,7 @@ function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; post
             src={poster}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
         ) : null
       ) : (
@@ -56,10 +56,10 @@ function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; post
           playsInline
           preload="metadata"
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/95" />
     </>
   );
 }
@@ -190,7 +190,7 @@ const ToolPage = () => {
         />
       )}
       {/* Hero with prompt bar */}
-      <div className="relative w-full overflow-hidden min-h-[600px]">
+      <div className="relative w-full overflow-hidden min-h-[520px] md:min-h-[calc(100vh-var(--header-offset,180px))]">
         {data.heroVideo && (
           <HeroVideoBackground
             src={data.heroVideo.src}
