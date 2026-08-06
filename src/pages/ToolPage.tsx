@@ -93,7 +93,10 @@ function truncate(s: string, n: number) {
 const ToolPage = () => {
   const { data } = toolRouteApi.useLoaderData() as { data: ToolPageData };
   const workspaceRef = useRef<HTMLDivElement | null>(null);
+  const heroWrapRef = useRef<HTMLDivElement | null>(null);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
+
+  useHeaderOffset(heroWrapRef, Boolean(data.heroVideo));
 
   useEffect(() => {
     if (!data.tool) return;
