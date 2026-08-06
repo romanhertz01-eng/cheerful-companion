@@ -173,21 +173,32 @@ const ToolPage = () => {
         />
       )}
       {/* Hero with prompt bar */}
-      <section className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
+      <div className="relative w-full overflow-hidden">
+        {data.heroVideo && (
+          <HeroVideoBackground
+            src={data.heroVideo.src}
+            poster={data.heroVideo.poster}
+            overlay={data.heroVideo.overlay}
+          />
+        )}
+        <div className="relative z-10">
+      <section className="relative overflow-hidden" style={data.heroVideo ? undefined : { background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
+        {!data.heroVideo && (
+          <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
+        )}
         <div className={cn("relative max-w-4xl mx-auto px-4", data.tool ? "pt-8 pb-5 md:pt-10 md:pb-6" : "pt-16 pb-14 md:pt-20 md:pb-16")}>
-          <nav className={cn("flex items-center gap-1.5 text-[13px] text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
-            <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link to="/studios" className="hover:text-foreground transition-colors">Инструменты</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span className="text-foreground/70">{data.heroTitle}</span>
+          <nav className={cn("flex items-center gap-1.5 text-[13px]", data.heroVideo ? "text-white/70" : "text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
+            <Link to="/" className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Главная</Link>
+            <ChevronRight className={cn("w-3 h-3", data.heroVideo && "text-white/40")} />
+            <Link to="/studios" className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Инструменты</Link>
+            <ChevronRight className={cn("w-3 h-3", data.heroVideo && "text-white/40")} />
+            <span className={data.heroVideo ? "text-white" : "text-foreground/70"}>{data.heroTitle}</span>
           </nav>
 
           {!data.tool && (
             <>
-              <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5">{data.heroTitle}</h1>
-              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-[640px] mb-10">{data.heroDescription}</p>
+              <h1 className={cn("text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5", data.heroVideo && "text-white")}>{data.heroTitle}</h1>
+              <p className={cn("text-sm md:text-base leading-relaxed max-w-[640px] mb-10", data.heroVideo ? "text-white/80" : "text-muted-foreground")}>{data.heroDescription}</p>
 
               {/* Prompt bar */}
               <div className="bg-card border border-border rounded-2xl p-5 md:p-6 max-w-2xl">
@@ -216,6 +227,8 @@ const ToolPage = () => {
           <ToolWorkspace data={data} />
         </div>
       )}
+        </div>
+      </div>
 
       {(() => {
         const sections: Record<string, React.ReactNode> = {
