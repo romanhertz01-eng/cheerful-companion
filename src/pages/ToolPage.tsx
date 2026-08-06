@@ -24,6 +24,28 @@ import { motion } from "framer-motion";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
 
+/** Measures how much chrome (promo bar + header) sits above the hero and
+ *  exposes it as --header-offset so the hero can fill the rest of the screen. */
+function useHeaderOffset(ref: React.RefObject<HTMLDivElement | null>, enabled: boolean) {
+  useEffect(() => {
+    if (!enabled) return;
+    const el = ref.current;
+    if (!el) return;
+    const update = () => {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      el.style.setProperty("--header-offset", `${Math.max(0, Math.round(top))}px`);
+    };
+    update();
+    window.addEventListener("resize", update);
+    const ro = new ResizeObserver(update);
+    if (document.body) ro.observe(document.body);
+    return () => {
+      window.removeEventListener("resize", update);
+      ro.disconnect();
+    };
+  }, [ref, enabled]);
+}
+
 function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; poster?: string; overlay?: number }) {
   const [reduceMotion, setReduceMotion] = useState(false);
 
@@ -43,7 +65,7 @@ function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; post
             src={poster}
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
         ) : null
       ) : (
@@ -56,10 +78,10 @@ function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; post
           playsInline
           preload="metadata"
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/75" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/45 to-black/95" />
     </>
   );
 }
@@ -71,7 +93,10 @@ function truncate(s: string, n: number) {
 const ToolPage = () => {
   const { data } = toolRouteApi.useLoaderData() as { data: ToolPageData };
   const workspaceRef = useRef<HTMLDivElement | null>(null);
+  const heroWrapRef = useRef<HTMLDivElement | null>(null);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
+
+  useHeaderOffset(heroWrapRef, Boolean(data.heroVideo));
 
   useEffect(() => {
     if (!data.tool) return;
@@ -190,7 +215,7 @@ const ToolPage = () => {
         />
       )}
       {/* Hero with prompt bar */}
-      <div className="relative w-full overflow-hidden min-h-[600px]">
+      <div ref={heroWrapRef} className="relative w-full overflow-hidden min-h-[520px] md:min-h-[calc(100vh-var(--header-offset,180px))]">
         {data.heroVideo && (
           <HeroVideoBackground
             src={data.heroVideo.src}
