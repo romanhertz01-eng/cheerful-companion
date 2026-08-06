@@ -291,6 +291,7 @@ const ToolPage = () => {
           ) : null,
           audioShowreel: data.audioShowreel ? (
             <AudioShowreel
+            <AudioShowreel
               key="audioShowreel"
               heading={data.audioShowreel.heading}
               sub={data.audioShowreel.sub}
