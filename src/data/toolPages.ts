@@ -82,6 +82,16 @@ export interface ToolPageData {
       insetPosition?: 'bottom-left' | 'bottom-right' | 'top-right';
     }[];
   };
+  pricingBlock?: {
+    heading: string;
+    sub?: string;
+  };
+  ctaBanner?: {
+    title: string;
+    button: string;
+    image?: string;
+    video?: string;
+  };
   audioShowreel?: {
     heading: string;
     sub?: string;
@@ -2269,6 +2279,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedance",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте видео\nна Seedance прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/01.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Seedance",
       sub: "Что чаще всего делают на этой модели",
@@ -3318,6 +3337,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sora",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте видео\nна Sora прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/03.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Sora",
       sub: "Что чаще всего делают на этой модели",
@@ -3514,6 +3542,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "veo",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте видео\nна Veo прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/02.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Veo",
       sub: "Что чаще всего делают на этой модели",
@@ -3711,6 +3748,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "kling",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте видео\nна Kling прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/videos/kling/kling-01.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Kling",
       sub: "Что чаще всего делают на этой модели",
@@ -4896,6 +4942,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "hailuo",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Оживляйте фото\nна Hailuo прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/05.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Hailuo",
       sub: "Что чаще всего делают на этой модели",
@@ -5083,6 +5138,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "runway",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте видео\nна Runway прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/03.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Runway",
       sub: "Что чаще всего делают на этой модели",
@@ -5256,6 +5320,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "wan",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте видео\nна Wan прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/02.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария Wan",
       sub: "Что чаще всего делают на этой модели",
@@ -5420,6 +5493,15 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "heygen",
+    pricingBlock: {
+      heading: "Тарифы ЭРА2",
+      sub: "Одна подписка на все модели каталога — оплата в рублях, без VPN",
+    },
+    ctaBanner: {
+      title: "Создавайте аватаров\nна HeyGen прямо сейчас",
+      button: "Начать бесплатно",
+      image: "/community/01.jpg",
+    },
     capabilityCards: {
       heading: "Три сценария HeyGen",
       sub: "Что чаще всего делают на этой модели",

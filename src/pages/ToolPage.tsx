@@ -17,6 +17,8 @@ import { PromptAnswer } from "@/components/tool/PromptAnswer";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
 import { TransformShowcase } from "@/components/tool/TransformShowcase";
 import { ModelGallery } from "@/components/tool/ModelGallery";
+import { PricingBlock } from "@/components/tool/PricingBlock";
+import { CtaBanner } from "@/components/tool/CtaBanner";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -349,6 +351,23 @@ const ToolPage = () => {
               initialCount={data.gallery.initialCount}
             />
           ) : null,
+          pricingBlock: data.pricingBlock ? (
+            <PricingBlock
+              key="pricingBlock"
+              heading={data.pricingBlock.heading}
+              sub={data.pricingBlock.sub}
+            />
+          ) : null,
+          ctaBanner: data.ctaBanner ? (
+            <CtaBanner
+              key="ctaBanner"
+              title={data.ctaBanner.title}
+              button={data.ctaBanner.button}
+              image={data.ctaBanner.image}
+              video={data.ctaBanner.video}
+              onClick={scrollToWorkspace}
+            />
+          ) : null,
           specs: data.specs ? (() => {
             const modelPage = data.kind === 'tool' ? getModelForTool(data) : null;
             const items = [...data.specs.items];
@@ -444,7 +463,6 @@ const ToolPage = () => {
           ) : null,
           featureBlocks: data.featureBlocks ? (() => {
             const withImg = data.featureBlocks.filter((b) => !!b.image);
-            const noImg = data.featureBlocks.filter((b) => !b.image);
             return (
               <section key="featureBlocks" className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
                 {withImg.map((b, i) => (
@@ -471,32 +489,6 @@ const ToolPage = () => {
                     </div>
                   </div>
                 ))}
-                {noImg.length >= 2 && (() => {
-                  const n = noImg.length;
-                  const gridCols =
-                    n === 2 ? "md:grid-cols-2" :
-                    n === 3 ? "md:grid-cols-3" :
-                    n === 4 ? "md:grid-cols-2" :
-                    "md:grid-cols-3";
-                  return (
-                    <div>
-                      {withImg.length > 0 && (
-                        <h3 className="text-xl md:text-2xl font-bold mb-6 text-center md:text-left">Что ещё умеет</h3>
-                      )}
-                      <div className={cn("grid grid-cols-1 gap-4", gridCols)}>
-                        {noImg.map((b, i) => (
-                          <div
-                            key={`txt-${i}`}
-                            className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors flex flex-col h-full"
-                          >
-                            <h4 className="font-semibold mb-1">{b.title}</h4>
-                            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-4">{b.desc}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                })()}
               </section>
             );
           })() : null,
@@ -689,11 +681,11 @@ const ToolPage = () => {
           "specs",
           "comparisonTable",
           "tips",
-          "useCases",
           "howItWorks",
           "audioShowreel",
           "promptAnswer",
-          "bigStat",
+          "pricingBlock",
+          "ctaBanner",
         ];
         const baseModelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
         const modelOrder = isWidePilot ? pilotModelOrder : baseModelOrder;
