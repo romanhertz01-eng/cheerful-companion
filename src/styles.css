@@ -447,3 +447,35 @@ body:not(.dark) {
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom);
 }
+
+/* Пилот широкого шаблона модельной страницы (/tools/kling) */
+.tool-wide .max-w-6xl,
+.tool-wide .max-w-5xl {
+  max-width: 1360px;
+}
+.tool-wide .max-w-4xl {
+  max-width: 1100px;
+}
+.tool-wide .max-w-3xl {
+  max-width: 900px;
+}
+.tool-wide > div > section,
+.tool-wide > div > * > section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+/* Витрина: более крупные карточки */
+.tool-wide .no-scrollbar > div {
+  height: 280px;
+}
+@media (min-width: 768px) {
+  .tool-wide .no-scrollbar > div {
+    height: 400px;
+  }
+}
+/* Мозаика работ: 5 колонок на широком экране */
+@media (min-width: 1024px) {
+  .tool-wide .columns-2 {
+    column-count: 5;
+  }
+}
