@@ -60,7 +60,7 @@ export function PopularToolsSection() {
         {TOOLS.map(({ Icon, title, desc, to }) => (
           <Link
             key={to}
-            to={to}
+            to={to as string}
             className="group rounded-2xl border p-5 transition-all"
             style={{
               backgroundColor: "hsl(var(--card))",
