@@ -267,7 +267,6 @@ export const toolPages: ToolPageData[] = [
     showreel: {
       heading: "Примеры оживших фото",
       sub: "Оживление фотографий: до/после",
-      aspect: '16/9',
       items: [
         { image: "/community/01.jpg", label: "Портрет ожил" },
         { image: "/community/02.jpg", label: "Семейный архив" },
@@ -2739,7 +2738,6 @@ export const toolPages: ToolPageData[] = [
     showreel: {
       heading: "Примеры сгенерированных видео",
       sub: "Кадры разных моделей",
-      aspect: '16/9',
       items: [
         { image: "/community/05.jpg", label: "Кинокадр" },
         { image: "/community/06.jpg", label: "Анимация" },
@@ -3157,7 +3155,6 @@ export const toolPages: ToolPageData[] = [
     showreel: {
       heading: "Примеры: аватар говорит",
       sub: "Аватары, которые говорят",
-      aspect: '16/9',
       items: [
         { image: "/community/04.jpg", label: "Ведущий" },
         { image: "/community/02.jpg", label: "Учитель" },
@@ -3301,7 +3298,6 @@ export const toolPages: ToolPageData[] = [
     showreel: {
       heading: "Примеры: товар в движении",
       sub: "Товар в движении для карточки",
-      aspect: '16/9',
       items: [
         { image: "/community/06.jpg", label: "Крутится 360°" },
         { image: "/community/02.jpg", label: "Свет играет" },
@@ -3417,8 +3413,9 @@ export const toolPages: ToolPageData[] = [
       ],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Sora",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/03.jpg", label: "Кинематографичный кадр",
           prompt: "Ночной город сверху, камера опускается между небоскрёбами к освещённой улице, глубина резкости, киношная цветокоррекция" },
@@ -3613,8 +3610,9 @@ export const toolPages: ToolPageData[] = [
       ],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Veo",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/02.jpg", label: "Пейзаж со звуком",
           prompt: "Горная долина на рассвете, ветер в траве, шум ветра и пение птиц в кадре, камера медленно панорамирует слева направо" },
@@ -3850,8 +3848,9 @@ export const toolPages: ToolPageData[] = [
       { title: "Из России — без обходных путей", desc: "Официальный Kling требует зарубежной регистрации. В ЭРА2 вся линейка доступна из браузера: промпты на русском, оплата картой или СБП, история генераций в личном кабинете, кредиты списываются только за фактические запуски.", image: "/community/07.jpg", cta: "Запустить генерацию" },
     ],
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Kling",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/01.jpg", label: "Портрет в неоне",
           prompt: "Девушка в неоновом свете, розовые и фиолетовые лампы по бокам кадра, медленный наезд камеры, волосы слегка колышутся" },
@@ -4983,8 +4982,9 @@ export const toolPages: ToolPageData[] = [
       images: ["/community/05.jpg", "/community/02.jpg", "/community/01.jpg", "/community/04.jpg", "/community/06.jpg", "/community/03.jpg", "/community/05.jpg", "/community/02.jpg"],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Hailuo",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/05.jpg", label: "Оживление статики",
           prompt: "Космическая туманность оживает: облака газа начинают медленно двигаться, свет пульсирует изнутри" },
@@ -5171,8 +5171,9 @@ export const toolPages: ToolPageData[] = [
       images: ["/community/03.jpg", "/community/01.jpg", "/community/05.jpg", "/community/04.jpg", "/community/06.jpg", "/community/02.jpg", "/community/03.jpg", "/community/01.jpg"],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Runway",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/03.jpg", label: "Рекламный кадр", prompt: "Ночная улица с неоновыми вывесками, камера едет вперёд на уровне глаз, мокрый асфальт отражает свет, кинематографичная цветокоррекция" },
         { image: "/community/01.jpg", label: "Портрет в свете", prompt: "Крупный план девушки в неоновом освещении, лёгкий поворот головы, розовые и фиолетовые блики на коже" },
@@ -5343,8 +5344,9 @@ export const toolPages: ToolPageData[] = [
       images: ["/community/02.jpg", "/community/05.jpg", "/community/04.jpg", "/community/01.jpg", "/community/03.jpg", "/community/06.jpg", "/community/02.jpg", "/community/05.jpg"],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на Wan",
-      sub: "Шесть примеров с промптами, которые их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/02.jpg", label: "Пейзаж", prompt: "Горы под звёздным небом, облака медленно плывут. Негативный промпт: люди, здания, дороги" },
         { image: "/community/04.jpg", label: "Абстракция", prompt: "Красный дым закручивается в чёрном пространстве. Негативный промпт: лица, текст, логотипы" },
@@ -5507,8 +5509,9 @@ export const toolPages: ToolPageData[] = [
       images: ["/community/01.jpg", "/community/03.jpg", "/community/06.jpg", "/community/02.jpg", "/community/05.jpg", "/community/04.jpg", "/community/01.jpg", "/community/03.jpg"],
     },
     showreel: {
+      aspect: '16/9',
       heading: "Что получается на HeyGen",
-      sub: "Шесть примеров с задачами, для которых их создали",
+      sub: "Примеры генераций на этой модели",
       items: [
         { image: "/community/01.jpg", label: "Обучающий ролик", prompt: "Портретное фото преподавателя + текст урока. Аватар произносит материал глядя в камеру, естественные паузы между смысловыми блоками" },
         { image: "/community/03.jpg", label: "Приветствие для сайта", prompt: "Фото основателя + короткая приветственная речь для главной страницы, формат 16:9" },
