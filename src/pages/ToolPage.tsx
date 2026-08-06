@@ -11,6 +11,7 @@ import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
+import { CapabilityCards } from "@/components/tool/CapabilityCards";
 import { AudioShowreel } from "@/components/tool/AudioShowreel";
 import { PromptAnswer } from "@/components/tool/PromptAnswer";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
@@ -288,6 +289,14 @@ const ToolPage = () => {
                 items={data.showreel.items}
               />
             )
+          ) : null,
+          capabilityCards: data.capabilityCards ? (
+            <CapabilityCards
+              key="capabilityCards"
+              heading={data.capabilityCards.heading}
+              sub={data.capabilityCards.sub}
+              cards={data.capabilityCards.cards}
+            />
           ) : null,
           audioShowreel: data.audioShowreel ? (
             <AudioShowreel
@@ -659,7 +668,7 @@ const ToolPage = () => {
         const pilotModelOrder = [
           "showcaseStrip",
           "visualCards",
-          "showreel",
+          "capabilityCards",
           "gallery",
           "featureBlocks",
           "transformShowcase",
