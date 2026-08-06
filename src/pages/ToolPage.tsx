@@ -155,7 +155,7 @@ const ToolPage = () => {
     ],
   };
   const related = getRelatedTools(data.slug);
-  const showRelated = related.length >= 3;
+  const showRelated = data.kind === 'tool' && related.length >= 3;
 
   const minPaidPrice = Math.min(
     ...plans
