@@ -21,9 +21,9 @@ export function PromptAnswer({ heading, sub, items }: Props) {
 
   return (
     <section className="max-w-5xl mx-auto px-4 py-12">
-      <h2 className="text-2xl md:text-[32px] font-bold text-center">{heading}</h2>
+      <h2 className="text-2xl md:text-[32px] font-bold text-center md:text-left">{heading}</h2>
       {sub ? (
-        <p className="mt-3 text-sm text-muted-foreground text-center">{sub}</p>
+        <p className="mt-3 text-sm text-muted-foreground text-center md:text-left">{sub}</p>
       ) : null}
 
       {items.length > 1 ? (

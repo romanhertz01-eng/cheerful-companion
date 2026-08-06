@@ -37,9 +37,9 @@ export function AudioShowreel({ heading, sub, textLabel = "Озвученный 
 
   return (
     <section className="max-w-4xl mx-auto px-4 py-12">
-      <h2 className="text-2xl md:text-3xl font-bold text-center">{heading}</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-center md:text-left">{heading}</h2>
       {sub && (
-        <p className="mt-3 text-sm text-muted-foreground text-center">{sub}</p>
+        <p className="mt-3 text-sm text-muted-foreground text-center md:text-left">{sub}</p>
       )}
 
       <div className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
