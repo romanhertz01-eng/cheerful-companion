@@ -681,7 +681,7 @@ const ToolPage = () => {
         const isWidePilot = data.kind === "model" && wideSlugs.includes(data.slug);
         const pilotModelOrder = [
           "capabilityCards",
-          "gallery",
+          "showreel",
           "featureBlocks",
           "transformShowcase",
           "modelChips",
