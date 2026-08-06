@@ -11,6 +11,7 @@ import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
+import { CapabilityCards } from "@/components/tool/CapabilityCards";
 import { AudioShowreel } from "@/components/tool/AudioShowreel";
 import { PromptAnswer } from "@/components/tool/PromptAnswer";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
