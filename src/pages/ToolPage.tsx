@@ -600,11 +600,44 @@ const ToolPage = () => {
           })() : null,
         };
 
-        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
+        // Пилот широкого шаблона: только модельная страница /tools/kling
+        const isWidePilot = data.kind === "model" && data.slug === "kling";
+        const pilotModelOrder = [
+          "showcaseStrip",
+          "visualCards",
+          "showreel",
+          "gallery",
+          "featureBlocks",
+          "transformShowcase",
+          "modelChips",
+          "intro",
+          "specs",
+          "comparisonTable",
+          "tips",
+          "useCases",
+          "howItWorks",
+          "audioShowreel",
+          "promptAnswer",
+          "bigStat",
+        ];
+        const baseModelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
+        const modelOrder = isWidePilot ? pilotModelOrder : baseModelOrder;
         const toolOrder = ["intro", "showreel", "audioShowreel", "promptAnswer", "featureBlocks", "useCases", "howItWorks", "keyFeature", "specs", "modelChips"];
         const defaultOrder = data.kind === "model" ? modelOrder : toolOrder;
         // Optional per-page full override of section order (only affects pages that set it).
         const order: string[] = data.sectionOrder ?? defaultOrder;
+        if (isWidePilot) {
+          const rendered = order.filter((k) => sections[k]);
+          return (
+            <div className="tool-wide">
+              {rendered.map((k, i) => (
+                <div key={k} className={i % 2 === 0 ? "w-full bg-background" : "w-full bg-muted/30"}>
+                  {sections[k]}
+                </div>
+              ))}
+            </div>
+          );
+        }
         return <>{order.map((k) => sections[k])}</>;
       })()}
 
