@@ -94,6 +94,20 @@ const ToolPage = () => {
 
   const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
 
+  // Цена по умолчанию для липкого бара (та же логика, что в панели генерации).
+  const stickyPriceLabel = (() => {
+    const t = data.tool;
+    if (!t) return "";
+    if (t.pricing) {
+      const selects = t.selects ?? [];
+      const idx = selects.map((s) => s.defaultIndex ?? 0);
+      return computePricingParts(t.pricing, selects, idx, 0).total;
+    }
+    if (t.types?.length) return `${t.types[0].credits} кр`;
+    if (typeof t.credits === "number") return `${t.credits} кр`;
+    return "";
+  })();
+
   const faqForLd = data.faqItems ?? toolPageItems;
   const faqLd = {
     "@context": "https://schema.org",
