@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-type ShowreelItem = { image: string; prompt?: string; label?: string };
+type ShowreelItem = { image: string; video?: string; prompt?: string; label?: string };
 
 interface ModelShowreelProps {
   heading: string;
@@ -52,6 +52,20 @@ export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShow
       )}
 
       <div className={`mt-8 ${aspectClass} ${mediaMaxWidth} mx-auto w-full max-h-[520px] rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] relative`}>
+        {active.video ? (
+          <video
+            key={active.video}
+            src={active.video}
+            poster={active.image}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        ) : (
+          <>
         <img
           src={frontSrc}
           alt={active.label ?? heading}
@@ -75,6 +89,8 @@ export function ModelShowreel({ heading, sub, items, aspect = '2/1' }: ModelShow
             (frontOnTop ? "opacity-0" : "opacity-100")
           }
         />
+          </>
+        )}
       </div>
 
       <div className="mt-4 flex justify-center">
