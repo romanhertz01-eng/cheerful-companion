@@ -2259,6 +2259,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedance",
+    capabilityCards: {
+      heading: "Три сценария Seedance",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Пластика движения", desc: "Танцы, спорт, походка — движение выглядит снятым, а не нарисованным", image: "/community/01.jpg", inset: "/community/04.jpg", insetPosition: "bottom-left" },
+        { title: "Мультишот", desc: "Несколько планов в одном ролике без монтажа и склеек", image: "/community/06.jpg", inset: "/community/03.jpg", insetPosition: "bottom-right" },
+        { title: "Люди в кадре", desc: "Лица и руки держат форму при активном движении на всей длине", image: "/community/03.jpg", inset: "/community/05.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с Seedance",
       initialCount: 12,
@@ -3300,6 +3310,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sora",
+    capabilityCards: {
+      heading: "Три сценария Sora",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Кинематографичный кадр", desc: "Глубина, свет и композиция уровня продакшена по текстовому описанию", image: "/community/03.jpg", inset: "/community/02.jpg", insetPosition: "bottom-left" },
+        { title: "Сложные сцены", desc: "Несколько объектов и взаимодействий в одном кадре без потери связности", image: "/community/05.jpg", inset: "/community/04.jpg", insetPosition: "bottom-right" },
+        { title: "Физика движения", desc: "Инерция, ткань и жидкость ведут себя правдоподобно, а не приблизительно", image: "/community/04.jpg", inset: "/community/06.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с Sora",
       initialCount: 12,
@@ -3485,6 +3505,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "veo",
+    capabilityCards: {
+      heading: "Три сценария Veo",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Видео со звуком", desc: "Шумы, речь и музыка генерируются вместе с картинкой — без отдельной дорожки", image: "/community/02.jpg", inset: "/community/06.jpg", insetPosition: "bottom-left" },
+        { title: "Точное следование ТЗ", desc: "Модель делает то, что описано, без вольной трактовки деталей", image: "/community/04.jpg", inset: "/community/03.jpg", insetPosition: "bottom-right" },
+        { title: "Вертикаль для Reels", desc: "Формат 9:16 нативно, без обрезки горизонтального кадра", image: "/community/03.jpg", inset: "/community/01.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с Veo",
       initialCount: 12,
@@ -3671,6 +3701,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "kling",
+    capabilityCards: {
+      heading: "Три сценария Kling",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Видео из текста", desc: "Опишите сцену словами — модель построит кадр с движением камеры и объектов", image: "/community/03.jpg", inset: "/community/01.jpg", insetPosition: "bottom-left" },
+        { title: "Оживление фото", desc: "Загрузите снимок — Kling добавит естественное движение, сохранив композицию", image: "/community/01.jpg", inset: "/community/05.jpg", insetPosition: "bottom-right" },
+        { title: "Контроль траектории", desc: "Motion Control ведёт объект и камеру по заданному пути, а не наугад", image: "/community/06.jpg", inset: "/community/02.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     heroVideo: {
       src: "/videos/kling-hero.mp4",
       poster: "/community/01.jpg",
@@ -4845,6 +4885,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "hailuo",
+    capabilityCards: {
+      heading: "Три сценария Hailuo",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Фото в движение", desc: "Статичный кадр оживает: моргание, поворот головы, колышется одежда", image: "/community/01.jpg", inset: "/community/05.jpg", insetPosition: "bottom-left" },
+        { title: "Плавность без рывков", desc: "Движение остаётся ровным на всей длине ролика, без скачков и артефактов", image: "/community/05.jpg", inset: "/community/02.jpg", insetPosition: "bottom-right" },
+        { title: "Два режима", desc: "Standard для потока, Pro для финальных кадров — цена под задачу", image: "/community/02.jpg", inset: "/community/04.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с Hailuo",
       initialCount: 12,
@@ -5021,6 +5071,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "runway",
+    capabilityCards: {
+      heading: "Три сценария Runway",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Профессиональный кадр", desc: "Композиция и свет уровня рекламного продакшена", image: "/community/03.jpg", inset: "/community/01.jpg", insetPosition: "bottom-left" },
+        { title: "Aleph — правки видео", desc: "Заменить фон, убрать объект, изменить свет в уже готовом ролике", image: "/community/04.jpg", inset: "/community/06.jpg", insetPosition: "bottom-right" },
+        { title: "Быстрый Turbo", desc: "Клип 5 секунд от 100 кредитов — дешевле большинства флагманов", image: "/community/01.jpg", inset: "/community/02.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с Runway",
       initialCount: 12,
@@ -5183,6 +5243,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "wan",
+    capabilityCards: {
+      heading: "Три сценария Wan",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Негативный промпт", desc: "Укажите, чего в кадре быть не должно — модель исключит без перегенераций", image: "/community/04.jpg", inset: "/community/02.jpg", insetPosition: "bottom-left" },
+        { title: "Серийный контент", desc: "130 кредитов за секунду — можно делать поток роликов, а не единичные", image: "/community/02.jpg", inset: "/community/05.jpg", insetPosition: "bottom-right" },
+        { title: "Два разрешения", desc: "720p для потока, 1080p для финалов — переключение в один клик", image: "/community/05.jpg", inset: "/community/03.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с Wan",
       initialCount: 12,
@@ -5336,6 +5406,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "heygen",
+    capabilityCards: {
+      heading: "Три сценария HeyGen",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Аватар по одному фото", desc: "Не нужна студия и съёмка — достаточно портретного снимка", image: "/community/01.jpg", inset: "/community/03.jpg", insetPosition: "bottom-left" },
+        { title: "Русская артикуляция", desc: "Губы синхронны с русской речью, а не подогнаны под английскую", image: "/community/03.jpg", inset: "/community/06.jpg", insetPosition: "bottom-right" },
+        { title: "Серийные ролики", desc: "Один аватар, десять текстов — единый ведущий для регулярных выпусков", image: "/community/06.jpg", inset: "/community/02.jpg", insetPosition: "top-right" },
+      ],
+    },
+
     gallery: {
       heading: "Создано с HeyGen",
       initialCount: 12,
