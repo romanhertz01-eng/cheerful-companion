@@ -666,8 +666,6 @@ const ToolPage = () => {
         const wideSlugs = ["kling", "sora", "veo", "seedance", "hailuo", "runway", "wan", "heygen"];
         const isWidePilot = data.kind === "model" && wideSlugs.includes(data.slug);
         const pilotModelOrder = [
-          "showcaseStrip",
-          "visualCards",
           "capabilityCards",
           "gallery",
           "featureBlocks",
