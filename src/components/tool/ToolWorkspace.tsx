@@ -230,10 +230,10 @@ function ChipSelect({
   );
 }
 
-export function ToolWorkspace({ data }: { data: ToolPageData }) {
+export function ToolWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?: boolean }) {
   const tool = data.tool!;
   if (tool.layout === "row") {
-    return <RowWorkspace data={data} />;
+    return <RowWorkspace data={data} onVideo={onVideo} />;
   }
   const demoImage = tool.demoImage ?? "/examples/ozhivit-preview.jpg";
   const demoCaption = tool.demoCaption ?? "Пример результата";
@@ -522,7 +522,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
 export default ToolWorkspace;
 
-function RowWorkspace({ data }: { data: ToolPageData }) {
+function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?: boolean }) {
   const tool = data.tool!;
   const voices = tool.voices ?? [];
   const maxChars = tool.maxChars ?? 2000;
@@ -580,11 +580,21 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const totalLabel = pricingParts ? pricingParts.total : `${tool.credits} кр`;
 
   return (
-    <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
+    <section
+      className={onVideo ? "" : "border-y border-border"}
+      style={onVideo ? undefined : { background: "hsl(var(--card))" }}
+    >
       <div className="max-w-3xl mx-auto px-4 py-8">
-        <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight text-center mb-3">{data.heroTitle}</h1>
-        <p className="text-muted-foreground text-center max-w-[640px] mx-auto mb-8">{data.heroDescription}</p>
-        <div className="rounded-3xl border border-border bg-card text-card-foreground p-5 md:p-6 flex flex-col gap-4 shadow-lg shadow-black/5">
+        <h1 className={cn("text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight text-center mb-3", onVideo && "text-white")}>{data.heroTitle}</h1>
+        <p className={cn("text-center max-w-[640px] mx-auto mb-8", onVideo ? "text-white/80" : "text-muted-foreground")}>{data.heroDescription}</p>
+        <div
+          className={cn(
+            "rounded-3xl border p-5 md:p-6 flex flex-col gap-4 shadow-lg shadow-black/5",
+            onVideo
+              ? "ws-on-video bg-black/35 backdrop-blur-md border-white/15 text-white"
+              : "border-border bg-card text-card-foreground",
+          )}
+        >
           {tool.sampleUpload && (
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">{tool.sampleUpload.label}</label>
@@ -662,7 +672,10 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 value={value}
                 onChange={(e) => setText(e.target.value.slice(0, maxChars))}
                 placeholder={tool.textPlaceholder}
-                className="w-full h-full min-h-[72px] resize-none bg-transparent text-foreground placeholder:text-muted-foreground px-1 py-1 text-sm outline-none border-0"
+                className={cn(
+                  "w-full h-full min-h-[72px] resize-none bg-transparent px-1 py-1 text-sm outline-none border-0",
+                  onVideo ? "text-white placeholder:text-white/50" : "text-foreground placeholder:text-muted-foreground",
+                )}
               />
               <div className="absolute bottom-1 right-1 text-[11px] text-muted-foreground">
                 {value.length} / {maxChars}
