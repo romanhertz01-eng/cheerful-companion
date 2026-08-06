@@ -8,7 +8,7 @@ import { getRelatedTools, isPublished, getModelPriceLabel, getToolsForModel, get
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
-import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
+import { ToolWorkspace, computePricingParts } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
 import { CapabilityCards } from "@/components/tool/CapabilityCards";
@@ -93,6 +93,20 @@ const ToolPage = () => {
   };
 
   const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
+
+  // Цена по умолчанию для липкого бара (та же логика, что в панели генерации).
+  const stickyPriceLabel = (() => {
+    const t = data.tool;
+    if (!t) return "";
+    if (t.pricing) {
+      const selects = t.selects ?? [];
+      const idx = selects.map((s) => s.defaultIndex ?? 0);
+      return computePricingParts(t.pricing, selects, idx, 0).total;
+    }
+    if (t.types?.length) return `${t.types[0].credits} кр`;
+    if (typeof t.credits === "number") return `${t.credits} кр`;
+    return "";
+  })();
 
   const faqForLd = data.faqItems ?? toolPageItems;
   const faqLd = {
@@ -188,11 +202,11 @@ const ToolPage = () => {
           <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
         )}
         <div className={cn("relative max-w-4xl mx-auto px-4", data.tool ? "pt-8 pb-5 md:pt-10 md:pb-6" : "pt-16 pb-14 md:pt-20 md:pb-16")}>
-          <nav className={cn("flex items-center gap-1.5 text-[13px]", data.heroVideo ? "text-white/70" : "text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
+          <nav className={cn("items-center gap-1.5 text-[13px]", data.heroVideo ? "inline-flex px-4 py-2 rounded-full bg-black/40 backdrop-blur-sm text-white/80" : "flex text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
             <Link to="/" className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Главная</Link>
-            <ChevronRight className={cn("w-3 h-3", data.heroVideo && "text-white/40")} />
+            <ChevronRight className={cn("w-3 h-3", data.heroVideo ? "text-white/50" : "")} />
             <Link to="/studios" search={{ q: "" }} className={data.heroVideo ? "hover:text-white transition-colors" : "hover:text-foreground transition-colors"}>Инструменты</Link>
-            <ChevronRight className={cn("w-3 h-3", data.heroVideo && "text-white/40")} />
+            <ChevronRight className={cn("w-3 h-3", data.heroVideo ? "text-white/50" : "")} />
             <span className={data.heroVideo ? "text-white" : "text-foreground/70"}>{data.heroTitle}</span>
           </nav>
 
@@ -253,9 +267,9 @@ const ToolPage = () => {
           showreel: data.showreel ? (
             data.kind === 'tool' ? (
               <section key="showreel" className="max-w-5xl mx-auto px-4 py-12">
-                <h2 className="text-2xl md:text-[32px] font-bold text-center">{data.showreel.heading}</h2>
+                <h2 className="text-2xl md:text-[32px] font-bold text-center md:text-left">{data.showreel.heading}</h2>
                 {data.showreel.sub && (
-                  <p className="mt-3 text-sm text-muted-foreground text-center max-w-2xl mx-auto">{data.showreel.sub}</p>
+                  <p className="mt-3 text-sm text-muted-foreground text-center md:text-left max-w-2xl mx-auto md:mx-0">{data.showreel.sub}</p>
                 )}
                 <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   {data.showreel.items.slice(0, 8).map((it, i) => (
@@ -353,7 +367,7 @@ const ToolPage = () => {
             };
             return (
               <section key="specs" className="max-w-3xl mx-auto px-4 py-12">
-                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
+                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.specs.heading}</h2>
                 <div className="flex flex-col">
                   {items.map((it, i) => (
                     <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
@@ -387,7 +401,7 @@ const ToolPage = () => {
           ) : null,
           comparisonTable: data.comparisonTable ? (
             <section key="comparisonTable" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.comparisonTable.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.comparisonTable.heading}</h2>
               <div className="overflow-x-auto -mx-4 px-4">
                 <table className="w-full min-w-[640px] text-sm">
                   <thead>
@@ -467,7 +481,7 @@ const ToolPage = () => {
                   return (
                     <div>
                       {withImg.length > 0 && (
-                        <h3 className="text-xl md:text-2xl font-bold mb-6 text-center">Что ещё умеет</h3>
+                        <h3 className="text-xl md:text-2xl font-bold mb-6 text-center md:text-left">Что ещё умеет</h3>
                       )}
                       <div className={cn("grid grid-cols-1 gap-4", gridCols)}>
                         {noImg.map((b, i) => (
@@ -488,7 +502,7 @@ const ToolPage = () => {
           })() : null,
           tips: data.tips ? (
             <section key="tips" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.tips.heading}</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {data.tips.items.map((it, i) => (
                   <div
@@ -504,7 +518,7 @@ const ToolPage = () => {
           ) : null,
           useCases: data.useCases ? (
             <section key="useCases" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.useCases.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">{data.useCases.heading}</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {data.useCases.items.map((it, i) => (
                   <div
@@ -520,9 +534,9 @@ const ToolPage = () => {
           ) : null,
           modelChips: data.modelChips ? (
             <section key="modelChips" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center">{data.modelChips.heading}</h2>
+              <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center md:text-left">{data.modelChips.heading}</h2>
               {data.modelChips.sub && (
-                <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
+                <p className="text-muted-foreground text-center md:text-left mb-8 max-w-2xl mx-auto md:mx-0">{data.modelChips.sub}</p>
               )}
               {(() => {
                 const all = data.modelChips.models.filter((m) => (m.slug ? isPublished(m.slug) : true));
@@ -588,7 +602,7 @@ const ToolPage = () => {
           ) : null,
           howItWorks: data.howItWorks ? (
             <section key="howItWorks" className="max-w-5xl mx-auto px-4 py-12">
-              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">
                 {data.howItWorks.title}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -621,7 +635,7 @@ const ToolPage = () => {
               const t = tools[0];
               return (
                 <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
-                  <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
+                  <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">Что делают на этой модели</h2>
                   <Link
                     to="/tools/$slug"
                     params={{ slug: t.slug }}
@@ -641,7 +655,7 @@ const ToolPage = () => {
             }
             return (
               <section key="modelTools" className="max-w-5xl mx-auto px-4 py-12">
-                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Что делают на этой модели</h2>
+                <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">Что делают на этой модели</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   {tools.map((t) => (
                     <Link
@@ -666,8 +680,6 @@ const ToolPage = () => {
         const wideSlugs = ["kling", "sora", "veo", "seedance", "hailuo", "runway", "wan", "heygen"];
         const isWidePilot = data.kind === "model" && wideSlugs.includes(data.slug);
         const pilotModelOrder = [
-          "showcaseStrip",
-          "visualCards",
           "capabilityCards",
           "gallery",
           "featureBlocks",
@@ -706,7 +718,7 @@ const ToolPage = () => {
 
       {showRelated && (
         <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Похожие инструменты</h2>
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center md:text-left">Похожие инструменты</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {related.map((r) => (
               <Link
@@ -752,20 +764,14 @@ const ToolPage = () => {
           )}
           aria-hidden={!showFloatingBar}
         >
-          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
-            <span className="hidden md:block flex-1 truncate text-sm text-muted-foreground">
-              {data.tool.textPlaceholder ?? "Опишите задачу…"}
-            </span>
-            <span className="md:hidden flex-1" />
-            <span className="border border-border rounded-full px-3 py-1 text-xs text-muted-foreground whitespace-nowrap">
-              {data.modelName}
-            </span>
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-center">
             <button
               type="button"
               onClick={scrollToWorkspace}
-              className="gradient-accent text-white rounded-full px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
+              className="h-10 px-5 rounded-full font-semibold text-white transition-opacity hover:opacity-90 whitespace-nowrap"
+              style={{ background: "hsl(var(--primary))" }}
             >
-              Генерировать
+              Генерировать{stickyPriceLabel ? ` · ${stickyPriceLabel}` : ""}
             </button>
           </div>
         </div>

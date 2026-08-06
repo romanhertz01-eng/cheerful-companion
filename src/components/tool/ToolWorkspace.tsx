@@ -66,7 +66,7 @@ function computePricingLabel(
 // Splits pricing into a small rate string (left of CTA) and a total credits label
 // that goes inside the "Генерировать · N кр" button. Reads the same inputs as
 // computePricingLabel — does not alter its output.
-function computePricingParts(
+export function computePricingParts(
   pricing: ToolPricing,
   selects: ToolSelects,
   selectIdx: number[],
@@ -136,6 +136,7 @@ function ChipSelect({
   variant = "pill",
   icon: IconOverride,
   flagshipMark = false,
+  onVideo = false,
 }: {
   label: string;
   options: string[];
@@ -144,6 +145,7 @@ function ChipSelect({
   variant?: "pill" | "inline";
   icon?: React.ComponentType<{ size?: number; className?: string }>;
   flagshipMark?: boolean;
+  onVideo?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [dropUp, setDropUp] = useState(false);
@@ -186,13 +188,15 @@ function ChipSelect({
           "flex items-center gap-1.5 text-xs font-medium transition-colors",
           variant === "pill"
             ? "h-8 px-3 rounded-full border border-border bg-muted/60 text-foreground hover:bg-muted"
-            : "h-8 px-2 rounded-md text-foreground/85 hover:bg-muted/60"
+            : onVideo
+              ? "bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-lg text-white/90 hover:bg-black/55"
+              : "h-8 px-2 rounded-md text-foreground/85 hover:bg-muted/60"
         )}
       >
-        <Icon size={14} className="opacity-70 shrink-0" />
+        <Icon size={14} className={cn("shrink-0", variant === "inline" && onVideo ? "text-white/70" : "opacity-70")} />
         {showFlame && <span aria-hidden>🔥</span>}
         <span className="truncate max-w-[140px]">{current}</span>
-        <ChevronDown size={12} className="opacity-60" />
+        <ChevronDown size={12} className={cn(variant === "inline" && onVideo ? "text-white/60" : "opacity-60")} />
       </button>
       {open && (
         <div
@@ -696,6 +700,7 @@ function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?:
                       value={Math.max(0, voices.indexOf(voice))}
                       onChange={(i) => setVoice(voices[i])}
                       variant="inline"
+                      onVideo={onVideo}
                     />
                   );
                 }
@@ -716,6 +721,7 @@ function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?:
                         })
                       }
                       variant="inline"
+                      onVideo={onVideo}
                     />
                   );
                 });
@@ -739,7 +745,7 @@ function RowWorkspace({ data, onVideo = false }: { data: ToolPageData; onVideo?:
                     )}
                     {inlineItems.map((node, idx) => (
                       <div key={idx} className="flex items-center gap-1">
-                        <span className="h-4 w-px bg-border/80" aria-hidden />
+                        {!onVideo && <span className="h-4 w-px bg-border/80" aria-hidden />}
                         {node}
                       </div>
                     ))}

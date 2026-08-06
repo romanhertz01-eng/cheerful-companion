@@ -22,9 +22,9 @@ export function CapabilityCards({ heading, sub, cards }: CapabilityCardsProps) {
   if (!cards?.length) return null;
   return (
     <section className="max-w-[1360px] mx-auto px-4 py-16">
-      <h2 className="text-2xl md:text-[32px] font-bold text-center">{heading}</h2>
+      <h2 className="text-2xl md:text-[32px] font-bold text-center md:text-left">{heading}</h2>
       {sub && (
-        <p className="mt-3 text-sm text-muted-foreground text-center max-w-2xl mx-auto">{sub}</p>
+        <p className="mt-3 text-sm text-muted-foreground text-center md:text-left max-w-2xl mx-auto md:mx-0">{sub}</p>
       )}
 
       <div className="mt-12 grid gap-8 md:grid-cols-3">
