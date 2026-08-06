@@ -56,7 +56,7 @@ function HeroVideoBackground({ src, poster, overlay = 0.6 }: { src: string; post
           className="absolute inset-0 w-full h-full object-cover"
         />
       )}
-      <div className="absolute inset-0" style={{ background: `rgba(0,0,0,${overlay})` }} />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/75" />
     </>
   );
 }
