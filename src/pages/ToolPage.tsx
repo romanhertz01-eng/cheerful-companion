@@ -361,11 +361,12 @@ const ToolPage = () => {
               key="transformShowcase"
               heading={data.transformShowcase.heading}
               sub={data.transformShowcase.sub}
-              inputLabel={data.transformShowcase.inputLabel}
-              outputLabel={data.transformShowcase.outputLabel}
-              inputs={data.transformShowcase.inputs}
+              cta={data.transformShowcase.cta}
+              input={data.transformShowcase.input}
+              inputPrompt={data.transformShowcase.inputPrompt}
               outputs={data.transformShowcase.outputs}
-              prompt={data.transformShowcase.prompt}
+              outputCols={data.transformShowcase.outputCols}
+              onCtaClick={scrollToWorkspace}
             />
           ) : null,
           gallery: data.gallery ? (

@@ -1,89 +1,91 @@
+import { Sparkles } from "lucide-react";
+
 interface Props {
   heading: string;
   sub?: string;
-  inputLabel?: string;
-  outputLabel?: string;
-  inputs: string[];
+  cta?: string;
+  input: string;
+  inputPrompt?: string;
   outputs: string[];
-  prompt?: string;
+  outputCols?: 2 | 3;
+  onCtaClick?: () => void;
 }
 
 export function TransformShowcase({
   heading,
   sub,
-  inputLabel = "Исходное изображение",
-  outputLabel = "Выходное изображение",
-  inputs,
+  cta,
+  input,
+  inputPrompt,
   outputs,
-  prompt,
+  outputCols = 2,
+  onCtaClick,
 }: Props) {
-  const cardClass =
-    "w-[200px] aspect-[3/4] rounded-xl overflow-hidden border border-white/10 shrink-0";
-
   return (
-    <section className="max-w-6xl mx-auto px-4 py-12">
-      <h2 className="text-2xl md:text-[32px] font-bold text-center md:text-left">{heading}</h2>
+    <section className="max-w-[1360px] mx-auto px-4 py-16">
+      <h2 className="text-3xl md:text-[40px] font-bold text-center leading-tight">{heading}</h2>
       {sub && (
-        <p className="mt-3 text-center md:text-left text-sm text-muted-foreground max-w-2xl mx-auto md:mx-0">
+        <p className="mt-5 text-base text-muted-foreground text-center max-w-3xl mx-auto leading-relaxed">
           {sub}
         </p>
       )}
+      {cta && (
+        <div className="mt-8 flex justify-center">
+          <button
+            type="button"
+            onClick={onCtaClick}
+            className="h-12 px-8 rounded-full border border-border font-medium hover:bg-muted/60 transition-colors"
+          >
+            {cta}
+          </button>
+        </div>
+      )}
 
-      <div className="mt-10 flex flex-col md:flex-row md:items-center gap-4 md:gap-6 justify-center">
-        <div className="shrink-0">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-3">
-            {inputLabel}
+      <div className="mt-14 flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-2">
+        {/* ВХОД */}
+        <div className="relative w-full max-w-[480px] lg:w-[40%] shrink-0">
+          <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-border">
+            <img
+              src={input}
+              alt="Исходное изображение"
+              loading="lazy"
+              width={800}
+              height={1000}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            {inputPrompt && (
+              <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-black/70 backdrop-blur-sm border border-white/15 px-4 py-3 flex gap-3 items-start">
+                <Sparkles size={16} className="shrink-0 mt-0.5 text-white/80" />
+                <p className="text-sm text-white/90 leading-snug">{inputPrompt}</p>
+              </div>
+            )}
           </div>
-          {inputs.length > 1 ? (
-            <div className="flex gap-3">
-              {inputs.map((src, i) => (
-                <div key={i} className={cardClass}>
-                  <img
-                    src={src}
-                    alt={`${inputLabel} ${i + 1}`}
-                    loading="lazy"
-                    width={600}
-                    height={800}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className={cardClass}>
-              <img
-                src={inputs[0]}
-                alt={inputLabel}
-                loading="lazy"
-                width={600}
-                height={800}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
         </div>
 
-        <div
-          className="shrink-0 text-muted-foreground rotate-90 md:rotate-0 md:mt-6"
-          style={{ fontSize: 24, lineHeight: 1 }}
-          aria-hidden
-        >
-          →
+        {/* СТРЕЛКА */}
+        <div className="shrink-0 rotate-90 lg:rotate-0 py-4 lg:py-0 lg:px-2" aria-hidden>
+          <svg width="56" height="40" viewBox="0 0 56 40" fill="none">
+            <defs>
+              <linearGradient id="arrowGrad" x1="0" y1="0" x2="56" y2="0">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" />
+              </linearGradient>
+            </defs>
+            <path d="M0 12 H30 V2 L56 20 L30 38 V28 H0 Z" fill="url(#arrowGrad)" />
+          </svg>
         </div>
 
-        <div className="shrink-0">
-          <div className="text-xs uppercase tracking-wide text-muted-foreground mb-3">
-            {outputLabel}
-          </div>
-          <div className="flex gap-3">
+        {/* ВЫХОДЫ */}
+        <div className="w-full max-w-[620px] lg:w-[46%] shrink-0 rounded-2xl border border-border p-4">
+          <div className={`grid gap-3 ${outputCols === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
             {outputs.map((src, i) => (
-              <div key={i} className={cardClass}>
+              <div key={i} className="aspect-[4/5] rounded-xl overflow-hidden border border-border/60">
                 <img
                   src={src}
-                  alt={`${outputLabel} ${i + 1}`}
+                  alt={`Результат ${i + 1}`}
                   loading="lazy"
                   width={600}
-                  height={800}
+                  height={750}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -91,12 +93,6 @@ export function TransformShowcase({
           </div>
         </div>
       </div>
-
-      {prompt && (
-        <p className="mt-8 text-center text-sm italic text-muted-foreground max-w-2xl mx-auto">
-          {prompt}
-        </p>
-      )}
     </section>
   );
 }
