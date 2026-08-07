@@ -693,10 +693,13 @@ const ToolPage = () => {
           })() : null,
         };
 
-        // Широкий шаблон: модельные страницы видео
-        const wideSlugs = ["kling", "sora", "veo", "seedance", "hailuo", "runway", "wan", "heygen"];
+        // Широкий шаблон: модельные страницы видео и изображений
+        const wideSlugs = [
+          "kling", "sora", "veo", "seedance", "hailuo", "runway", "wan", "heygen",
+          "nano-banana", "seedream", "flux", "gpt-image", "grok-imagine", "qwen-image",
+        ];
         const isWidePilot = data.kind === "model" && wideSlugs.includes(data.slug);
-        const pilotModelOrder = [
+        const videoOrder = [
           "capabilityCards",
           "showreel",
           "featureBlocks",
@@ -712,8 +715,27 @@ const ToolPage = () => {
           "pricingBlock",
           "ctaBanner",
         ];
+        const imageOrder = [
+          "capabilityCards",
+          "transformShowcase",
+          "gallery",
+          "featureBlocks",
+          "modelChips",
+          "intro",
+          "specs",
+          "comparisonTable",
+          "tips",
+          "howItWorks",
+          "pricingBlock",
+          "ctaBanner",
+        ];
         const baseModelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "audioShowreel", "promptAnswer", "specs", "comparisonTable", "keyFeature", "featureBlocks", "showreel", "transformShowcase", "gallery", "tips", "useCases", "modelTools", "howItWorks"];
-        const modelOrder = isWidePilot ? pilotModelOrder : baseModelOrder;
+        const modelOrder =
+          isWidePilot && data.category === "video"
+            ? videoOrder
+            : isWidePilot && data.category === "image"
+              ? imageOrder
+              : baseModelOrder;
         const toolOrder = ["intro", "showreel", "audioShowreel", "promptAnswer", "featureBlocks", "useCases", "howItWorks", "keyFeature", "specs", "modelChips"];
         const defaultOrder = data.kind === "model" ? modelOrder : toolOrder;
         // Optional per-page full override of section order (only affects pages that set it).
