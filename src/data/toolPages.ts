@@ -1255,6 +1255,29 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "nano-banana",
+
+    capabilityCards: {
+      heading: "Три сценария Nano Banana",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Изображение из текста", desc: "Опишите сцену на русском — модель построит кадр без перевода промпта", image: "/community/03.jpg", inset: "/community/01.jpg", insetPosition: "bottom-left" },
+        { title: "Правка загруженного фото", desc: "Загрузите снимок и скажите словами, что изменить — остальное останется как было", image: "/community/01.jpg", inset: "/community/05.jpg", insetPosition: "bottom-right" },
+        { title: "Один персонаж в разных сценах", desc: "Модель сохраняет черты лица при смене ракурса, одежды и окружения", image: "/community/06.jpg", inset: "/community/02.jpg", insetPosition: "top-right" },
+      ],
+    },
+
+    comparisonTable: {
+      heading: "Nano Banana против Flux и GPT Image",
+      columns: ["Nano Banana 2", "Flux-2 Pro", "GPT Image 2"],
+      rows: [
+        { label: "Лучше всего для", values: ["Скорость и правки", "Фотореализм", "Длинные промпты"] },
+        { label: "Цена за кадр", values: ["От 25 кр (Lite)", "От 40 кр", "От 20 кр (1.5 Medium)"] },
+        { label: "Максимум", values: ["4K", "2K", "4K"] },
+        { label: "Референсов на входе", values: ["До 14", "1", "До 5"] },
+        { label: "Текст на картинке", values: ["Хорошо", "Средне", "Отлично"] },
+        { label: "Берите, когда", values: ["Нужно быстро и много", "Нужна анатомия и свет", "Нужно точное следование ТЗ"] },
+      ],
+    },
     kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Nano Banana",
@@ -1391,6 +1414,24 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedream",
+
+    capabilityCards: {
+      heading: "Три сценария Seedream",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Быстрый перебор идей", desc: "30 кредитов за кадр — можно проверить десять вариантов, не считая бюджет", image: "/community/02.jpg", inset: "/community/04.jpg", insetPosition: "bottom-left" },
+        { title: "До 14 референсов", desc: "Загрузите несколько изображений — модель соберёт из них общий стиль", image: "/community/05.jpg", inset: "/community/03.jpg", insetPosition: "bottom-right" },
+        { title: "Финал в 2K", desc: "Pro-версия для печати и крупных форматов, когда черновик утверждён", image: "/community/03.jpg", inset: "/community/01.jpg", insetPosition: "top-right" },
+      ],
+    },
+
+    transformShowcase: {
+      heading: "Референс на входе — стиль на выходе",
+      sub: "Загрузите до 14 изображений, и модель соберёт из них общую стилистику",
+      inputs: ["/community/02.jpg"],
+      outputs: ["/community/04.jpg", "/community/06.jpg", "/community/01.jpg"],
+      prompt: "Сохрани цветовую гамму и настроение референса в новых сюжетах",
+    },
     kind: 'model',
     status: 'published',
     updatedAt: '2026-07-29',
@@ -1550,6 +1591,24 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "flux",
+
+    capabilityCards: {
+      heading: "Три сценария Flux",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Фотореалистичный портрет", desc: "Кожа, ткани и свет неотличимы от съёмки — без пластикового эффекта", image: "/community/01.jpg", inset: "/community/06.jpg", insetPosition: "bottom-left" },
+        { title: "Точная анатомия", desc: "Руки и лица без искажений, за которые ругают другие модели", image: "/community/06.jpg", inset: "/community/02.jpg", insetPosition: "bottom-right" },
+        { title: "Контроль через Flex", desc: "Steps, CFG и seed — тонкая настройка, когда нужен предсказуемый результат", image: "/community/04.jpg", inset: "/community/05.jpg", insetPosition: "top-right" },
+      ],
+    },
+
+    transformShowcase: {
+      heading: "Фото на входе — правка на выходе",
+      sub: "Модель меняет то, что описано, не трогая остальное в кадре",
+      inputs: ["/community/01.jpg"],
+      outputs: ["/community/03.jpg", "/community/06.jpg", "/community/05.jpg"],
+      prompt: "Замени фон и освещение, сохранив позу и черты лица",
+    },
     kind: 'model',
     status: 'published',
     updatedAt: '2026-07-29',
@@ -1707,6 +1766,24 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "gpt-image",
+
+    capabilityCards: {
+      heading: "Три сценария GPT Image",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Длинное описание", desc: "Модель обрабатывает промпт по пунктам, а не выхватывает случайные детали", image: "/community/03.jpg", inset: "/community/02.jpg", insetPosition: "bottom-left" },
+        { title: "Текст на изображении", desc: "Вывески, упаковка и надписи читаются без искажений букв", image: "/community/01.jpg", inset: "/community/04.jpg", insetPosition: "bottom-right" },
+        { title: "Разрешение до 4K", desc: "Готово для печати и больших форматов без дополнительного апскейла", image: "/community/05.jpg", inset: "/community/03.jpg", insetPosition: "top-right" },
+      ],
+    },
+
+    transformShowcase: {
+      heading: "Описание на входе — сцена на выходе",
+      sub: "Чем подробнее промпт, тем точнее результат — модель не додумывает",
+      inputs: ["/community/03.jpg"],
+      outputs: ["/community/01.jpg", "/community/05.jpg", "/community/02.jpg"],
+      prompt: "Та же сцена в трёх вариантах освещения: утро, закат, ночь",
+    },
     kind: 'model',
     status: 'published',
     updatedAt: '2026-07-29',
@@ -1866,6 +1943,24 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "grok-imagine",
+
+    capabilityCards: {
+      heading: "Три сценария Grok Imagine",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Проба идеи за 25 кредитов", desc: "Самая низкая цена в каталоге — перебирайте варианты без оглядки на счёт", image: "/community/04.jpg", inset: "/community/02.jpg", insetPosition: "bottom-left" },
+        { title: "Скорость 15 секунд", desc: "Результат почти мгновенно: удобно, когда нужно проверить десяток направлений", image: "/community/02.jpg", inset: "/community/06.jpg", insetPosition: "bottom-right" },
+        { title: "Финал в Quality", desc: "Найденную идею повторите в 2K — тот же промпт, выше разрешение", image: "/community/05.jpg", inset: "/community/01.jpg", insetPosition: "top-right" },
+      ],
+    },
+
+    transformShowcase: {
+      heading: "Черновик на входе — финал на выходе",
+      sub: "Найдите идею на базовой версии, повторите её в Quality",
+      inputs: ["/community/04.jpg"],
+      outputs: ["/community/02.jpg", "/community/05.jpg", "/community/06.jpg"],
+      prompt: "Тот же сюжет в высоком разрешении, с проработкой деталей",
+    },
     kind: 'model',
     status: 'published',
     updatedAt: '2026-07-29',
@@ -2024,6 +2119,16 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "qwen-image",
+
+    capabilityCards: {
+      heading: "Три сценария Qwen Image",
+      sub: "Что чаще всего делают на этой модели",
+      cards: [
+        { title: "Правка по описанию", desc: "Загрузите картинку и скажите словами, что заменить — модель сохранит остальное", image: "/community/01.jpg", inset: "/community/03.jpg", insetPosition: "bottom-left" },
+        { title: "Генерация с нуля", desc: "Полноценный текст-в-изображение, если исходника нет", image: "/community/03.jpg", inset: "/community/05.jpg", insetPosition: "bottom-right" },
+        { title: "Z-Image за 20 кредитов", desc: "Облегчённая версия для черновиков и быстрых проверок", image: "/community/05.jpg", inset: "/community/02.jpg", insetPosition: "top-right" },
+      ],
+    },
     kind: 'model',
     status: 'published',
     updatedAt: '2026-07-29',
