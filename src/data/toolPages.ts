@@ -123,11 +123,11 @@ export interface ToolPageData {
   transformShowcase?: {
     heading: string;
     sub?: string;
-    inputLabel?: string;
-    outputLabel?: string;
-    inputs: string[];
+    cta?: string;
+    input: string;
+    inputPrompt?: string;
     outputs: string[];
-    prompt?: string;
+    outputCols?: 2 | 3;
   };
   gallery?: {
     heading: string;
